@@ -4,12 +4,19 @@ import com.example.Calendly.model.Event;
 import com.example.Calendly.repository.EventRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class EventServiceImpl implements EventService{
     private final EventRepository eventRepository;
 
     public EventServiceImpl(EventRepository eventRepository) {
         this.eventRepository = eventRepository;
+    }
+
+    @Override
+    public List<Event> findAllEvents() {
+        return eventRepository.findAll();
     }
 
     @Override
