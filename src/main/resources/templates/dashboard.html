@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmins:th="http:www.thymeleaf.org" xmlns:xmins="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Dashboard</title>
+    <style>
+        .main {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr); /* 3 columns with equal width */
+            grid-gap: 10px; /* Gap between grid items */
+            width: 85%;
+            margin: auto;
+        }
+
+        #each-post {
+            border: 2px solid black;
+            margin-top: 10px;
+            padding-left: 8px;
+            padding-right: 8px;
+        }
+
+        .button{
+            font-size:22px;
+            margin: 5px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="main">
+    <div id="each-event" th:each="event: ${events}" >
+        <h1 th:text="${event.title}"/>
+
+<!--        <p th:text="${post.excerpt}"/>-->
+<!--        <p th:each=" tag : ${post.tags}" th:text="${tag.name}"/>-->
+<!--        <a th:href="@{/posts/{postId}(postId=${post.id})}">Read more</a>-->
+
+    </div>
+</div>
+
+
+
+
+</body>
+</html>
