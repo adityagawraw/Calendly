@@ -24,7 +24,7 @@ public class Event {
     private String title;
 
     @Column(name = "host")
-    private final String host ="aditya";
+    private String host ="aditya";
 
     @Column(name = "description")
     private String description;
@@ -47,15 +47,24 @@ public class Event {
     @Column(name = "limit_per_day")
     private int limitPerDay;
 
-    @Column(name = "invitee_name")
-    private String inviteeName;
-
-    @Column(name = "invitee_email")
-    private String inviteeEmail;
+//    @Column(name = "invitee_name")
+//    private String inviteeName;
+//
+//    @Column(name = "invitee_email")
+//    private String inviteeEmail;
 
     @OneToMany(mappedBy = "event")
     private List<EventQuestion> meetQuestions;
 
-    @Column(name = "email_confirmation")
-    private boolean emailConfirmation;
+    public Event(String title, String description, int duration, String location, String eventColor) {
+        this.title = title;
+        this.description = description;
+        this.duration = duration;
+        this.location = location;
+        this.eventColor = eventColor;
+    }
+
+
+//    @Column(name = "email_confirmation")
+//    private boolean emailConfirmation;
 }
