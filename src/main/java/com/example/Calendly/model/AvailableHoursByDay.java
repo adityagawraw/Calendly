@@ -15,7 +15,7 @@ import lombok.Setter;
 public class AvailableHoursByDay {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private long id;
 
     @Column(name = "day")
     private String day;
