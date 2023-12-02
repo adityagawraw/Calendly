@@ -1,10 +1,36 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
 </head>
 <body>
-
+<link rel="stylesheet" th:href="@{/css/create-event.css}">
+<section>
+    <div id="setting-header">
+        <h1>Event Title</h1>
+    </div>
+    <div id="setting-section">
+        <form th:action="@{/event-details}">
+            <button  type="submit" class="event-setting">
+                <h2>Event details</h2>
+                <p>45 min</p>
+                <p>Google meet</p>
+            </button>
+        </form>
+        <form th:action="@{/event-details}">
+            <button type="submit" class="event-setting">
+                <h2>Scheduling settings</h2>
+                <p>Indefinitly</p>
+                <p>Google, meet</p>
+            </button>
+        </form>
+        <div class="event-setting">
+            <h2>Booking page options</h2>
+            <p>Indefinitly</p>
+            <p>Google meet</p>
+        </div>
+    </div>
+</section>
 </body>
 </html>

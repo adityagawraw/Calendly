@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<link rel="stylesheet" th:href="@{/css/create-event.css}">
+<section>
+    <div id="setting-header">
+        <h1>Event Details</h1>
+    </div>
+    <form id="setting-section" th:action="@{/save-event-details}" >
+        <div>
+            <h4>Event Name</h4>
+            <input type="text" th:name="title" >
+        </div>
+        <div>
+            <h4>Duration</h4>
+            <select id="select-duration"  th:name="duration" >
+                <option value="30">30min</option>
+                <option value="40">60min</option>
+            </select>
+        </div>
+        <div>
+            <h4>Event color</h4>
+            <select  th:name="eventColor" >
+                <option value="blue">Blue</option>
+                <option value="red">Red</option>
+            </select>
+        </div>
+        <div>
+            <h4>Location</h4>
+            <select  th:name="location" >
+                <option value="Google meet">Google meet</option>
+                <option value="Zoom">Zoom</option>
+            </select>
+        </div>
+        <div>
+            <h4>Description/Instructions</h4>
+            <textarea name="" id="" cols="30" rows="6"  th:name="description" ></textarea>
+        </div>
+        <div id="button-section">
+
+                <a type="submit" id="cancel-button" th:href="@{/create-event}">Cancel</a>
+            <button id="save-button">Save and Close</button>
+        </div>
+    </form>
+</section>
+</body>
+</html>
