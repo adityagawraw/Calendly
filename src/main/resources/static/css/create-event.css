@@ -1,0 +1,76 @@
+body{
+    display: grid;
+    grid-template-columns: 1fr 1.5fr;
+    margin: 0px;
+}
+section{
+    border-right:1px solid rgb(53, 53, 53);
+}
+#setting-header{
+    padding: 15px;
+    border-bottom: 1px solid rgb(53, 53, 53);
+}
+#setting-section{
+    padding: 4px 15px 4px 15px;
+}
+.event-setting{
+    border-bottom: 1px solid black;
+
+}
+.event-setting:hover{
+    background-color: #eef5ff;
+    cursor: pointer;
+}
+h4{
+    margin: 0px;
+    padding: 5px 0px 5px 0px;
+
+}
+input{
+    border: 1px solid #b2b2b2;
+    border-radius: 3px;
+    padding: 7px;
+    font-size: 15px;
+}
+select{
+    border: 1px solid #b2b2b2;
+    border-radius: 3px;
+    padding: 7px;
+    font-size: 15px;
+    background-color: white;
+    min-width: 80px;
+}
+#select-duration{
+    min-width: 80px;
+}
+textarea{
+    border: 1px solid #b2b2b2;
+    border-radius: 3px;
+    padding: 7px;
+    font-size: 15px;
+}
+#button-section{
+    display: flex;
+    justify-content: end;
+    padding: 10px;
+}
+#cancel-button{
+    background-color: white;
+    border: none;
+    padding: 0px;
+    margin: 0px 30px 0px 4px;
+}
+#cancel-button:hover{
+    border-bottom: 1px black solid;
+}
+#save-button{
+    background-color: #0069ff;
+    color: white;
+    font-weight: bold;
+    padding: 13px;
+    border:none;
+    border-radius: 20px;
+}
+#save-button:hover{
+    background-color: #0462e7;
+}

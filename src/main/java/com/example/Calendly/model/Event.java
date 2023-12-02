@@ -1,13 +1,14 @@
 package com.example.Calendly.model;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
 import java.util.List;
 import java.util.Map;
 
-@Entity
-@Table(name = "entity")
+//@Entity
+//@Table(name = "entity")
 public class Event {
     private long id;
     private String title;

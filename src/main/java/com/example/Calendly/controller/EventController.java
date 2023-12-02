@@ -6,8 +6,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class EventController {
 
+
     @GetMapping("/create-event")
     public  String getCreateEventPage(){
-        return "creat-event";
+        return "create-event";
     }
 }
