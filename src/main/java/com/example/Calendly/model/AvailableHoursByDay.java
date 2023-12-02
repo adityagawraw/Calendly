@@ -1,5 +1,4 @@
 package com.example.Calendly.model;
 
-public class Availabitlity {
-
+public class AvailableHoursByDay {
 }
