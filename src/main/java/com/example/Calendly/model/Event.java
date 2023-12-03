@@ -28,8 +28,9 @@ public class Event {
     @Column(name = "title")
     private String title;
 
-    @Column(name = "host")
-    private String host ="aditya";
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "user_id")
+    private User host;
 
     @Column(name = "description")
     private String description;
@@ -51,12 +52,6 @@ public class Event {
 
     @Column(name = "limit_per_day")
     private int limitPerDay;
-
-//    @Column(name = "invitee_name")
-//    private String inviteeName;
-//
-//    @Column(name = "invitee_email")
-//    private String inviteeEmail;
 
     @OneToMany(mappedBy = "event")
     private List<EventQuestion> meetQuestions;

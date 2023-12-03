@@ -7,13 +7,13 @@
     <style>
         .main {
             display: grid;
-            grid-template-columns: repeat(2, 1fr); /* 3 columns with equal width */
-            grid-gap: 10px; /* Gap between grid items */
+            grid-template-columns: repeat(4, 1fr);
+            grid-gap: 10px;
             width: 85%;
             margin: auto;
         }
 
-        #each-post {
+        #each-event {
             border: 2px solid black;
             margin-top: 10px;
             padding-left: 8px;
@@ -31,10 +31,9 @@
 <div class="main">
     <div id="each-event" th:each="event: ${events}" >
         <h1 th:text="${event.title}"/>
-
-<!--        <p th:text="${post.excerpt}"/>-->
-<!--        <p th:each=" tag : ${post.tags}" th:text="${tag.name}"/>-->
-<!--        <a th:href="@{/posts/{postId}(postId=${post.id})}">Read more</a>-->
+        <p th:text="${event.host}"/>
+        <p th:text="${event.duration}"/>
+        <p th:text="${event.location}"/>
 
     </div>
 </div>
