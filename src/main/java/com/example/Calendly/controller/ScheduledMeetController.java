@@ -7,7 +7,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+
+import java.time.LocalTime;
+import java.util.Calendar;
+import java.util.Date;
 
 @Controller
 public class ScheduledMeetController {
@@ -18,24 +23,48 @@ public class ScheduledMeetController {
         this.scheduledMeetService = scheduledMeetService;
     }
 
-    @GetMapping("/schedule-meet/{eventId}")
-    public String createScheduledMeet(Model model
-//                                      @RequestParam("inviteeName") String inviteeName,
-//                                      @RequestParam("inviteeEmail") String inviteeEmail,
-//                                      @RequestParam("startHour") int startHour,
-//                                      @RequestParam("startMinute") int startMinute,
-//                                      @RequestParam("endHour") int endHour,
-//                                      @RequestParam("endMinute") int endMinute,
-//                                      @RequestParam("year") int year,
-//                                      @RequestParam("month") int month,
-//                                      @RequestParam("day") int day,
-//                                      @PathVariable("eventId") int eventId
+    @PostMapping("/schedule-meet/{eventId}")
+    public String createScheduledMeet(
+                                      @RequestParam("inviteeName") String inviteeName,
+                                      @RequestParam("inviteeEmail") String inviteeEmail,
+                                      @RequestParam("startHour") int startHour,
+                                      @RequestParam("startMinute") int startMinute,
+                                      @RequestParam("endHour") int endHour,
+                                      @RequestParam("endMinute") int endMinute,
+                                      @RequestParam("year") int year,
+                                      @RequestParam("month") int month,
+                                      @RequestParam("day") int day,
+                                      @PathVariable("eventId") int eventId
                                       ) {
 
-        ScheduledMeet newScheduledMeet = new ScheduledMeet();
-        scheduledMeetService.saveScheduledMeet(newScheduledMeet, model);
+        ScheduledMeet scheduledMeet = new ScheduledMeet();
+        scheduledMeet.setInviteeName(inviteeName);
+        scheduledMeet.setInviteeEmail(inviteeEmail);
 
-        return "dashboard";
+        LocalTime startTime = LocalTime.of(startHour, startMinute);
+        LocalTime endTime = LocalTime.of(endHour, endMinute);
+
+        // Create a Calendar instance and set year, month, and day
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(Calendar.YEAR, year);
+        calendar.set(Calendar.MONTH, month - 1); // Month is 0-indexed in Calendar
+        calendar.set(Calendar.DAY_OF_MONTH, day);
+
+        // Convert Calendar to Date
+        Date customDate = calendar.getTime();
+
+        scheduledMeet.setStartTime(startTime);
+        scheduledMeet.setEndTime(endTime);
+        scheduledMeet.setDate(customDate);
+        scheduledMeetService.saveScheduledMeet(scheduledMeet);
+
+        return "redirect:/";
+    }
+
+    @GetMapping("/scheduled-meet")
+    public String scheduledMeet(Model model) {
+        model.addAttribute("eventId", 1);
+        return "schedule-meeting";
     }
 
 }

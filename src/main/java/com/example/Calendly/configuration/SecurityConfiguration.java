@@ -19,9 +19,10 @@ public class SecurityConfiguration {
     }
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception{
-        http.authorizeHttpRequests(configure ->
-                        configure.requestMatchers("/","/signIn","/signUp","/saveRegisteredUser").permitAll()
-                                .anyRequest().authenticated()
+        http.authorizeHttpRequests(configure -> configure
+                        .requestMatchers("/signIn","/signUp","/saveRegisteredUser", "/").permitAll()
+                        .requestMatchers("/scheduled-meet", "/schedule-meet/{eventId}").permitAll()
+                        .anyRequest().authenticated()
                 )
                 .formLogin(form ->
                         form

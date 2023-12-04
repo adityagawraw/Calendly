@@ -1,10 +1,29 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>ScheduledMeet</title>
 </head>
 <body>
 
+<section>
+    <div id="setting-header">
+        <h1>Scheduled Meet Details</h1>
+    </div>
+        <form th:action="@{/schedule-meet/1}"  method="POST">
+
+            <input id="inviteeName" type="text" name="inviteeName" placeholder="Name"> <br>
+            <input id="inviteeEmail" type="text" name="inviteeEmail" placeholder="Email"><br>
+            <input id="startHour" type="text" name="startHour" placeholder="startHour"><br>
+            <input id="startMinute" type="text" name="startMinute" placeholder="startMinute"><br>
+            <input id="endHour" type="text" name="endHour" placeholder="endHour"><br>
+            <input id="endMinute" type="text" name="endMinute" placeholder="endMinute"><br>
+            <input id="year" type="text" name="year" placeholder="year"><br>
+            <input id="month" type="text" name="month" placeholder="month"><br>
+            <input id="day" type="text" name="day" placeholder="day"><br>
+            <input type="submit" value="Schedule">
+
+         </form>
+</section>
 </body>
 </html>
