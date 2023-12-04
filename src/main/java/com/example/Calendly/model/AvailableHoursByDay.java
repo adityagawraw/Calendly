@@ -20,14 +20,53 @@ public class AvailableHoursByDay {
     @Column(name = "day")
     private String day;
 
-    @Column(name = "start")
-    private Integer start;
+    @Column(name = "start_time")
+    private Integer startTime;
 
-    @Column(name = "end")
-    private Integer end;
+    @Column(name = "end_time")
+    private Integer endTime;
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "event_id")
     private Event event;
 
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public String getDay() {
+        return day;
+    }
+
+    public void setDay(String day) {
+        this.day = day;
+    }
+
+    public Integer getStartTime() {
+        return startTime;
+    }
+
+    public void setStartTime(Integer startTime) {
+        this.startTime = startTime;
+    }
+
+    public Integer getEndTime() {
+        return endTime;
+    }
+
+    public void setEndTime(Integer endTime) {
+        this.endTime = endTime;
+    }
+
+    public Event getEvent() {
+        return event;
+    }
+
+    public void setEvent(Event event) {
+        this.event = event;
+    }
 }

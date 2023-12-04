@@ -69,7 +69,91 @@ public class Event {
         this.eventColor = eventColor;
     }
 
+    public long getId() {
+        return id;
+    }
 
-//    @Column(name = "email_confirmation")
-//    private boolean emailConfirmation;
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public String getHost() {
+        return host;
+    }
+
+    public void setHost(String host) {
+        this.host = host;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public int getDuration() {
+        return duration;
+    }
+
+    public void setDuration(int duration) {
+        this.duration = duration;
+    }
+
+    public String getLocation() {
+        return location;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
+    }
+
+    public String getEventColor() {
+        return eventColor;
+    }
+
+    public void setEventColor(String eventColor) {
+        this.eventColor = eventColor;
+    }
+
+    public int getDateRange() {
+        return dateRange;
+    }
+
+    public void setDateRange(int dateRange) {
+        this.dateRange = dateRange;
+    }
+
+    public List<AvailableHoursByDay> getAvailableHoursByDays() {
+        return availableHoursByDays;
+    }
+
+    public void setAvailableHoursByDays(List<AvailableHoursByDay> availableHoursByDays) {
+        this.availableHoursByDays = availableHoursByDays;
+    }
+
+    public int getLimitPerDay() {
+        return limitPerDay;
+    }
+
+    public void setLimitPerDay(int limitPerDay) {
+        this.limitPerDay = limitPerDay;
+    }
+
+    public List<EventQuestion> getMeetQuestions() {
+        return meetQuestions;
+    }
+
+    public void setMeetQuestions(List<EventQuestion> meetQuestions) {
+        this.meetQuestions = meetQuestions;
+    }
 }

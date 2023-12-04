@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<link rel="stylesheet" th:href="@{/css/create-event.css}">
+<section>
+    <div id="setting-header">
+        <h1>Scheduling settings</h1>
+    </div>
+    <form th:action="@{/save-scheduling-settings}" id="setting-section" th:object="${schedulingSettings}">
+        <div id="dateRange">
+            <h4>Date range</h4>
+            <input type="number" th:field="*{dateRange}"><span>into the future</span>
+        </div>
+        <div>
+            <h4>Available hours</h4>
+            <div id="weeklyHoursSetting">
+                <h4>Weekly hours</h4>
+
+                <div class="timeSlotSetting" th:each="availableDays : *{availabilityPerDay.entrySet()}">
+                    <input type="checkbox" id="${availableDays.key}"
+                           th:field="${daysCheckBox.selectedDays}" th:value="${availableDays.key}">
+                    <span th:text="${availableDays.key}"></span>
+                    <div th:each="hourSlot, iterStat : ${availableDays.value}">
+                        <input class="timeSlot" type="text"
+                               th:field="${schedulingSettings.availabilityPerDay[__${availableDays.key}__][__${iterStat.index}__].startTime}"
+                               th:value="${hourSlot.startTime}">
+                        -
+                        <input class="timeSlot" type="text"
+                               th:field="${schedulingSettings.availabilityPerDay[__${availableDays.key}__][__${iterStat.index}__].endTime}"
+                               th:value="${hourSlot.endTime}">
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <div>
+            <h4>Daily limit</h4>
+            <input type="number" th:field="*{maxPerDay}" th:value="*{maxPerDay}">
+        </div>
+        <input type="hidden" th:value="${eventId}" th:name="eventId">
+        <div id="button-section">
+            <a type="submit" id="cancel-button" th:href="@{/create-event}">Cancel</a>
+            <button type="submit" id="save-button">Save and Close</button>
+        </div>
+    </form>
+</section>
+</body>
+</html>
