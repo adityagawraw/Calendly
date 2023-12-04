@@ -1,91 +1,88 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:sec="http://www.thymleaf.org/extras/spring-security" xmlns:th="http://www.thymleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Homepage</title>
     <style>
         body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-    background-color: #ffffff; /* White background */
-}
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #ffffff; /* White background */
+        }
 
-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 20px;
-    background-color: #ffffff; /* White background */
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px;
+            background-color: #ffffff; /* White background */
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
 
-#logo {
-    width: 100px; /* Adjust the width as needed */
-    height: auto;
-}
+        #logo {
+            width: 100px; /* Adjust the width as needed */
+            height: auto;
+        }
 
-nav {
-    display: flex;
-}
+        nav {
+            display: flex;
+        }
 
-nav a {
-    text-decoration: none;
-    color: #333333; /* Dark gray text color */
-    margin-right: 20px;
-    transition: color 0.3s; /* Smooth color transition on hover */
-}
+        nav a {
+            text-decoration: none;
+            color: #333333; /* Dark gray text color */
+            margin-right: 20px;
+            transition: color 0.3s; /* Smooth color transition on hover */
+        }
 
-nav a:hover {
-    color: #0000FF; /* blue on hover */
-}
+        nav a:hover {
+            color: #0000FF; /* blue on hover */
+        }
 
-#login-btn {
-    background-color: #4caf50; /* Green button color */
-    color: #ffffff; /* White text color */
-    padding: 10px 20px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-}
+        #login-btn,
+        #get-started-btn,
+        #logout-btn {
+            background-color: #0000FF; /* Blue button color */
+            color: #ffffff; /* White text color */
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-right: 10px; /* Adjust the margin as needed */
+        }
 
-#get-started-btn {
-    background-color: #3498db; /* Blue button color */
-    color: #ffffff; /* White text color */
-    padding: 10px 20px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-}
+        #get-started-btn:hover,
+        #login-btn:hover,
+        #logout-btn:hover {
+            background-color: #3333FF; /* Darker blue on hover */
+        }
 
-#get-started-btn:hover,
-#login-btn:hover {
-    background-color: #45a049; /* Darker green on hover */
-}
+        main {
+            /* Add your main content styles here */
+            padding: 20px;
+        }
 
-main {
-    /* Add your main content styles here */
-    padding: 20px;
-}
+        h2 {
+            color: #333333; /* Dark gray text color */
+            margin-bottom: 10px;
+        }
 
-h2 {
-    color: #333333; /* Dark gray text color */
-    margin-bottom: 10px;
-}
-
-p {
-    color: #666666; /* Slightly lighter gray text color */
-    margin-bottom: 20px;
-}
+        p {
+            color: #666666; /* Slightly lighter gray text color */
+            margin-bottom: 20px;
+        }
     </style>
 </head>
 <body>
 
 <header>
     <div>
-        <img id="logo" src="https://cdn.mos.cms.futurecdn.net/W3yFiCjbmPia2u3qk9kKci.jpg" alt="Calendly Logo"> <!-- Replace with your actual logo image -->
+        <img id="logo" src="https://cdn.mos.cms.futurecdn.net/W3yFiCjbmPia2u3qk9kKci.jpg" alt="Calendly Logo">
+        <!-- Replace with your actual logo image -->
     </div>
+
     <nav>
         <a href="#">Product</a>
         <a href="#">Solution</a>
@@ -93,13 +90,25 @@ p {
         <a href="#">Pricing</a>
         <a href="#">Resources</a>
     </nav>
-    <div>
+
+    <div sec:authorize="isAuthenticated()">
+        <h2 th:text="'Welcome : '+${user.name}" style="color: blue;"></h2>
+        <form th:action="@{/logout}" method="post">
+            <button id="logout-btn" type="submit">Logout</button>
+        </form>
+    </div>
+
+    <div sec:authorize="!isAuthenticated()">
+
+        <!-- Register Button -->
         <form th:action="@{/signUp}" method="get">
-            <button type="submit">Get Started</button>
+            <button id="get-started-btn" type="submit">Get Started</button>
         </form>
+        <br>
         <form th:action="@{/signIn}" method="get">
-            <button type="submit">Login</button>
+            <button id="login-btn" type="submit">Login</button>
         </form>
+
     </div>
 </header>
 
@@ -110,3 +119,4 @@ p {
 
 </body>
 </html>
+
