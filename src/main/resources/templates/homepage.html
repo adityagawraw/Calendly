@@ -94,8 +94,12 @@ p {
         <a href="#">Resources</a>
     </nav>
     <div>
-        <button id="login-btn">Login</button>
-        <button id="get-started-btn">Get Started</button>
+        <form th:action="@{/signUp}" method="get">
+            <button type="submit">Get Started</button>
+        </form>
+        <form th:action="@{/signIn}" method="get">
+            <button type="submit">Login</button>
+        </form>
     </div>
 </header>
 
