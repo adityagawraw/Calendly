@@ -27,11 +27,14 @@
                 <p>Google, meet</p>
             </button>
         </form>
-        <div class="event-setting">
-            <h2>Booking page options</h2>
-            <p>Indefinitly</p>
-            <p>Google meet</p>
-        </div>
+        <form th:action="@{/booking-page-options}">
+            <input type="hidden" th:name="eventId" th:value="1">
+            <button type="submit" class="event-setting">
+                <h2>Booking page options</h2>
+                <p>Indefinitly</p>
+                <p>Google, meet</p>
+            </button>
+        </form>
     </div>
 </section>
 </body>

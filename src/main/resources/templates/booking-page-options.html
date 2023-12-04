@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<link rel="stylesheet" th:href="@{/css/create-event.css}">
+<section>
+    <div id="setting-header">
+        <a th:href="@{/create-event}">< Event Type Summary</a>
+        <h1>Booking page options</h1>
+    </div>
+    <form id="setting-section" th:action="@{/save-booking-page-options}" method="post" >
+        <div>
+            <h4>Event link</h4>
+            <input type="text" th:field="${eventLink}" >
+        </div>
+        <div>
+            <h4>Invitee questions</h4>
+            <textarea id="" cols="30" rows="6" th:field="${inviteeQuestions}"></textarea>
+        </div>
+        <input type="hidden" th:value="${eventId}" th:name="eventId">
+        <div id="button-section">
+            <a type="submit" id="cancel-button" th:href="@{/create-event}">Cancel</a>
+            <button type="submit" id="save-button">Save and Close</button>
+        </div>
+    </form>
+
+</section>
+</body>
+</html>

@@ -8,6 +8,7 @@
 <link rel="stylesheet" th:href="@{/css/create-event.css}">
 <section>
     <div id="setting-header">
+        <a th:href="@{/create-event}">< Event Type Summary</a>
         <h1>Scheduling settings</h1>
     </div>
     <form th:action="@{/save-scheduling-settings}" id="setting-section" th:object="${schedulingSettings}">

@@ -52,12 +52,6 @@ public class Event {
     @Column(name = "limit_per_day")
     private int limitPerDay;
 
-//    @Column(name = "invitee_name")
-//    private String inviteeName;
-//
-//    @Column(name = "invitee_email")
-//    private String inviteeEmail;
-
     @OneToMany(mappedBy = "event")
     private List<EventQuestion> meetQuestions;
 
@@ -67,6 +61,10 @@ public class Event {
         this.duration = duration;
         this.location = location;
         this.eventColor = eventColor;
+    }
+
+    public void addavailableHoursByDay(AvailableHoursByDay availableHoursByDay){
+        availableHoursByDays.add(availableHoursByDay);
     }
 
     public long getId() {

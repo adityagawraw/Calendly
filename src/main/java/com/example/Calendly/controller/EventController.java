@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.ArrayList;
@@ -62,10 +63,28 @@ public class EventController {
                                          @ModelAttribute("daysCheckBox") DaysCheckBox daysCheckBox,
                                          @RequestParam("eventId") long eventId,
                                          Model model) {
-        System.out.println(schedulingSetting.getMaxPerDay());
         eventService.saveScheduleSettings(eventId, daysCheckBox.getSelectedDays(), schedulingSetting);
 
-        return "create-event";
+        return "redirect:/create-event";
+    }
+    @GetMapping("/booking-page-options")
+    public String getBookingPageOptions(@RequestParam("eventId") long eventID, Model model){
+        model.addAttribute("eventId", eventID);
+        model.addAttribute("eventLink", "asdas");
+        model.addAttribute("inviteeQuestions", "asdasd");
+
+        return "booking-page-options";
+    }
+    @PostMapping("/save-booking-page-options")
+    public String saveBookingPageOptions(@ModelAttribute("eventId") long eventId,
+                                         @ModelAttribute("eventLink") String eventLink,
+                                         @ModelAttribute("inviteeQuestions") String inviteeQuestions,
+                                         Model model) {
+        System.out.println("save-booking-page-options "+eventId);
+        System.out.println(eventLink);
+        System.out.println(inviteeQuestions);
+
+        return "redirect:/create-event";
     }
 
 }

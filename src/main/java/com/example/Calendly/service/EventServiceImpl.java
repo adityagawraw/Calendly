@@ -3,6 +3,7 @@ package com.example.Calendly.service;
 import com.example.Calendly.model.AvailableHoursByDay;
 import com.example.Calendly.model.Event;
 import com.example.Calendly.model.SchedulingSetting;
+import com.example.Calendly.repository.AvailableHoursByDayRepository;
 import com.example.Calendly.repository.EventRepository;
 import org.springframework.stereotype.Service;
 
@@ -12,9 +13,12 @@ import java.util.Optional;
 @Service
 public class EventServiceImpl implements EventService{
     private EventRepository eventRepository;
+    private AvailableHoursByDayRepository availableHoursByDayRepository;
 
-    public EventServiceImpl(EventRepository eventRepository) {
+    public EventServiceImpl(EventRepository eventRepository,
+                            AvailableHoursByDayRepository availableHoursByDayRepository) {
         this.eventRepository = eventRepository;
+        this.availableHoursByDayRepository= availableHoursByDayRepository;
     }
 
     @Override
@@ -36,11 +40,14 @@ public class EventServiceImpl implements EventService{
 
             for(String day : selectedDays){
                 List<AvailableHoursByDay> availableHoursByDays = schedulingSetting.getAvailabilityPerDay().get(day);
+
                 for(AvailableHoursByDay availableHoursByDay : availableHoursByDays){
-                    System.out.println(availableHoursByDay);
+                    availableHoursByDay.setEvent(event);
+                    availableHoursByDayRepository.save(availableHoursByDay);
+                    event.addavailableHoursByDay(availableHoursByDay);
                 }
-                event.setAvailableHoursByDays(availableHoursByDays);
             }
+
             eventRepository.save(event);
         }
     }
