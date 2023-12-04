@@ -1,122 +1,687 @@
 <!DOCTYPE html>
-<html xmlns:sec="http://www.thymleaf.org/extras/spring-security" xmlns:th="http://www.thymleaf.org">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Homepage</title>
+    <title>Document</title>
+
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #ffffff; /* White background */
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+        body{
+        line-height: 1.5;
+        font-family: 'Poppins', sans-serif;
+                }
+                    *{
+        margin:0;
+        padding:0;
+                    box-sizing: border-box;
+                }
+        .container{
+            max-width: 1170px;
+            margin:auto;
         }
-
-        header {
+        .row{
             display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 20px;
-            background-color: #ffffff; /* White background */
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            flex-wrap: wrap;
         }
-
-        #logo {
-            width: 100px; /* Adjust the width as needed */
-            height: auto;
+        ul{
+            list-style: none;
         }
-
-        nav {
-            display: flex;
+        .footer{
+            background-color: #fafafa;
+            padding: 70px 0;
         }
-
-        nav a {
-            text-decoration: none;
-            color: #333333; /* Dark gray text color */
-            margin-right: 20px;
-            transition: color 0.3s; /* Smooth color transition on hover */
+        .footer-col{
+        width: 25%;
+        padding: 0 15px;
         }
-
-        nav a:hover {
-            color: #0000FF; /* blue on hover */
+        .footer-col h4{
+            font-size: 18px;
+            color: #080808;
+            text-transform: capitalize;
+            margin-bottom: 35px;
+            font-weight: 500;
+            position: relative;
         }
-
-        #login-btn,
-        #get-started-btn,
-        #logout-btn {
-            background-color: #0000FF; /* Blue button color */
-            color: #ffffff; /* White text color */
-            padding: 10px 20px;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            margin-right: 10px; /* Adjust the margin as needed */
+        .footer-col h4::before{
+            content: '';
+            position: absolute;
+            left:0;
+            bottom: -10px;
+            background-color: #e91e63;
+            height: 2px;
+            box-sizing: border-box;
+            width: 50px;
         }
-
-        #get-started-btn:hover,
-        #login-btn:hover,
-        #logout-btn:hover {
-            background-color: #3333FF; /* Darker blue on hover */
-        }
-
-        main {
-            /* Add your main content styles here */
-            padding: 20px;
-        }
-
-        h2 {
-            color: #333333; /* Dark gray text color */
+        .footer-col ul li:not(:last-child){
             margin-bottom: 10px;
         }
+        .footer-col ul li a{
+            font-size: 16px;
+            text-transform: capitalize;
+            color: #000000;
+            text-decoration: none;
+            font-weight: 300;
+            color: #0a0909;
+            display: block;
+            transition: all 0.3s ease;
+        }
+        .footer-col ul li a:hover{
+            color: #0b0b0b;
+            padding-left: 8px;
+        }
+        .footer-col .social-links a{
+            display: inline-block;
+            height: 40px;
+            width: 40px;
+            background-color: rgba(255,255,255,0.2);
+            margin:0 10px 10px 0;
+            text-align: center;
+            line-height: 40px;
+            border-radius: 50%;
+            color: #ffffff;
+            transition: all 0.5s ease;
+        }
+        .footer-col .social-links a:hover{
+            color: #24262b;
+            background-color: #ffffff;
+        }
 
-        p {
-            color: #666666; /* Slightly lighter gray text color */
-            margin-bottom: 20px;
+        /*responsive*/
+        @media(max-width: 767px){
+        .footer-col{
+            width: 50%;
+            margin-bottom: 30px;
+        }
+        }
+        @media(max-width: 574px){
+        .footer-col{
+            width: 100%;
+        }
         }
     </style>
+
+
+    <style>
+
+    body {
+      margin: 0px;
+    }
+
+    .a {
+      text-decoration: none;
+    }
+
+    #mid {
+      display: flex;
+      margin-top: 8px;
+
+    }
+
+    #navbar {
+      display: flex;
+      /* border: 1px solid black; */
+      justify-content: space-evenly;
+      padding: 30px;
+      /* position: sticky; */
+      top: 0;
+    }
+    #logo{
+      width: 100%;
+    }
+
+
+
+    #ul {
+      list-style-type: none;
+      font-weight: 600;
+      font-size: 16px;
+
+      display: flex;
+      gap: 40px;
+    }
+
+    #ul>li>.a {
+      color: rgb(80, 77, 77);
+
+      font-family: sans-serif;
+    }
+    #ul>li>.a:hover{
+        color: rgb(0, 107, 255);
+    }
+    #bt,#bt1,#gs,#gs1 {
+      margin-top: 5px;
+      font-size: 15px;
+      font-weight: bold;
+      padding: 10px 15px;
+      color: white;
+      border: 0px;
+      border-radius: 10px;
+      background-color: rgb(0, 107, 255);
+    }
+
+    .signup {
+      width:550px;
+      display: grid;
+      justify-content: center;
+      height: 550px;
+      border-radius: 10px;
+      background-color: white;
+      position: relative;
+    }
+
+    #gg{
+      margin-top: -25px;
+      margin-left: 120px;
+      width: 25px;
+      font-weight: bold;
+      display: none;
+    }
+
+    .signup1 {
+      width: 550px;
+      display: grid;
+      justify-content: center;
+      height: 550px;
+      border-radius: 10px;
+      background-color: white;
+      position: relative;
+    }
+
+    .close,
+    .close1,
+    .close2 {
+      position: absolute;
+      top: 15px;
+      right: 30px;
+      font-size: 40px;
+      font-weight: bold;
+      cursor: pointer;
+      transform: rotate(45deg);
+    }
+
+    #cont {
+      width: 450px;
+      text-align: center;
+      margin-top: 50px;
+
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    #cont>h1 {
+      color: rgb(48, 47, 47);
+    }
+
+    #bt:hover,#bt1:hover,#gs:hover,#gs1:hover {
+      background-color: rgb(10, 94, 212)
+    }
+
+    #bt,#bt1,#gs,#gs1 {
+      cursor: pointer;
+    }
+
+    #cont>input {
+      width: 400px;
+      border: 0.5px solid rgb(177, 179, 180);
+      border-radius: 5px;
+      font-size: 18px;
+      padding: 20px;
+      opacity: .6;
+      margin-top: 15px;
+    }
+
+    #gs,
+    #gs1 {
+      width: 440px;
+      margin-top: 30px;
+      font-size: 18px;
+      padding: 20px;
+    }
+
+    .p {
+      max-width: 600px;
+      position: relative;
+      color: rgb(125, 130, 134);
+      margin-top: 20px;
+    }
+
+    .p:before {
+      content: "";
+      display: block;
+      width: 200px;
+      height: 1px;
+      background: rgb(166, 172, 179);
+      position: absolute;
+      left: 0;
+      top: 40%;
+
+    }
+
+    .p::after {
+      content: "";
+      display: block;
+      width: 200px;
+      height: 1px;
+      background: rgb(166, 172, 179);
+      position: absolute;
+      right: 0;
+      top: 40%;
+
+    }
+
+    .otpbox {
+      display: flex;
+      justify-content: center;
+
+    }
+
+    .otpbox>input {
+      margin: 10px;
+      height: 35px;
+      width: 65px;
+      border: 1px solid black;
+      border-radius: 5px;
+      text-align: center;
+      font-family: arimo;
+      font-size: 1.1rem;
+
+
+    }
+
+    #res {
+      display: flex;
+      margin-top: 10px;
+      justify-content: space-between;
+    }
+
+    #send {
+      color: rgb(10, 94, 212);
+    }
+
+    #ti {
+      color: red;
+    }
+
+    #imlogo {
+      display: none;
+    }
+
+    #mul {
+      list-style-type: none;
+    }
+
+    #mul>li {
+      margin-left: -40px;
+      margin-top: -40px;
+    }
+
+    .inul {
+
+      width: 100%;
+      height: 100%;
+      /* background-color: rgba(0, 0, 0, 0.5); */
+      display: flex;
+      position: absolute;
+      top: 0;
+      display: none;
+
+      justify-content: center;
+      /* align-items: center; */
+
+    }
+
+    .mdon {
+      width: 90%;
+      /* display: flex; */
+      margin-top: 10px;
+      justify-content: center;
+      height: 500px;
+      padding: 10px;
+      border-radius: 10px;
+      background-color: white;
+      box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+      position: relative;
+    }
+    #mdiv{
+      margin-top: 10px;
+      padding: 10px;
+    }
+    #mdiv>div{
+      border-bottom: 1px dashed rgb(73, 71, 71);
+      padding: 20px 0px;
+
+      font-family: sans-serif;
+    }
+    #mdiv>div>.a{
+      text-decoration: none;
+      color: rgb(59, 58, 58);
+      font-weight: bold;
+      font-size: 20px;
+    }
+    #imlogo{
+      width: 45px;
+    }
+
+    @media (min-width:480px) and (max-width:999px) {
+      #mid {
+
+        display: none;
+      }
+      .p:before {
+        width: 40%;
+      }
+      .p:after{
+        width: 40%;
+      }
+      .signup{
+        width: 90%;
+        display: flex;
+        justify-content: center;
+      }
+      .signup1{
+        width: 90%;
+        display: flex;
+        justify-content: center;
+      }
+      #cont>input{
+        width: 92%;
+
+      padding: 4%;
+
+      }
+      #gs1,#gs{
+        width: 100%;
+      }
+      #navbar {
+        display: flex;
+        justify-content: space-between;
+
+      }
+
+      #gg {
+        display: block;
+      }
+      #cont{
+        width: 60%;
+      }
+      .otpbox>input {
+
+      height: 40%;
+      width: 18%;
+
+
+    }
+    #sec-div-2{
+      width: 90%;
+      margin-left: 30%;
+
+            }
+    }
+
+    @media (min-width:0px) and (max-width:479px) {
+      #mid {
+
+        display: none;
+      }
+      #cont{
+        width: 60%;
+        /* border: 1px solid black; */
+
+      }
+      .p:before {
+        width: 40%;
+      }
+      .p:after{
+        width: 40%;
+      }
+      .otpbox>input {
+
+      height: 35px;
+      width: 30px;
+
+
+    }
+
+      .signup{
+        width: 90%;
+        display: flex;
+        justify-content: center;
+      }
+      .signup1{
+        width: 90%;
+        display: flex;
+        justify-content: center;
+      }
+      #navbar {
+        display: flex;
+        justify-content: space-between;
+      }
+
+      #gg {
+        display: block;
+      }
+
+      #cont>input{
+        width: 92%;
+
+
+      padding:  4%;
+      }
+      #gs1,#gs{
+        width: 100%;
+      }
+
+      #imlogo {
+        display: flex;
+      }
+      #logo {
+        display: none;
+
+      }
+
+
+    }
+    </style>
+
+    <!-- section 1 style part -->
+    <style>
+        @import url('http://fonts.cdnfonts.com/css/gilroy-bold');
+
+        #section_1{
+            width: 100%;
+            height: auto;
+            border: 1px solid transparent;
+            margin: auto;
+
+        }
+        #cont1{
+            width: 90%;
+            height: auto;
+            margin: auto;
+            border: 1px solid transparent;
+            display: grid;
+            grid-template-columns: 40% 50%;
+            grid-template-rows: auto;
+            gap: 5%;
+            padding: 72px 24px;
+        }
+        #sec-div-1{
+            border: 1px solid transparent;
+        }
+        #cal{
+            font-weight: bold;
+            color: #006bff;
+            font-family:'Gilroy-Bold';
+            margin: 0px 0px 32px;
+            font-size: 16px;
+
+        }
+        #take{
+            font-weight: bold;
+            color: #0b3558;
+            margin: 0px 0px 32px;
+
+            font-size: 72px;
+            font-family:'Gilroy-Heavy'
+        }
+        #spn{
+            color: #006bff;
+        }
+
+        #calTag{
+
+            color: #476788;
+            margin: 0px 0px 32px;
+            line-height: 35px;
+            font-size: 20px;
+            font-family: 'Gilroy-Medium', sans-serif;
+        }
+
+        #sec-div-2{
+            border: 1px solid transparent;
+        }
+
+        #start{
+            border: 0px;
+            background-color: #006BFF;
+            color: white;
+            margin: 8px 0px;
+            padding: 10px 18px;
+            font-family: 'Gilroy-Medium', sans-serif;
+            font-size:18px;
+            border-radius: 7px;
+        }
+
+            #signup form {
+        display: inline-block; /* or use display: flex; */
+    }
+
+    #bt1,
+    #bt {
+        display: inline-block;
+    }
+    </style>
+
 </head>
+
+
 <body>
-
-<header>
-    <div>
-        <img id="logo" src="https://cdn.mos.cms.futurecdn.net/W3yFiCjbmPia2u3qk9kKci.jpg" alt="Calendly Logo">
-        <!-- Replace with your actual logo image -->
+<div id="navbar">
+    <div >
+        <img id="logo"
+             src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxNTgwLjkxIDM4MS41MiI+PGRlZnM+PHN0eWxlPi5jbHMtMXtmaWxsOiMwMDZiZmY7fS5jbHMtMntmaWxsOiMwYWU4ZjA7fTwvc3R5bGU+PC9kZWZzPjxnIGlkPSJMYXllcl8yIiBkYXRhLW5hbWU9IkxheWVyIDIiPjxnIGlkPSJMYXllcl8xLTIiIGRhdGEtbmFtZT0iTGF5ZXIgMSI+PGcgaWQ9IldvcmRtYXJrIj48cGF0aCBjbGFzcz0iY2xzLTEiIGQ9Ik05MzguNDYsMTUwLjU0YzI0LjUyLDAsNDcuNzQsMTUsNTIuNjQsNDcuNDFIODgxLjljNC41Ny0yOC40NCwyNS44My00Ny40MSw1Ni41Ni00Ny40MW00OS4xNSw5NS4zNmMtOC4zNCwxMy0yNC40NiwyMy00Ni41MywyMy0zMC40MSwwLTUzLjYzLTE2LjY3LTU5LjE4LTQ2LjFoMTM3YTgzLDgzLDAsMCwwLDEtMTIuNzVjMC00NS43Ny0zMi04Ni4zMi04MS40Mi04Ni4zMi01MSwwLTg1LjY2LDM3LjYtODUuNjYsODYsMCw0OSwzNSw4Niw4Ny42Miw4NiwzMi43LDAsNTcuNTUtMTQuNzIsNzEuOTMtMzdaIi8+PHJlY3QgY2xhc3M9ImNscy0xIiB4PSI4MTAuOTIiIHk9IjUyLjc4IiB3aWR0aD0iMjguNDQiIGhlaWdodD0iMjM4LjY5Ii8+PHBhdGggY2xhc3M9ImNscy0xIiBkPSJNMTE3OC4xNSwxOTEuMDlWMjkxLjQ2SDExNDkuN1YxOTIuNzJjMC0yNi44MS0xNS4zNi00MS44NS00MC41NC00MS44NS0yNi4xNiwwLTQ3LjQxLDE1LjM3LTQ3LjQxLDUzLjk1djg2LjY0SDEwMzMuM1YxMjhoMjguNDV2MjMuNTRjMTIuMS0xOS4yOSwzMC4wOC0yNy43OSw1My0yNy43OSwzOC4yNSwwLDYzLjQzLDI1LjUsNjMuNDMsNjcuMzYiLz48cGF0aCBjbGFzcz0iY2xzLTEiIGQ9Ik0xMzM1LDIwOS43MmMwLTMzLjM1LTI1LjE4LTU4LjUzLTU4LjItNTguNTMtMzIuNywwLTU3Ljg3LDI1LjE4LTU3Ljg3LDU4LjUzczI1LjE3LDU4LjUzLDU3Ljg3LDU4LjUzYzMzLDAsNTguMi0yNS4xOCw1OC4yLTU4LjUzbTI4LjQ0LTE1Ni45NFYyOTEuNDdIMTMzNVYyNjMuMzRjLTEzLjA4LDIwLTM0LDMyLjM4LTYxLjgsMzIuMzgtNDUuNDUsMC04Mi43Mi0zNy42MS04Mi43Mi04NnMzNy4yNy04Niw4Mi43Mi04NmMyNy43OSwwLDQ4LjcyLDEyLjQyLDYxLjgsMzIuMzdWNTIuNzhaIi8+PHJlY3QgY2xhc3M9ImNscy0xIiB4PSIxMzg2LjM4IiB5PSI1Mi43OCIgd2lkdGg9IjI4LjQ0IiBoZWlnaHQ9IjIzOC42OSIvPjxwYXRoIGNsYXNzPSJjbHMtMSIgZD0iTTc2MC4yMiwyMDkuNzJjMC0zMy4zNS0yNS4xNy01OC41My01OC4yLTU4LjUzLTMyLjY5LDAtNTcuODcsMjUuMTgtNTcuODcsNTguNTNzMjUuMTgsNTguNTMsNTcuODcsNTguNTNjMzMsMCw1OC4yLTI1LjE4LDU4LjItNTguNTNNNzg4LjY3LDEyOFYyOTEuNDZINzYwLjIyVjI2My4zNGMtMTMuMDgsMjAtMzQsMzIuMzgtNjEuNzksMzIuMzgtNDUuNDUsMC04Mi43My0zNy42MS04Mi43My04NnMzNy4yOC04Niw4Mi43My04NmMyNy43OSwwLDQ4LjcxLDEyLjQyLDYxLjc5LDMyLjM3VjEyOFoiLz48cGF0aCBjbGFzcz0iY2xzLTEiIGQ9Ik01NzMuNTEsMjYwYTg4LjUzLDg4LjUzLDAsMSwxLDI1LjYtMTUxLjQyLDg3LDg3LDAsMCwxLDEzLjQ4LDEzLjkybDI0LjYxLTE4YTExOS4xNywxMTkuMTcsMCwxLDAtMjEuNzIsMTY2LjY1TDU5OS4xLDI0NS4yNUE4OS4zMiw4OS4zMiwwLDAsMSw1NzMuNTEsMjYwIi8+PHBhdGggY2xhc3M9ImNscy0xIiBkPSJNMTU1Mi4xMiwxMjh2OTIuNzhjMCwzMC0xNy40NSw0OS00NC4wOSw0OXMtNDUuOTMtMTktNDUuOTMtNDlWMTI4aC0yOC43OHY5MGMwLDQ3LjE2LDI5LjM5LDc3Ljc4LDc0LjcxLDc3Ljc4LDM5LjIsMCw0NS4zMi0yNC44LDQ1LjMyLTI1LjQydjMzLjM4YzAsMzMuMDctMTQuMzksNTEuNzUtNDQuNCw1MS43NWE0NC4xOSw0NC4xOSwwLDAsMS00NC0zOC4ybC0yNS43Myw5QTcxLjUzLDcxLjUzLDAsMCwwLDE1MDksMzgxLjUyYzQ2LjU0LDAsNzItMzAuNjMsNzItNzcuNzhWMTI4WiIvPjwvZz48ZyBpZD0iQnJhbmRfbWFyayIgZGF0YS1uYW1lPSJCcmFuZCBtYXJrIj48cGF0aCBjbGFzcz0iY2xzLTEiIGQ9Ik0yMzEuNTgsMjIzLjIzQzIyMC42NSwyMzIuOTMsMjA3LDI0NSwxODIuMjUsMjQ1aC0xNC44Yy0xNy45MSwwLTM0LjItNi41MS00NS44Ni0xOC4zMS0xMS4zOS0xMS41My0xNy42Ni0yNy4zMS0xNy42Ni00NC40NFYxNjJjMC0xNy4xMyw2LjI3LTMyLjkxLDE3LjY2LTQ0LjQ0LDExLjY2LTExLjgsMjcuOTUtMTguMyw0NS44Ni0xOC4zaDE0LjhjMjQuNzgsMCwzOC40LDEyLjA2LDQ5LjMzLDIxLjc2LDExLjM1LDEwLDIxLjE0LDE4Ljc0LDQ3LjI1LDE4Ljc0YTc1LjExLDc1LjExLDAsMCwwLDExLjg5LS45NWwtLjA5LS4yM2E4OS41Myw4OS41MywwLDAsMC01LjQ5LTExLjI4TDI2Ny42OSw5Ny4wN2E4OS42NSw4OS42NSwwLDAsMC03Ny42NC00NC44MkgxNTUuMTRBODkuNjUsODkuNjUsMCwwLDAsNzcuNSw5Ny4wN0w2MC4wNSwxMjcuM2E4OS42Nyw4OS42NywwLDAsMCwwLDg5LjY1TDc3LjUsMjQ3LjE4QTg5LjY1LDg5LjY1LDAsMCwwLDE1NS4xNCwyOTJoMzQuOTFhODkuNjUsODkuNjUsMCwwLDAsNzcuNjQtNDQuODJMMjg1LjE0LDIxN2E4OS41Myw4OS41MywwLDAsMCw1LjQ5LTExLjI4bC4wOS0uMjJhNzQsNzQsMCwwLDAtMTEuODktMWMtMjYuMTEsMC0zNS45LDguNjktNDcuMjUsMTguNzQiLz48cGF0aCBjbGFzcz0iY2xzLTEiIGQ9Ik0xODIuMjUsMTE3LjYxaC0xNC44Yy0yNy4yNiwwLTQ1LjE3LDE5LjQ3LTQ1LjE3LDQ0LjM5djIwLjI1YzAsMjQuOTIsMTcuOTEsNDQuMzksNDUuMTcsNDQuMzloMTQuOGMzOS43MiwwLDM2LjYtNDAuNSw5Ni41OC00MC41YTkxLjY0LDkxLjY0LDAsMCwxLDE2Ljk0LDEuNTYsODkuNTQsODkuNTQsMCwwLDAsMC0zMS4xNSw5Mi41MSw5Mi41MSwwLDAsMS0xNi45NCwxLjU2Yy02MCwwLTU2Ljg2LTQwLjUtOTYuNTgtNDAuNSIvPjxwYXRoIGNsYXNzPSJjbHMtMSIgZD0iTTMzMC4yMywyMDIuNWE4My42Miw4My42MiwwLDAsMC0zNC40NS0xNC44MWMwLC4xMSwwLC4yLDAsLjNhODkuNyw4OS43LDAsMCwxLTUsMTcuNDUsNjUuNTgsNjUuNTgsMCwwLDEsMjguNDgsMTEuNzNjMCwuMDgtLjA1LjE4LS4wOC4yN2ExNTMuNTcsMTUzLjU3LDAsMSwxLDAtOTAuNjNjMCwuMDkuMDUuMTkuMDguMjdhNjUuNDUsNjUuNDUsMCwwLDEtMjguNDgsMTEuNzIsOTAuMyw5MC4zLDAsMCwxLDUsMTcuNDcsMi4zMywyLjMzLDAsMCwwLDAsLjI4LDgzLjYsODMuNiwwLDAsMCwzNC40NS0xNC44YzkuODItNy4yNyw3LjkyLTE1LjQ4LDYuNDMtMjAuMzRhMTcyLjEzLDE3Mi4xMywwLDEsMCwwLDEwMS40M2MxLjQ5LTQuODYsMy4zOS0xMy4wNy02LjQzLTIwLjM0Ii8+PHBhdGggY2xhc3M9ImNscy0yIiBkPSJNMjkwLjcyLDEzOC44YTc0LDc0LDAsMCwxLTExLjg5LDFjLTI2LjExLDAtMzUuOS04LjY5LTQ3LjI0LTE4Ljc0LTEwLjk0LTkuNy0yNC41Ni0yMS43Ny00OS4zNC0yMS43N2gtMTQuOGMtMTcuOTIsMC0zNC4yLDYuNTEtNDUuODYsMTguMzEtMTEuMzksMTEuNTMtMTcuNjYsMjcuMzEtMTcuNjYsNDQuNDR2MjAuMjVjMCwxNy4xMyw2LjI3LDMyLjkxLDE3LjY2LDQ0LjQ0LDExLjY2LDExLjgsMjcuOTQsMTguMyw0NS44NiwxOC4zaDE0LjhjMjQuNzgsMCwzOC40LTEyLjA2LDQ5LjM0LTIxLjc2LDExLjM0LTEwLDIxLjEzLTE4Ljc0LDQ3LjI0LTE4Ljc0YTc1LjExLDc1LjExLDAsMCwxLDExLjg5Ljk1LDg5LDg5LDAsMCwwLDUtMTcuNDUsMi42OCwyLjY4LDAsMCwwLDAtLjMsOTIuNTEsOTIuNTEsMCwwLDAtMTYuOTQtMS41NWMtNjAsMC01Ni44Niw0MC41MS05Ni41OCw0MC41MWgtMTQuOGMtMjcuMjYsMC00NS4xNy0xOS40OC00NS4xNy00NC40VjE2MmMwLTI0LjkyLDE3LjkxLTQ0LjM5LDQ1LjE3LTQ0LjM5aDE0LjhjMzkuNzIsMCwzNi42LDQwLjQ5LDk2LjU4LDQwLjQ5YTkxLjY0LDkxLjY0LDAsMCwwLDE2Ljk0LTEuNTVjMC0uMDksMC0uMTgsMC0uMjhhOTAuMyw5MC4zLDAsMCwwLTUtMTcuNDciLz48cGF0aCBjbGFzcz0iY2xzLTIiIGQ9Ik0yOTAuNzIsMTM4LjhhNzQsNzQsMCwwLDEtMTEuODksMWMtMjYuMTEsMC0zNS45LTguNjktNDcuMjQtMTguNzQtMTAuOTQtOS43LTI0LjU2LTIxLjc3LTQ5LjM0LTIxLjc3aC0xNC44Yy0xNy45MiwwLTM0LjIsNi41MS00NS44NiwxOC4zMS0xMS4zOSwxMS41My0xNy42NiwyNy4zMS0xNy42Niw0NC40NHYyMC4yNWMwLDE3LjEzLDYuMjcsMzIuOTEsMTcuNjYsNDQuNDQsMTEuNjYsMTEuOCwyNy45NCwxOC4zLDQ1Ljg2LDE4LjNoMTQuOGMyNC43OCwwLDM4LjQtMTIuMDYsNDkuMzQtMjEuNzYsMTEuMzQtMTAsMjEuMTMtMTguNzQsNDcuMjQtMTguNzRhNzUuMTEsNzUuMTEsMCwwLDEsMTEuODkuOTUsODksODksMCwwLDAsNS0xNy40NSwyLjY4LDIuNjgsMCwwLDAsMC0uMyw5Mi41MSw5Mi41MSwwLDAsMC0xNi45NC0xLjU1Yy02MCwwLTU2Ljg2LDQwLjUxLTk2LjU4LDQwLjUxaC0xNC44Yy0yNy4yNiwwLTQ1LjE3LTE5LjQ4LTQ1LjE3LTQ0LjRWMTYyYzAtMjQuOTIsMTcuOTEtNDQuMzksNDUuMTctNDQuMzloMTQuOGMzOS43MiwwLDM2LjYsNDAuNDksOTYuNTgsNDAuNDlhOTEuNjQsOTEuNjQsMCwwLDAsMTYuOTQtMS41NWMwLS4wOSwwLS4xOCwwLS4yOGE5MC4zLDkwLjMsMCwwLDAtNS0xNy40NyIvPjwvZz48L2c+PC9nPjwvc3ZnPg=="
+             height="40px" width="auto" alt="Calendly logo" class="sc-xcu1of-0 fAEWHY"/>
+        <img id="imlogo" src="https://assets.calendly.com/packs/frontend/media/logo-square-cd364a3c33976d32792a.png" />
     </div>
 
-    <nav>
-        <a href="#">Product</a>
-        <a href="#">Solution</a>
-        <a href="#">Enterprise</a>
-        <a href="#">Pricing</a>
-        <a href="#">Resources</a>
-    </nav>
-
-    <div sec:authorize="isAuthenticated()">
-        <h2 th:text="'Welcome : '+${user.name}" style="color: blue;"></h2>
-        <form th:action="@{/logout}" method="post">
-            <button id="logout-btn" type="submit">Logout</button>
-        </form>
+    <div id="mid">
+        <ul id="ul">
+            <li><a class="a" href="#">Individuals</a></li>
+            <li><a class="a" href="#">Teams</a></li>
+            <li><a class="a" href="#">Enterprise</a></li>
+            <li><a class="a" href="#">Product</a></li>
+            <li><a class="a" href="#">Pricing</a></li>
+            <li><a class="a" href="#">Resources</a></li>
+        </ul>
     </div>
 
-    <div sec:authorize="!isAuthenticated()">
-
-        <!-- Register Button -->
-        <form th:action="@{/signUp}" method="get">
-            <button id="get-started-btn" type="submit">Get Started</button>
+    <div id="signup">
+        <form action="/signIn" method="get">
+            <button type="submit" id="bt1">Log In</button>
         </form>
-        <br>
-        <form th:action="@{/signIn}" method="get">
-            <button id="login-btn" type="submit">Login</button>
+        <form action="/signUp" method="get">
+            <button type="submit" id="bt">Get started</button>
         </form>
-
     </div>
-</header>
+</div>
 
-<main>
-    <h2>Easy Scheduling Ahead</h2>
-    <p>Calendly is your scheduling automation platform for eliminating the back-and-forth emails to find the perfect time — and so much more.</p>
-</main>
+<div class="inul">
+    <div class="mdon">
+        <div class="close2">+</div>
+        <div id="cont2">
+            <img id="logo1"
+                 src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxNTgwLjkxIDM4MS41MiI+PGRlZnM+PHN0eWxlPi5jbHMtMXtmaWxsOiMwMDZiZmY7fS5jbHMtMntmaWxsOiMwYWU4ZjA7fTwvc3R5bGU+PC9kZWZzPjxnIGlkPSJMYXllcl8yIiBkYXRhLW5hbWU9IkxheWVyIDIiPjxnIGlkPSJMYXllcl8xLTIiIGRhdGEtbmFtZT0iTGF5ZXIgMSI+PGcgaWQ9IldvcmRtYXJrIj48cGF0aCBjbGFzcz0iY2xzLTEiIGQ9Ik05MzguNDYsMTUwLjU0YzI0LjUyLDAsNDcuNzQsMTUsNTIuNjQsNDcuNDFIODgxLjljNC41Ny0yOC40NCwyNS44My00Ny40MSw1Ni41Ni00Ny40MW00OS4xNSw5NS4zNmMtOC4zNCwxMy0yNC40NiwyMy00Ni41MywyMy0zMC40MSwwLTUzLjYzLTE2LjY3LTU5LjE4LTQ2LjFoMTM3YTgzLDgzLDAsMCwwLDEtMTIuNzVjMC00NS43Ny0zMi04Ni4zMi04MS40Mi04Ni4zMi01MSwwLTg1LjY2LDM3LjYtODUuNjYsODYsMCw0OSwzNSw4Niw4Ny42Miw4NiwzMi43LDAsNTcuNTUtMTQuNzIsNzEuOTMtMzdaIi8+PHJlY3QgY2xhc3M9ImNscy0xIiB4PSI4MTAuOTIiIHk9IjUyLjc4IiB3aWR0aD0iMjguNDQiIGhlaWdodD0iMjM4LjY5Ii8+PHBhdGggY2xhc3M9ImNscy0xIiBkPSJNMTE3OC4xNSwxOTEuMDlWMjkxLjQ2SDExNDkuN1YxOTIuNzJjMC0yNi44MS0xNS4zNi00MS44NS00MC41NC00MS44NS0yNi4xNiwwLTQ3LjQxLDE1LjM3LTQ3LjQxLDUzLjk1djg2LjY0SDEwMzMuM1YxMjhoMjguNDV2MjMuNTRjMTIuMS0xOS4yOSwzMC4wOC0yNy43OSw1My0yNy43OSwzOC4yNSwwLDYzLjQzLDI1LjUsNjMuNDMsNjcuMzYiLz48cGF0aCBjbGFzcz0iY2xzLTEiIGQ9Ik0xMzM1LDIwOS43MmMwLTMzLjM1LTI1LjE4LTU4LjUzLTU4LjItNTguNTMtMzIuNywwLTU3Ljg3LDI1LjE4LTU3Ljg3LDU4LjUzczI1LjE3LDU4LjUzLDU3Ljg3LDU4LjUzYzMzLDAsNTguMi0yNS4xOCw1OC4yLTU4LjUzbTI4LjQ0LTE1Ni45NFYyOTEuNDdIMTMzNVYyNjMuMzRjLTEzLjA4LDIwLTM0LDMyLjM4LTYxLjgsMzIuMzgtNDUuNDUsMC04Mi43Mi0zNy42MS04Mi43Mi04NnMzNy4yNy04Niw4Mi43Mi04NmMyNy43OSwwLDQ4LjcyLDEyLjQyLDYxLjgsMzIuMzdWNTIuNzhaIi8+PHJlY3QgY2xhc3M9ImNscy0xIiB4PSIxMzg2LjM4IiB5PSI1Mi43OCIgd2lkdGg9IjI4LjQ0IiBoZWlnaHQ9IjIzOC42OSIvPjxwYXRoIGNsYXNzPSJjbHMtMSIgZD0iTTc2MC4yMiwyMDkuNzJjMC0zMy4zNS0yNS4xNy01OC41My01OC4yLTU4LjUzLTMyLjY5LDAtNTcuODcsMjUuMTgtNTcuODcsNTguNTNzMjUuMTgsNTguNTMsNTcuODcsNTguNTNjMzMsMCw1OC4yLTI1LjE4LDU4LjItNTguNTNNNzg4LjY3LDEyOFYyOTEuNDZINzYwLjIyVjI2My4zNGMtMTMuMDgsMjAtMzQsMzIuMzgtNjEuNzksMzIuMzgtNDUuNDUsMC04Mi43My0zNy42MS04Mi43My04NnMzNy4yOC04Niw4Mi43My04NmMyNy43OSwwLDQ4LjcxLDEyLjQyLDYxLjc5LDMyLjM3VjEyOFoiLz48cGF0aCBjbGFzcz0iY2xzLTEiIGQ9Ik01NzMuNTEsMjYwYTg4LjUzLDg4LjUzLDAsMSwxLDI1LjYtMTUxLjQyLDg3LDg3LDAsMCwxLDEzLjQ4LDEzLjkybDI0LjYxLTE4YTExOS4xNywxMTkuMTcsMCwxLDAtMjEuNzIsMTY2LjY1TDU5OS4xLDI0NS4yNUE4OS4zMiw4OS4zMiwwLDAsMSw1NzMuNTEsMjYwIi8+PHBhdGggY2xhc3M9ImNscy0xIiBkPSJNMTU1Mi4xMiwxMjh2OTIuNzhjMCwzMC0xNy40NSw0OS00NC4wOSw0OXMtNDUuOTMtMTktNDUuOTMtNDlWMTI4aC0yOC43OHY5MGMwLDQ3LjE2LDI5LjM5LDc3Ljc4LDc0LjcxLDc3Ljc4LDM5LjIsMCw0NS4zMi0yNC44LDQ1LjMyLTI1LjQydjMzLjM4YzAsMzMuMDctMTQuMzksNTEuNzUtNDQuNCw1MS43NWE0NC4xOSw0NC4xOSwwLDAsMS00NC0zOC4ybC0yNS43Myw5QTcxLjUzLDcxLjUzLDAsMCwwLDE1MDksMzgxLjUyYzQ2LjU0LDAsNzItMzAuNjMsNzItNzcuNzhWMTI4WiIvPjwvZz48ZyBpZD0iQnJhbmRfbWFyayIgZGF0YS1uYW1lPSJCcmFuZCBtYXJrIj48cGF0aCBjbGFzcz0iY2xzLTEiIGQ9Ik0yMzEuNTgsMjIzLjIzQzIyMC42NSwyMzIuOTMsMjA3LDI0NSwxODIuMjUsMjQ1aC0xNC44Yy0xNy45MSwwLTM0LjItNi41MS00NS44Ni0xOC4zMS0xMS4zOS0xMS41My0xNy42Ni0yNy4zMS0xNy42Ni00NC40NFYxNjJjMC0xNy4xMyw2LjI3LTMyLjkxLDE3LjY2LTQ0LjQ0LDExLjY2LTExLjgsMjcuOTUtMTguMyw0NS44Ni0xOC4zaDE0LjhjMjQuNzgsMCwzOC40LDEyLjA2LDQ5LjMzLDIxLjc2LDExLjM1LDEwLDIxLjE0LDE4Ljc0LDQ3LjI1LDE4Ljc0YTc1LjExLDc1LjExLDAsMCwwLDExLjg5LS45NWwtLjA5LS4yM2E4OS41Myw4OS41MywwLDAsMC01LjQ5LTExLjI4TDI2Ny42OSw5Ny4wN2E4OS42NSw4OS42NSwwLDAsMC03Ny42NC00NC44MkgxNTUuMTRBODkuNjUsODkuNjUsMCwwLDAsNzcuNSw5Ny4wN0w2MC4wNSwxMjcuM2E4OS42Nyw4OS42NywwLDAsMCwwLDg5LjY1TDc3LjUsMjQ3LjE4QTg5LjY1LDg5LjY1LDAsMCwwLDE1NS4xNCwyOTJoMzQuOTFhODkuNjUsODkuNjUsMCwwLDAsNzcuNjQtNDQuODJMMjg1LjE0LDIxN2E4OS41Myw4OS41MywwLDAsMCw1LjQ5LTExLjI4bC4wOS0uMjJhNzQsNzQsMCwwLDAtMTEuODktMWMtMjYuMTEsMC0zNS45LDguNjktNDcuMjUsMTguNzQiLz48cGF0aCBjbGFzcz0iY2xzLTEiIGQ9Ik0xODIuMjUsMTE3LjYxaC0xNC44Yy0yNy4yNiwwLTQ1LjE3LDE5LjQ3LTQ1LjE3LDQ0LjM5djIwLjI1YzAsMjQuOTIsMTcuOTEsNDQuMzksNDUuMTcsNDQuMzloMTQuOGMzOS43MiwwLDM2LjYtNDAuNSw5Ni41OC00MC41YTkxLjY0LDkxLjY0LDAsMCwxLDE2Ljk0LDEuNTYsODkuNTQsODkuNTQsMCwwLDAsMC0zMS4xNSw5Mi41MSw5Mi41MSwwLDAsMS0xNi45NCwxLjU2Yy02MCwwLTU2Ljg2LTQwLjUtOTYuNTgtNDAuNSIvPjxwYXRoIGNsYXNzPSJjbHMtMSIgZD0iTTMzMC4yMywyMDIuNWE4My42Miw4My42MiwwLDAsMC0zNC40NS0xNC44MWMwLC4xMSwwLC4yLDAsLjNhODkuNyw4OS43LDAsMCwxLTUsMTcuNDUsNjUuNTgsNjUuNTgsMCwwLDEsMjguNDgsMTEuNzNjMCwuMDgtLjA1LjE4LS4wOC4yN2ExNTMuNTcsMTUzLjU3LDAsMSwxLDAtOTAuNjNjMCwuMDkuMDUuMTkuMDguMjdhNjUuNDUsNjUuNDUsMCwwLDEtMjguNDgsMTEuNzIsOTAuMyw5MC4zLDAsMCwxLDUsMTcuNDcsMi4zMywyLjMzLDAsMCwwLDAsLjI4LDgzLjYsODMuNiwwLDAsMCwzNC40NS0xNC44YzkuODItNy4yNyw3LjkyLTE1LjQ4LDYuNDMtMjAuMzRhMTcyLjEzLDE3Mi4xMywwLDEsMCwwLDEwMS40M2MxLjQ5LTQuODYsMy4zOS0xMy4wNy02LjQzLTIwLjM0Ii8+PHBhdGggY2xhc3M9ImNscy0yIiBkPSJNMjkwLjcyLDEzOC44YTc0LDc0LDAsMCwxLTExLjg5LDFjLTI2LjExLDAtMzUuOS04LjY5LTQ3LjI0LTE4Ljc0LTEwLjk0LTkuNy0yNC41Ni0yMS43Ny00OS4zNC0yMS43N2gtMTQuOGMtMTcuOTIsMC0zNC4yLDYuNTEtNDUuODYsMTguMzEtMTEuMzksMTEuNTMtMTcuNjYsMjcuMzEtMTcuNjYsNDQuNDR2MjAuMjVjMCwxNy4xMyw2LjI3LDMyLjkxLDE3LjY2LDQ0LjQ0LDExLjY2LDExLjgsMjcuOTQsMTguMyw0NS44NiwxOC4zaDE0LjhjMjQuNzgsMCwzOC40LTEyLjA2LDQ5LjM0LTIxLjc2LDExLjM0LTEwLDIxLjEzLTE4Ljc0LDQ3LjI0LTE4Ljc0YTc1LjExLDc1LjExLDAsMCwxLDExLjg5Ljk1LDg5LDg5LDAsMCwwLDUtMTcuNDUsMi42OCwyLjY4LDAsMCwwLDAtLjMsOTIuNTEsOTIuNTEsMCwwLDAtMTYuOTQtMS41NWMtNjAsMC01Ni44Niw0MC41MS05Ni41OCw0MC41MWgtMTQuOGMtMjcuMjYsMC00NS4xNy0xOS40OC00NS4xNy00NC40VjE2MmMwLTI0LjkyLDE3LjkxLTQ0LjM5LDQ1LjE3LTQ0LjM5aDE0LjhjMzkuNzIsMCwzNi42LDQwLjQ5LDk2LjU4LDQwLjQ5YTkxLjY0LDkxLjY0LDAsMCwwLDE2Ljk0LTEuNTVjMC0uMDksMC0uMTgsMC0uMjhhOTAuMyw5MC4zLDAsMCwwLTUtMTcuNDciLz48cGF0aCBjbGFzcz0iY2xzLTIiIGQ9Ik0yOTAuNzIsMTM4LjhhNzQsNzQsMCwwLDEtMTEuODksMWMtMjYuMTEsMC0zNS45LTguNjktNDcuMjQtMTguNzQtMTAuOTQtOS43LTI0LjU2LTIxLjc3LTQ5LjM0LTIxLjc3aC0xNC44Yy0xNy45MiwwLTM0LjIsNi41MS00NS44NiwxOC4zMS0xMS4zOSwxMS41My0xNy42NiwyNy4zMS0xNy42Niw0NC40NHYyMC4yNWMwLDE3LjEzLDYuMjcsMzIuOTEsMTcuNjYsNDQuNDQsMTEuNjYsMTEuOCwyNy45NCwxOC4zLDQ1Ljg2LDE4LjNoMTQuOGMyNC43OCwwLDM4LjQtMTIuMDYsNDkuMzQtMjEuNzYsMTEuMzQtMTAsMjEuMTMtMTguNzQsNDcuMjQtMTguNzRhNzUuMTEsNzUuMTEsMCwwLDEsMTEuODkuOTUsODksODksMCwwLDAsNS0xNy40NSwyLjY4LDIuNjgsMCwwLDAsMC0uMyw5Mi41MSw5Mi41MSwwLDAsMC0xNi45NC0xLjU1Yy02MCwwLTU2Ljg2LDQwLjUxLTk2LjU4LDQwLjUxaC0xNC44Yy0yNy4yNiwwLTQ1LjE3LTE5LjQ4LTQ1LjE3LTQ0LjRWMTYyYzAtMjQuOTIsMTcuOTEtNDQuMzksNDUuMTctNDQuMzloMTQuOGMzOS43MiwwLDM2LjYsNDAuNDksOTYuNTgsNDAuNDlhOTEuNjQsOTEuNjQsMCwwLDAsMTYuOTQtMS41NWMwLS4wOSwwLS4xOCwwLS4yOGE5MC4zLDkwLjMsMCwwLDAtNS0xNy40NyIvPjwvZz48L2c+PC9nPjwvc3ZnPg=="
+                 height="40px" width="auto" alt="Calendly logo" class="sc-xcu1of-0 fAEWHY">
+            <div id="mdiv">
+                <div><a class="a" id="a" href="#">Individuals</a></div>
+                <div><a class="a" href="#">Teams</a></div>
+                <div><a class="a" href="#">Enterprise</a></div>
+                <div><a class="a" href="#">Product</a></div>
+                <div><a class="a" href="#">Pricing</a></div>
+                <div><a class="a" href="#">Resources</a></div>
+
+            </div>
+        </div>
+    </div>
+</div>
 
 </body>
-</html>
 
+<section id="section_1" >
+    <div id="cont1">
+        <div id="sec-div-1">
+            <h1 id="take">Easy scheduling <span id="spn"> ahead</span></h1>
+            <p id="calTag">Calendly is your hub for scheduling meetings professionally and efficiently, eliminating the hassle of back-and-forth emails so you can get back to work.</p>
+            <button id="start">Start for free</button>
+        </div>
+
+        <div id="sec-div-2"><img style="width:100%" src="https://images.ctfassets.net/k0lk9kiuza3o/4CrsQ3maYuDvlRW9EvMmeQ/b7b08a5826b2dacaf14b4fdafac4d5c3/features_overview_1__1_.png?w=1920&h=1564&q=50&fm=webp" alt=""></div>
+    </div>
+</section>
+
+<footer class="footer">
+    <div class="container">
+        <div class="row">
+
+            <div class="footer-col">
+                <h4>About</h4>
+                <ul>
+                    <li><a href="#">About Calendly</a></li>
+                    <li><a href="#">Contack Sales</a></li>
+                    <li><a href="#">Newsroom</a></li>
+                    <li><a href="#">Careers</a></li>
+                    <li><a href="#">Security</a></li>
+
+                </ul>
+
+            </div>
+
+            <div class="footer-col">
+                <h4>Solution</h4>
+                <ul>
+                    <li><a href="#">Customer Success</a></li>
+                    <li><a href="#">Sales</a></li>
+                    <li><a href="#">Recruiting</a></li>
+                    <li><a href="#">Information Technology</a></li>
+                    <li><a href="#">Marketing</a></li>
+
+                </ul>
+
+            </div>
+            <div class="footer-col">
+                <h4>Popular Feature
+                </h4>
+                <ul>
+                    <li><a href="#">Embed Calendly</a></li>
+                    <li><a href="#">Evailability</a></li>
+                    <li><a href="#">Sending Notification</a></li>
+                    <li><a href="#">Using Calendly Mobile</a></li>
+
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Support and Other</h4>
+                <ul>
+                    <li><a href="#">Help Center</a></li>
+                    <li><a href="#">Video Tutorials</a></li>
+                    <li><a href="#">Download for chrome</a></li>
+                    <li><a href="#">Download for Firefox</a></li>
+                    <li><a href="#">Developer Tools</a></li>
+                </ul>
+            </div>
+
+        </div>
+    </div>
+</footer>
+</html>
