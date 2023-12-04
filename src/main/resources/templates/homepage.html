@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Homepage</title>
+    <style>
+        body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #ffffff; /* White background */
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    background-color: #ffffff; /* White background */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+#logo {
+    width: 100px; /* Adjust the width as needed */
+    height: auto;
+}
+
+nav {
+    display: flex;
+}
+
+nav a {
+    text-decoration: none;
+    color: #333333; /* Dark gray text color */
+    margin-right: 20px;
+    transition: color 0.3s; /* Smooth color transition on hover */
+}
+
+nav a:hover {
+    color: #0000FF; /* blue on hover */
+}
+
+#login-btn {
+    background-color: #4caf50; /* Green button color */
+    color: #ffffff; /* White text color */
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+#get-started-btn {
+    background-color: #3498db; /* Blue button color */
+    color: #ffffff; /* White text color */
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+#get-started-btn:hover,
+#login-btn:hover {
+    background-color: #45a049; /* Darker green on hover */
+}
+
+main {
+    /* Add your main content styles here */
+    padding: 20px;
+}
+
+h2 {
+    color: #333333; /* Dark gray text color */
+    margin-bottom: 10px;
+}
+
+p {
+    color: #666666; /* Slightly lighter gray text color */
+    margin-bottom: 20px;
+}
+    </style>
+</head>
+<body>
+
+<header>
+    <div>
+        <img id="logo" src="https://cdn.mos.cms.futurecdn.net/W3yFiCjbmPia2u3qk9kKci.jpg" alt="Calendly Logo"> <!-- Replace with your actual logo image -->
+    </div>
+    <nav>
+        <a href="#">Product</a>
+        <a href="#">Solution</a>
+        <a href="#">Enterprise</a>
+        <a href="#">Pricing</a>
+        <a href="#">Resources</a>
+    </nav>
+    <div>
+        <form th:action="@{/signUp}" method="get">
+            <button type="submit">Get Started</button>
+        </form>
+        <form th:action="@{/signIn}" method="get">
+            <button type="submit">Login</button>
+        </form>
+    </div>
+</header>
+
+<main>
+    <h2>Easy Scheduling Ahead</h2>
+    <p>Calendly is your scheduling automation platform for eliminating the back-and-forth emails to find the perfect time — and so much more.</p>
+</main>
+
+</body>
+</html>
