@@ -6,6 +6,9 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.time.LocalTime;
+import java.util.Date;
+
 @Entity
 @Getter
 @Setter
@@ -24,17 +27,14 @@ public class ScheduledMeet {
     @Column(name = "invitee_email")
     private String inviteeEmail;
 
-    @Column(name = "start_hour")
-    private int startHour;
+    @Column(name = "start_time")
+    private LocalTime startTime;
 
-    @Column(name = "start_minute")
-    private int startMinute;
+    @Column(name = "end_time")
+    private LocalTime endTime;
 
-    @Column(name = "end_hour")
-    private int endHour;
-
-    @Column(name = "end_minute")
-    private int endMinute;
+    @Column(name = "date")
+    private Date date;
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "user_id")
@@ -43,7 +43,5 @@ public class ScheduledMeet {
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "event_id")
     private Event event;
-
-
 
 }
