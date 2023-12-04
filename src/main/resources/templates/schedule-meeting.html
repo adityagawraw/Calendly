@@ -10,8 +10,8 @@
     <div id="setting-header">
         <h1>Scheduled Meet Details</h1>
     </div>
-        <form th:action="@{/schedule-meet/1}"  method="POST">
-
+        <form th:action="@{/schedule-meet}" th:object="${eventId}" method="POST">
+            <input type="hidden" name="eventId" th:value="${eventId}">
             <input id="inviteeName" type="text" name="inviteeName" placeholder="Name"> <br>
             <input id="inviteeEmail" type="text" name="inviteeEmail" placeholder="Email"><br>
             <input id="startHour" type="text" name="startHour" placeholder="startHour"><br>

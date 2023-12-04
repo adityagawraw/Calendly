@@ -1,6 +1,5 @@
 package com.example.Calendly.model;
 
-
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
@@ -47,14 +46,17 @@ public class Event {
     @Column(name = "date_range")
     private int dateRange;
 
-    @OneToMany(mappedBy = "event")
-    private List<AvailableHoursByDay> availableHoursByDays;
+//    @OneToMany(mappedBy = "event")
+//    private List<Availability> availableHoursByDays;
 
     @Column(name = "limit_per_day")
     private int limitPerDay;
 
     @OneToMany(mappedBy = "event")
     private List<EventQuestion> meetQuestions;
+
+    @OneToMany(mappedBy = "event")
+    private List<ScheduledMeet> scheduledMeets;
 
     public Event(String title, String description, int duration, String location, String eventColor) {
         this.title = title;

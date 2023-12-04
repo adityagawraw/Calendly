@@ -21,7 +21,8 @@ public class SecurityConfiguration {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception{
         http.authorizeHttpRequests(configure -> configure
                         .requestMatchers("/signIn","/signUp","/saveRegisteredUser", "/").permitAll()
-                        .requestMatchers("/scheduled-meet", "/schedule-meet/{eventId}").permitAll()
+                        .requestMatchers("/scheduled-meet", "/schedule-meet").permitAll()
+                        .requestMatchers("/dashboard").permitAll()
                         .anyRequest().authenticated()
                 )
                 .formLogin(form ->

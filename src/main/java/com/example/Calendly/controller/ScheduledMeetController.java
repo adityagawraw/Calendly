@@ -1,6 +1,8 @@
 package com.example.Calendly.controller;
 
+import com.example.Calendly.model.Event;
 import com.example.Calendly.model.ScheduledMeet;
+import com.example.Calendly.repository.EventRepository;
 import com.example.Calendly.service.ScheduledMeetService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -17,13 +19,15 @@ import java.util.Date;
 @Controller
 public class ScheduledMeetController {
     private final ScheduledMeetService scheduledMeetService;
+    private final EventRepository eventRepository;
 
     @Autowired
-    public ScheduledMeetController(ScheduledMeetService scheduledMeetService) {
+    public ScheduledMeetController(ScheduledMeetService scheduledMeetService, EventRepository eventRepository) {
         this.scheduledMeetService = scheduledMeetService;
+        this.eventRepository = eventRepository;
     }
 
-    @PostMapping("/schedule-meet/{eventId}")
+    @PostMapping("/schedule-meet")
     public String createScheduledMeet(
                                       @RequestParam("inviteeName") String inviteeName,
                                       @RequestParam("inviteeEmail") String inviteeEmail,
@@ -34,7 +38,7 @@ public class ScheduledMeetController {
                                       @RequestParam("year") int year,
                                       @RequestParam("month") int month,
                                       @RequestParam("day") int day,
-                                      @PathVariable("eventId") int eventId
+                                      @RequestParam("eventId") long eventId
                                       ) {
 
         ScheduledMeet scheduledMeet = new ScheduledMeet();
@@ -56,14 +60,16 @@ public class ScheduledMeetController {
         scheduledMeet.setStartTime(startTime);
         scheduledMeet.setEndTime(endTime);
         scheduledMeet.setDate(customDate);
+        Event event = eventRepository.findById(eventId).orElse(null);
+        scheduledMeet.setEvent(event);
         scheduledMeetService.saveScheduledMeet(scheduledMeet);
 
-        return "redirect:/";
+        return "redirect:/scheduled-meet";
     }
 
-    @GetMapping("/scheduled-meet")
-    public String scheduledMeet(Model model) {
-        model.addAttribute("eventId", 1);
+    @GetMapping("/scheduled-meet/{eventId}")
+    public String scheduledMeet(Model model, @PathVariable("eventId") long eventId) {
+        model.addAttribute("eventId", eventId);
         return "schedule-meeting";
     }
 

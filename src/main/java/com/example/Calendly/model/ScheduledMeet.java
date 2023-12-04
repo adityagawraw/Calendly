@@ -8,6 +8,8 @@ import lombok.Setter;
 
 import java.time.LocalTime;
 import java.util.Date;
+import java.util.LinkedHashSet;
+import java.util.List;
 
 @Entity
 @Getter
@@ -40,8 +42,11 @@ public class ScheduledMeet {
     @JoinColumn(name = "user_id")
     private User host;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "event_id")
     private Event event;
+
+    @OneToMany(mappedBy = "scheduledMeet")
+    private List<MeetQuestionAnswer>  meetQuestionAnswers;
 
 }

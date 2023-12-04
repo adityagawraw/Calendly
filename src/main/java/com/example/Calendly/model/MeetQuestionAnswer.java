@@ -25,5 +25,7 @@ public class MeetQuestionAnswer {
     @Column(name = "answer")
     private String answer;
 
+    @ManyToOne(cascade = CascadeType.ALL)
+    private ScheduledMeet scheduledMeet;
 
 }
