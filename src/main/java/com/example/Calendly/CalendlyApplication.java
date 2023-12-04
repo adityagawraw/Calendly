@@ -3,7 +3,7 @@ package com.example.Calendly;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-@SpringBootApplicationPandey-
+@SpringBootApplication
 public class CalendlyApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(CalendlyApplication.class, args);
