@@ -18,6 +18,10 @@ public class EventController {
         this.eventService = eventService;
     }
 
+    @GetMapping("/")
+    public String home(){
+        return "homepage";
+    }
     @GetMapping("/dashboard")
     public String showDashboard(Model model) {
         List<Event> events = eventService.findAllEvents();
