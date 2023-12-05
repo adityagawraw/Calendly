@@ -24,7 +24,7 @@ public class SecurityConfiguration {
                                 "/css/**","/create-event","/event-details","/save-event-details",
                                 "/scheduling-settings","/save-scheduling-settings","/booking-page-options",
                                 "/save-booking-page-options").permitAll()
-                        .requestMatchers("/scheduled-meet", "/schedule-meet").permitAll()
+                        .requestMatchers("/scheduled-meet/{eventId}", "/schedule-meet").permitAll()
                         .requestMatchers("/dashboard").permitAll()
                         .anyRequest().authenticated()
                 )

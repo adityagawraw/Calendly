@@ -61,13 +61,13 @@ public class Event {
     @Column(name = "event_link")
     private  String eventLink;
 
-    public Event(String title, String description, int duration, String location, String eventColor) {
+    public Event(String title, String description, int duration, String location) {
         this.title = title;
         this.description = description;
         this.duration = duration;
         this.location = location;
-        this.eventColor = eventColor;
     }
+
 
     public void addAvailableHoursByDay(Availability availableHoursByDay){
         availableHoursByDays.add(availableHoursByDay);
@@ -171,4 +171,5 @@ public class Event {
     public void setMeetQuestions(List<EventQuestion> meetQuestions) {
         this.meetQuestions = meetQuestions;
     }
+
 }

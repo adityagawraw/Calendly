@@ -32,9 +32,8 @@ public class EventServiceImpl implements EventService{
     }
 
     @Override
-    public Event createEvent(String title, String description, int duration, String location,
-                             String eventColor) {
-        Event event = new Event(title, description, duration, location, eventColor);
+    public Event createEvent(String title, String description, int duration, String location) {
+        Event event = new Event(title, description, duration, location);
         Event savedEvent = eventRepository.save(event);
         return savedEvent;
     }
@@ -42,8 +41,9 @@ public class EventServiceImpl implements EventService{
     @Override
     public void saveScheduleSettings(Long eventId, List<String> selectedDays, SchedulingSetting schedulingSetting) {
         Optional<Event> optionalEvent = eventRepository.findById(eventId);
-        if(optionalEvent.isPresent()){
+        if(optionalEvent.isPresent()) {
             Event event = optionalEvent.get();
+
 
             event.setDateRange(schedulingSetting.getDateRange());
             event.setLimitPerDay(schedulingSetting.getMaxPerDay());
@@ -61,6 +61,11 @@ public class EventServiceImpl implements EventService{
             eventRepository.save(event);
         }
     }
+    public Event findEvent(long eventId) {
+        Event event = eventRepository.findById(eventId).orElse(null);
+        return event;
+    }
+
 
     public void saveBookingPageOptions(Long eventId, String eventLink, String inviteeQuestions){
         Optional<Event> optionalEvent = eventRepository.findById(eventId);
