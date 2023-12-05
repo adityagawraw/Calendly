@@ -14,13 +14,13 @@ import java.util.*;
 
 public class SchedulingSetting {
     private int dateRange;
-    private Map<String,List<AvailableHoursByDay>> availabilityPerDay = new LinkedHashMap<>();
+    private Map<String,List<Availability>> availabilityPerDay = new LinkedHashMap<>();
     private int maxPerDay;
 
     public SchedulingSetting() {
         for(Days day: Days.values()){
-            List<AvailableHoursByDay> availableHoursOnADay = new ArrayList<>();
-            AvailableHoursByDay availableHoursByDay = new AvailableHoursByDay();
+            List<Availability> availableHoursOnADay = new ArrayList<>();
+            Availability availableHoursByDay = new Availability();
 
             availableHoursByDay.setDay(String.valueOf(day));
             availableHoursByDay.setStartTime(9);
@@ -49,11 +49,11 @@ public class SchedulingSetting {
         this.maxPerDay = maxPerDay;
     }
 
-    public Map<String, List<AvailableHoursByDay>> getAvailabilityPerDay() {
+    public Map<String, List<Availability>> getAvailabilityPerDay() {
         return availabilityPerDay;
     }
 
-    public void setAvailabilityPerDay(Map<String, List<AvailableHoursByDay>> availabilityPerDay) {
+    public void setAvailabilityPerDay(Map<String, List<Availability>> availabilityPerDay) {
         this.availabilityPerDay = availabilityPerDay;
     }
 

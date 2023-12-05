@@ -10,4 +10,5 @@ public interface EventService {
     Event createEvent(String title, String description, int duration, String location,
                       String eventColor);
     public void saveScheduleSettings(Long eventId, List<String> selectedDays, SchedulingSetting schedulingSetting);
+    public void saveBookingPageOptions(Long eventId, String eventLink, String inviteeQuestions);
 }

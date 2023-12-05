@@ -47,13 +47,16 @@ public class Event {
     private int dateRange;
 
     @OneToMany(mappedBy = "event")
-    private List<AvailableHoursByDay> availableHoursByDays;
+    private List<Availability> availableHoursByDays;
 
     @Column(name = "limit_per_day")
     private int limitPerDay;
 
     @OneToMany(mappedBy = "event")
     private List<EventQuestion> meetQuestions;
+
+    @Column(name = "event_link")
+    private  String eventLink;
 
     public Event(String title, String description, int duration, String location, String eventColor) {
         this.title = title;
@@ -63,8 +66,19 @@ public class Event {
         this.eventColor = eventColor;
     }
 
-    public void addavailableHoursByDay(AvailableHoursByDay availableHoursByDay){
+    public void addAvailableHoursByDay(Availability availableHoursByDay){
         availableHoursByDays.add(availableHoursByDay);
+    }
+    public void addMeetQuestions(EventQuestion eventQuestion){
+        meetQuestions.add(eventQuestion);
+    }
+
+    public String getEventLink() {
+        return eventLink;
+    }
+
+    public void setEventLink(String eventLink) {
+        this.eventLink = eventLink;
     }
 
     public long getId() {
@@ -131,11 +145,11 @@ public class Event {
         this.dateRange = dateRange;
     }
 
-    public List<AvailableHoursByDay> getAvailableHoursByDays() {
+    public List<Availability> getAvailableHoursByDays() {
         return availableHoursByDays;
     }
 
-    public void setAvailableHoursByDays(List<AvailableHoursByDay> availableHoursByDays) {
+    public void setAvailableHoursByDays(List<Availability> availableHoursByDays) {
         this.availableHoursByDays = availableHoursByDays;
     }
 

@@ -11,14 +11,14 @@
         <a th:href="@{/create-event}">< Event Type Summary</a>
         <h1>Booking page options</h1>
     </div>
-    <form id="setting-section" th:action="@{/save-booking-page-options}" method="post" >
+    <form id="setting-section" th:action="@{/save-booking-page-options}">
         <div>
             <h4>Event link</h4>
-            <input type="text" th:field="${eventLink}" >
+            <input type="text" th:name="eventLink" th:value="${eventLink}" >
         </div>
         <div>
             <h4>Invitee questions</h4>
-            <textarea id="" cols="30" rows="6" th:field="${inviteeQuestions}"></textarea>
+            <textarea id="" cols="30" rows="6" th:name="inviteeQuestions" th:value="${inviteeQuestions}"></textarea>
         </div>
         <input type="hidden" th:value="${eventId}" th:name="eventId">
         <div id="button-section">

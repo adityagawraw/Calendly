@@ -1,9 +1,11 @@
 package com.example.Calendly.service;
 
-import com.example.Calendly.model.AvailableHoursByDay;
+import com.example.Calendly.model.Availability;
 import com.example.Calendly.model.Event;
+import com.example.Calendly.model.EventQuestion;
 import com.example.Calendly.model.SchedulingSetting;
-import com.example.Calendly.repository.AvailableHoursByDayRepository;
+import com.example.Calendly.repository.AvailabilityRepository;
+import com.example.Calendly.repository.EventQuestionRepository;
 import com.example.Calendly.repository.EventRepository;
 import org.springframework.stereotype.Service;
 
@@ -13,12 +15,15 @@ import java.util.Optional;
 @Service
 public class EventServiceImpl implements EventService{
     private EventRepository eventRepository;
-    private AvailableHoursByDayRepository availableHoursByDayRepository;
+    private AvailabilityRepository availabilityRepository;
+    private EventQuestionRepository eventQuestionRepository;
 
     public EventServiceImpl(EventRepository eventRepository,
-                            AvailableHoursByDayRepository availableHoursByDayRepository) {
+                            AvailabilityRepository availabilityRepository,
+                            EventQuestionRepository eventQuestionRepository) {
         this.eventRepository = eventRepository;
-        this.availableHoursByDayRepository= availableHoursByDayRepository;
+        this.availabilityRepository = availabilityRepository;
+        this.eventQuestionRepository = eventQuestionRepository;
     }
 
     @Override
@@ -39,12 +44,12 @@ public class EventServiceImpl implements EventService{
             event.setLimitPerDay(schedulingSetting.getMaxPerDay());
 
             for(String day : selectedDays){
-                List<AvailableHoursByDay> availableHoursByDays = schedulingSetting.getAvailabilityPerDay().get(day);
+                List<Availability> availableHoursByDays = schedulingSetting.getAvailabilityPerDay().get(day);
 
-                for(AvailableHoursByDay availableHoursByDay : availableHoursByDays){
+                for(Availability availableHoursByDay : availableHoursByDays){
                     availableHoursByDay.setEvent(event);
-                    availableHoursByDayRepository.save(availableHoursByDay);
-                    event.addavailableHoursByDay(availableHoursByDay);
+                    availabilityRepository.save(availableHoursByDay);
+                    event.addAvailableHoursByDay(availableHoursByDay);
                 }
             }
 
@@ -52,10 +57,21 @@ public class EventServiceImpl implements EventService{
         }
     }
 
-    public Event updateEvent(String title, String description, int duration, String location,
-                             String eventColor) {
+    public void saveBookingPageOptions(Long eventId, String eventLink, String inviteeQuestions){
+        Optional<Event> optionalEvent = eventRepository.findById(eventId);
+        if(optionalEvent.isPresent()){
+            Event event = optionalEvent.get();
+            event.setEventLink(eventLink);
+            String []meetQuestions = inviteeQuestions.split(",");
 
-        return null;
+            for(String question: meetQuestions){
+                EventQuestion eventQuestion = new EventQuestion();
+                eventQuestion.setQuestion(question);
+                eventQuestion.setEvent(event);
+                eventQuestionRepository.save(eventQuestion);
+
+                event.addMeetQuestions(eventQuestion);
+            }
+        }
     }
-
 }

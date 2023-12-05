@@ -12,7 +12,7 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "available_hour_by_day")
-public class AvailableHoursByDay {
+public class Availability {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
