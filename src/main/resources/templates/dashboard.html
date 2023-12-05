@@ -176,10 +176,7 @@ margin-top: 30px;
 
 }
 
-#headings>p{
-    padding-bottom: 62px;
-    border-bottom: solid 3px rgb(59, 59, 255);
-}
+
 #headings>p:first-child~p{
     border: none;
     color: rgb(122, 114, 114);
@@ -402,6 +399,16 @@ font-size: large;
             margin: 5px;
         }
 
+         .para{
+        padding-bottom: 62px;
+        display:block;
+    border-bottom: solid 3px rgb(59, 59, 255) !important;
+    }
+    .hide{
+    display:none;
+    }
+
+
     </style>
 </head>
 <body>
@@ -425,12 +432,13 @@ font-size: large;
     </form>
 </div>
 <div id="headings">
-    <p>Event Types</p>
-    <p>Scheduled Events</p>
+    <p onclick="changefirstP()">Event Types</p>
+    <p onclick="changeDiv()">Scheduled Events</p>
 </div>
 
 <section id="B">
     <div>
+
     </div>
 
     <div class="main">
@@ -441,7 +449,6 @@ font-size: large;
                 <p th:text="${event.host}"/>
                 <p th:text="${event.duration}"/>
                 <p th:text="${event.location}"/>
-                <!-- Add the link with copy-to-clipboard functionality -->
                 <div>
                     <p class="blue" th:attr="onclick='copyToClipboard(\'' + ${event.id} + '\')'">❐ Copy link</p>
                 </div>
@@ -449,6 +456,19 @@ font-size: large;
         </div>
     </div>
 
+    <div class="main-2 hide">
+        <div>
+            <div id="schedule" th:each="schedule: ${scheduledMeets}">
+                <h1 th:text="${schedule.inviteeName}"/>
+                <p th:text="${schedule.inviteeEmail}"/>
+                <p th:text="${schedule.date}"/>
+                <p th:text="${schedule.startTime}"/>
+                <p th:text="${schedule.endTime}"/>
+                <!--            <p th:text="${schedule.host.name}"/>-->
+                <!--            <p th:text="${schedule.event.title}"/>-->
+            </div>
+        </div>
+    </div>
     <!-- Add the script for copy-to-clipboard functionality -->
     <script>
     function copyToClipboard(eventId) {
@@ -468,7 +488,25 @@ font-size: large;
 
         alert('Link copied to clipboard: ' + link);
     }
-</script>
+
+    function changeDiv(){
+      console.log('hello');
+       document.querySelectorAll('#headings p')[1].classList.add('para');
+   document.querySelectorAll('#headings p')[0].classList.remove('para');
+    document.querySelectorAll('#headings p')[0].style.border='none';
+     document.querySelector('.main-2').classList.remove('hide');
+     document.querySelector('.main').classList.add('hide');
+    }
+        function changefirstP(){
+      console.log('hello p');
+       //console.log(document.querySelector('#headings').children[0]);
+        document.querySelectorAll('#headings p')[0].classList.add('para');
+       document.querySelectorAll('#headings p')[1].classList.remove('para');
+       document.querySelector('.main-2').classList.add('hide');
+       document.querySelector('.main').classList.remove('hide');
+    }
+
+    </script>
 
 </section>
 
