@@ -86,15 +86,12 @@ public class EventServiceImpl implements EventService{
         return event;
     }
 
-<<<<<<< HEAD
-=======
     @Override
     public void deleteEvent(long eventId) {
         eventRepository.deleteById(eventId);
     }
 
     @Override
->>>>>>> origin/master
     public void saveBookingPageOptions(Long eventId, String eventLink, String inviteeQuestions){
         Optional<Event> optionalEvent = eventRepository.findById(eventId);
         if(optionalEvent.isPresent()){

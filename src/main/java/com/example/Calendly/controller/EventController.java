@@ -48,6 +48,10 @@ public class EventController {
         return "dashboard";
 
     }
+    @GetMapping("/new-event")
+    public  String getNewEventPage() {
+        return "new-event";
+    }
 
     @GetMapping("/create-event")
     public  String getCreateEventPage() {
