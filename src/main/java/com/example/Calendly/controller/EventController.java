@@ -58,9 +58,9 @@ public class EventController {
             @RequestParam("title") String title,
             @RequestParam("description") String description,
             @RequestParam("duration") int duration,
-            @RequestParam("location") String location,
-            @RequestParam("eventColor") String eventColor) {
-        eventService.createEvent(title, description, duration, location, eventColor);
+            @RequestParam("location") String location
+            ) {
+        eventService.createEvent(title, description, duration, location);
 
         return "create-event";
     }

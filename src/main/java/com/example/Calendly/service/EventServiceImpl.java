@@ -20,9 +20,8 @@ public class EventServiceImpl implements EventService{
     }
 
     @Override
-    public Event createEvent(String title, String description, int duration, String location,
-                             String eventColor) {
-        Event event = new Event(title, description, duration, location, eventColor);
+    public Event createEvent(String title, String description, int duration, String location) {
+        Event event = new Event(title, description, duration, location);
         Event savedEvent = eventRepository.save(event);
         return savedEvent;
     }
