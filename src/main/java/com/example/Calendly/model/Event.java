@@ -27,7 +27,7 @@ public class Event {
     @Column(name = "title")
     private String title;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.DETACH, CascadeType.PERSIST, CascadeType.REFRESH})
     @JoinColumn(name = "user_id")
     private User host;
 
@@ -47,7 +47,7 @@ public class Event {
     private int dateRange;
 
 
-    @OneToMany(mappedBy = "event")
+    @OneToMany(mappedBy = "event", cascade = {CascadeType.ALL})
     private List<Availability> availableHoursByDays;
 
     @Column(name = "limit_per_day")
@@ -56,8 +56,7 @@ public class Event {
     @OneToMany(mappedBy = "event")
     private List<EventQuestion> meetQuestions;
 
-    @OneToMany(mappedBy = "event",
-            cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.MERGE,CascadeType.PERSIST})
+    @OneToMany(mappedBy = "event", cascade = {CascadeType.ALL})
     private List<ScheduledMeet> scheduledMeets;
 
     @Column(name = "event_link")
