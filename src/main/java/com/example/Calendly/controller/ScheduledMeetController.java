@@ -2,7 +2,7 @@ package com.example.Calendly.controller;
 
 import com.example.Calendly.model.Event;
 import com.example.Calendly.model.ScheduledMeet;
-import com.example.Calendly.repository.EventRepository;
+import com.example.Calendly.service.EventService;
 import com.example.Calendly.service.ScheduledMeetService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -20,12 +20,12 @@ import java.util.List;
 @Controller
 public class ScheduledMeetController {
     private final ScheduledMeetService scheduledMeetService;
-    private final EventRepository eventRepository;
+    private final EventService eventService;
 
     @Autowired
-    public ScheduledMeetController(ScheduledMeetService scheduledMeetService, EventRepository eventRepository) {
+    public ScheduledMeetController(ScheduledMeetService scheduledMeetService, EventService eventService) {
         this.scheduledMeetService = scheduledMeetService;
-        this.eventRepository = eventRepository;
+        this.eventService = eventService;
     }
 
     @PostMapping("/schedule-meet")
@@ -61,7 +61,7 @@ public class ScheduledMeetController {
         scheduledMeet.setStartTime(startTime);
         scheduledMeet.setEndTime(endTime);
         scheduledMeet.setDate(customDate);
-        Event event = eventRepository.findById(eventId).orElse(null);
+        Event event = eventService.findEvent(eventId);
         scheduledMeet.setEvent(event);
         scheduledMeetService.saveScheduledMeet(scheduledMeet);
 
@@ -70,7 +70,11 @@ public class ScheduledMeetController {
 
     @GetMapping("/scheduled-meet/{eventId}")
     public String scheduledMeet(Model model, @PathVariable("eventId") long eventId) {
-        model.addAttribute("eventId", eventId);
+        Event event = eventService.findEvent(eventId);
+        String host = event.getHost().getName();
+
+        model.addAttribute("event", event);
+        model.addAttribute("host", host);
         return "schedule-meeting";
     }
 
