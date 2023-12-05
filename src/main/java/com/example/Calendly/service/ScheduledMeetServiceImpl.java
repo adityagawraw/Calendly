@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import java.time.LocalTime;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 
 @Service
 public class ScheduledMeetServiceImpl implements ScheduledMeetService {
@@ -21,5 +22,11 @@ public class ScheduledMeetServiceImpl implements ScheduledMeetService {
     @Override
     public void saveScheduledMeet(ScheduledMeet scheduledMeet) {
         scheduledMeetRepository.save(scheduledMeet);
+    }
+
+    @Override
+    public List<ScheduledMeet> findAllScheduledMeets() {
+        List<ScheduledMeet> scheduledMeets = scheduledMeetRepository.findAll();
+        return scheduledMeets;
     }
 }

@@ -9,4 +9,6 @@ public interface EventService {
 
     List<Event> findAllEvents();
     Event createEvent(String title, String description, int duration, String location);
+
+    Event findEvent(long eventId);
 }

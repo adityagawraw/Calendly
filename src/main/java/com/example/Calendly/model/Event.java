@@ -40,18 +40,6 @@ public class Event {
     @Column(name = "location")
     private String location;
 
-    @Column(name = "event_color")
-    private String eventColor;
-
-//    @Column(name = "date_range")
-//    private int dateRange;
-
-//    @OneToMany(mappedBy = "event")
-//    private List<Availability> availableHoursByDays;
-
-//    @Column(name = "limit_per_day")
-//    private int limitPerDay;
-
     @OneToMany(mappedBy = "event")
     private List<EventQuestion> eventQuestions;
 

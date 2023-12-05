@@ -64,4 +64,11 @@ public class EventController {
 
         return "create-event";
     }
+
+    @GetMapping("/events")
+    public String findEvent(Model model, @RequestParam("eventId") long eventId) {
+        Event event = eventService.findEvent(eventId);
+        model.addAttribute("event", event);
+        return "event";
+    }
 }

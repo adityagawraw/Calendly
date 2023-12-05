@@ -26,6 +26,12 @@ public class EventServiceImpl implements EventService{
         return savedEvent;
     }
 
+    @Override
+    public Event findEvent(long eventId) {
+        Event event = eventRepository.findById(eventId).orElse(null);
+        return event;
+    }
+
     public Event updateEvent(String title, String description, int duration, String location,
                              String eventColor) {
 
