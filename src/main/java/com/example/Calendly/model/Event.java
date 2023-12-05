@@ -58,6 +58,7 @@ public class Event {
 
     @OneToMany(mappedBy = "event")
     private List<ScheduledMeet> scheduledMeets;
+
     @Column(name = "event_link")
     private  String eventLink;
 

@@ -44,6 +44,7 @@ public class EventController {
         List<ScheduledMeet> scheduledMeets = scheduledMeetService.findAllScheduledMeets();
         model.addAttribute("scheduledMeets", scheduledMeets);
         model.addAttribute("user",user);
+
         return "dashboard";
 
     }
@@ -105,6 +106,7 @@ public class EventController {
                                          @RequestParam("inviteeQuestions") String inviteeQuestions,
                                          Model model) {
     eventService.saveBookingPageOptions(eventId, eventLink, inviteeQuestions);
+
         return "redirect:/create-event";
     }
 
@@ -112,6 +114,14 @@ public class EventController {
     public String findEvent(Model model, @RequestParam("eventId") long eventId) {
         Event event = eventService.findEvent(eventId);
         model.addAttribute("event", event);
+
         return "event";
+    }
+
+    @GetMapping("/events/delete")
+    public String deleteEvent(Model model, @RequestParam("eventId") long eventId) {
+        eventService.deleteEvent(eventId);
+
+        return "redirect:/dashboard";
     }
 }
