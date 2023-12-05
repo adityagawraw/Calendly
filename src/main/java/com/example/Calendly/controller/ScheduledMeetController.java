@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import java.time.LocalTime;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 
 @Controller
 public class ScheduledMeetController {
@@ -64,7 +65,7 @@ public class ScheduledMeetController {
         scheduledMeet.setEvent(event);
         scheduledMeetService.saveScheduledMeet(scheduledMeet);
 
-        return "redirect:/scheduled-meet";
+        return "/scheduled-success";
     }
 
     @GetMapping("/scheduled-meet/{eventId}")
@@ -72,4 +73,12 @@ public class ScheduledMeetController {
         model.addAttribute("eventId", eventId);
         return "schedule-meeting";
     }
+
+    @GetMapping("/scheduledMeets")
+    public String findAllScheduledMeets(Model model) {
+        List<ScheduledMeet> scheduledMeets = scheduledMeetService.findAllScheduledMeets();
+        model.addAttribute("scheduledMeets", scheduledMeets);
+        return "scheduled-meets";
+    }
+
 }

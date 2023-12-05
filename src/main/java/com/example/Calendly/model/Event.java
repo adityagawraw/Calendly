@@ -40,33 +40,16 @@ public class Event {
     @Column(name = "location")
     private String location;
 
-    @Column(name = "event_color")
-    private String eventColor;
-
-    @Column(name = "date_range")
-    private int dateRange;
-
-//    @OneToMany(mappedBy = "event")
-//    private List<Availability> availableHoursByDays;
-
-    @Column(name = "limit_per_day")
-    private int limitPerDay;
-
     @OneToMany(mappedBy = "event")
-    private List<EventQuestion> meetQuestions;
+    private List<EventQuestion> eventQuestions;
 
     @OneToMany(mappedBy = "event")
     private List<ScheduledMeet> scheduledMeets;
 
-    public Event(String title, String description, int duration, String location, String eventColor) {
+    public Event(String title, String description, int duration, String location) {
         this.title = title;
         this.description = description;
         this.duration = duration;
         this.location = location;
-        this.eventColor = eventColor;
     }
-
-
-//    @Column(name = "email_confirmation")
-//    private boolean emailConfirmation;
 }
