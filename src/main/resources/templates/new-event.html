@@ -3,12 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <link rel="stylesheet" th:href="@{/css/create-event.css}">
 </head>
 <body>
-<link rel="stylesheet" th:href="@{/css/create-event.css}">
+
 <section>
     <div id="setting-header">
-        <a th:href="@{/dashboard}">Dashboard</a>
+        <a th:href="@{/dashboard}" style="text-decoration: none; border: none; color: blue;">&lt; Dashboard</a>
         <h1>Event Details</h1>
     </div>
     <form id="setting-section" th:action="@{/save-event-details}" >
@@ -39,13 +40,15 @@
         </div>
         <div>
             <h4>Description/Instructions</h4>
-            <textarea name="" id="" cols="30" rows="6"  th:name="description" ></textarea>
+            <textarea name="" id="" cols="70" rows="26" placeholder="Write Something......" th:name="description" ></textarea>
         </div>
+        <div class="line"></div> <!-- New line to complete the box shape -->
         <div id="button-section">
-            <a type="submit" id="cancel-button" th:href="@{/create-event}">Cancel</a>
+            <a type="submit" id="cancel-button" th:href="@{/dashboard}">Cancel</a>
             <button id="save-button">Save and Close</button>
         </div>
     </form>
+    <div class="line"></div> <!-- New line to complete the box shape -->
 </section>
 </body>
 </html>

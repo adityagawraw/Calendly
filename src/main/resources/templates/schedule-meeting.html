@@ -9,10 +9,11 @@
 
 <section>
     <div id="meetDetails">
-        <a href="">Back</a>
-        <h1 id="hostName" th:text="${host}"></h1>
-<!--            Host's Name</h2>-->
-        <h1>Meet Title</h1>
+
+        <h1 id="hostName">Host name: <span th:text="${host}"></span></h1>
+
+        <h1>Event Title: <span th:text="${event.title}"></span></h1>
+
         <div>
             <p class="meetinfo">45 min</p>
         </div>

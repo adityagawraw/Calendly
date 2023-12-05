@@ -410,15 +410,23 @@ font-size: large;
     display:none;
     }
 
-         #B{
+    #B{
         display:block;
-        }
+    }
 
+    .flat-button {
+        border: none;
+        background: none;
+        padding: 0; /* Optional: If you want to remove padding */
+        cursor: pointer; /* Optional: Add a pointer cursor for better UX */
+        outline: none; /* Remove outline on focus */
+    }
 
-
-
-
-
+    .flat-button:hover {
+        background: none;
+        border: none; /* Remove border on hover */
+        outline: none; /* Remove outline on focus */
+    }
 
     </style>
 </head>
@@ -461,7 +469,7 @@ font-size: large;
                 </div>
                 <form th:action="@{/create-event}">
                     <input type="hidden" th:name="eventId" th:value="${event.id}">
-                    <button>
+                    <button class="flat-button">
                         <h1 th:text="${event.title}"/>
                     </button>
                 </form>

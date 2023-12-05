@@ -50,6 +50,7 @@ textarea{
     border-radius: 6px;
     padding: 7px;
     font-size: 15px;
+     resize: none;
 }
 #button-section{
     display: flex;
@@ -58,8 +59,11 @@ textarea{
 }
 #cancel-button{
     background-color: white;
+    color: black;
     border: none;
-    padding: 0px;
+    border-radius:20px;
+    padding: 13px;
+    text-decoration: none;
     margin: 0px 30px 0px 4px;
 }
 #cancel-button:hover{
@@ -103,3 +107,19 @@ textarea{
 .timeSlotSetting span{
 margin: 0px 15px 0px 10px;
 }
+
+.line {
+    border-bottom: 1px solid rgb(53, 53, 53);
+    margin-top: 10px; /* Adjust as needed */
+    width: 100%;
+}
+
+.backButton {
+    background-color: white;
+    border: none;
+    text-decoration: none;
+    color: black;
+    padding: 10px 20px; /* Adjust padding as needed */
+    cursor: pointer;
+}
+

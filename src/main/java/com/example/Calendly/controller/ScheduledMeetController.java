@@ -84,5 +84,4 @@ public class ScheduledMeetController {
         model.addAttribute("scheduledMeets", scheduledMeets);
         return "scheduled-meets";
     }
-
 }
