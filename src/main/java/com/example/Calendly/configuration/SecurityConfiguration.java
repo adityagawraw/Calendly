@@ -20,7 +20,10 @@ public class SecurityConfiguration {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception{
         http.authorizeHttpRequests(configure -> configure
-                        .requestMatchers("/signIn","/signUp","/saveRegisteredUser", "/").permitAll()
+                        .requestMatchers("/signIn","/signUp","/saveRegisteredUser", "/",
+                                "/css/**","/create-event","/event-details","/save-event-details",
+                                "/scheduling-settings","/save-scheduling-settings","/booking-page-options",
+                                "/save-booking-page-options").permitAll()
                         .requestMatchers("/scheduled-meet", "/schedule-meet").permitAll()
                         .requestMatchers("/dashboard").permitAll()
                         .anyRequest().authenticated()

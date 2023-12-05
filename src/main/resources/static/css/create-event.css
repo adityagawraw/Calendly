@@ -29,7 +29,7 @@ h4{
 }
 input{
     border: 1px solid #b2b2b2;
-    border-radius: 3px;
+    border-radius: 6px;
     padding: 7px;
     font-size: 15px;
 }
@@ -74,4 +74,31 @@ textarea{
 }
 #save-button:hover{
     background-color: #0462e7;
+}
+#dateRange input{
+    max-width: 50px;
+}
+#dateRange span{
+    margin-left: 10px;
+}
+#weeklyHoursSetting{
+    background-color: #fafafa;
+    padding:10px ;
+    border-radius: 6px;
+}
+.timeSlot{
+    max-width: 90px;
+}
+.timeSlotButton{
+    background-color: #fafafa;
+    border: none;
+    margin: 0px 7px 0px 10px;
+}
+.timeSlotSetting{
+    display:flex;
+    align-items: center;
+    margin: 10px 0px 5px 0px;
+}
+.timeSlotSetting span{
+margin: 0px 15px 0px 10px;
 }

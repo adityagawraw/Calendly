@@ -8,6 +8,7 @@
 <link rel="stylesheet" th:href="@{/css/create-event.css}">
 <section>
     <div id="setting-header">
+        <a th:href="@{/create-event}">< Event Type Summary</a>
         <h1>Event Details</h1>
     </div>
     <form id="setting-section" th:action="@{/save-event-details}" >
@@ -41,7 +42,6 @@
             <textarea name="" id="" cols="30" rows="6"  th:name="description" ></textarea>
         </div>
         <div id="button-section">
-
                 <a type="submit" id="cancel-button" th:href="@{/create-event}">Cancel</a>
             <button id="save-button">Save and Close</button>
         </div>

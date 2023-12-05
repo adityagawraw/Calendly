@@ -6,24 +6,74 @@
 </head>
 <body>
 
+<!--<section>-->
+<!--    <div id="setting-header">-->
+<!--        <h1>Scheduled Meet Details</h1>-->
+<!--    </div>-->
+<!--        <form th:action="@{/schedule-meet}" th:object="${eventId}" method="POST">-->
+<!--            <input type="hidden" name="eventId" th:value="${eventId}">-->
+<!--            <input id="inviteeName" type="text" name="inviteeName" placeholder="Name"> <br>-->
+<!--            <input id="inviteeEmail" type="text" name="inviteeEmail" placeholder="Email"><br>-->
+<!--            <input id="startHour" type="text" name="startHour" placeholder="startHour"><br>-->
+<!--            <input id="startMinute" type="text" name="startMinute" placeholder="startMinute"><br>-->
+<!--            <input id="endHour" type="text" name="endHour" placeholder="endHour"><br>-->
+<!--            <input id="endMinute" type="text" name="endMinute" placeholder="endMinute"><br>-->
+<!--            <input id="year" type="text" name="year" placeholder="year"><br>-->
+<!--            <input id="month" type="text" name="month" placeholder="month"><br>-->
+<!--            <input id="day" type="text" name="day" placeholder="day"><br>-->
+<!--            <input type="submit" value="Schedule">-->
+<!--         </form>-->
+<!--</section>-->
+<link rel="stylesheet" th:href="@{/css/schedule-meet.css}">
 <section>
-    <div id="setting-header">
-        <h1>Scheduled Meet Details</h1>
+    <div id="meetDetails">
+        <a href="">Back</a>
+        <h2 id="hostName">Host's Name</h2>
+        <h1>Meet Title</h1>
+        <div>
+            <p class="meetinfo">45 min</p>
+        </div>
+        <div>
+            <p class="meetinfo">11:30am - 12:15pm, Friday, December 8, 2023</p>
+        </div>
+        <div>
+            <p class="meetinfo">India Standard Time</p>
+        </div>
+        <p>
+            I take inteerviews here Description
+        </p>
     </div>
-        <form th:action="@{/schedule-meet}" th:object="${eventId}" method="POST">
-            <input type="hidden" name="eventId" th:value="${eventId}">
-            <input id="inviteeName" type="text" name="inviteeName" placeholder="Name"> <br>
-            <input id="inviteeEmail" type="text" name="inviteeEmail" placeholder="Email"><br>
-            <input id="startHour" type="text" name="startHour" placeholder="startHour"><br>
-            <input id="startMinute" type="text" name="startMinute" placeholder="startMinute"><br>
-            <input id="endHour" type="text" name="endHour" placeholder="endHour"><br>
-            <input id="endMinute" type="text" name="endMinute" placeholder="endMinute"><br>
-            <input id="year" type="text" name="year" placeholder="year"><br>
-            <input id="month" type="text" name="month" placeholder="month"><br>
-            <input id="day" type="text" name="day" placeholder="day"><br>
-            <input type="submit" value="Schedule">
+    <div id="inviteesDetails">
+        <h2>Enter Details</h2>
+        <form th:action="@{/schedule-meet}">
+            <input type="hidden" th:name="eventId" th:value="${eventId}">
+            <input id="startHour" type="hidden" name="startHour" placeholder="startHour" th:value="9">
+            <input id="startMinute" type="hidden" name="startMinute" placeholder="startMinute" th:value="0">
+            <input id="endHour" type="hidden" name="endHour" placeholder="endHour" th:value="10">
+            <input id="endMinute" type="hidden" name="endMinute" placeholder="endMinute" th:value="0">
+            <input id="year" type="hidden" name="year" placeholder="year" th:value="2023">
+            <input id="month" type="hidden" name="month" placeholder="month" th:value="9">
+            <input id="day" type="hidden" name="day" placeholder="day" th:value="9">
 
-         </form>
+            <div class="inputFields">
+                <p>Name *</p>
+                <input type="text" th:name="inviteeName">
+            </div>
+            <div class="inputFields">
+                <p>Email *</p>
+                <input type="text" th:name="inviteeEmail">
+            </div>
+            <div class="inputFields">
+                <p>Please share anything that will help prepare for our meeting.</p>
+                <textarea type="text"></textarea>
+            </div>
+            <div class="inputFields">
+                <p>Please share anything that will help prepare for our meeting.</p>
+                <textarea type="text"></textarea>
+            </div>
+            <button type="submit" id="save-button">Save and Close</button>
+        </form>
+    </div>
 </section>
 </body>
 </html>
