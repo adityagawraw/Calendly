@@ -37,7 +37,7 @@ public class Availability {
     @Column(name = "day")
     private String day;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.MERGE,CascadeType.PERSIST})
     @JoinColumn(name = "event_id")
     private Event event;
 

@@ -55,16 +55,23 @@ public class EventServiceImpl implements EventService{
         if(optionalEvent.isPresent()) {
             Event event = optionalEvent.get();
 
-
             event.setDateRange(schedulingSetting.getDateRange());
             event.setLimitPerDay(schedulingSetting.getMaxPerDay());
+
+            List<Availability> availabilities =  event.getAvailableHoursByDays();
+
+            for(Availability availability : availabilities){
+                    availabilityRepository.delete(availability);
+            }
 
             for(String day : selectedDays){
                 List<Availability> availableHoursByDays = schedulingSetting.getAvailabilityPerDay().get(day);
 
                 for(Availability availableHoursByDay : availableHoursByDays){
                     availableHoursByDay.setEvent(event);
+                    availableHoursByDay.setDay(day);
                     availabilityRepository.save(availableHoursByDay);
+
                     event.addAvailableHoursByDay(availableHoursByDay);
                 }
             }
@@ -91,6 +98,11 @@ public class EventServiceImpl implements EventService{
             Event event = optionalEvent.get();
             event.setEventLink(eventLink);
             String []meetQuestions = inviteeQuestions.split(",");
+
+            List<EventQuestion> eventQuestions = event.getMeetQuestions();
+            for(EventQuestion eventQuestion : eventQuestions){
+                eventQuestionRepository.delete(eventQuestion);
+            }
 
             for(String question: meetQuestions){
                 EventQuestion eventQuestion = new EventQuestion();

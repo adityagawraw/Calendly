@@ -3,16 +3,6 @@ package com.example.Calendly.model;
 import java.time.LocalTime;
 import java.util.*;
 
- enum Days {
-    MONDAY,
-    TUESDAY,
-    WEDNESDAY,
-    THURSDAY,
-    FRIDAY,
-    SATURDAY,
-    SUNDAY
-}
-
 public class SchedulingSetting {
     private int dateRange;
     private Map<String,List<Availability>> availabilityPerDay = new LinkedHashMap<>();
