@@ -5,7 +5,6 @@ import com.example.Calendly.service.EventService;
 import com.example.Calendly.service.ScheduledMeetService;
 import com.example.Calendly.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.Banner;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -49,9 +48,7 @@ public class EventController {
         model.addAttribute("scheduledMeets", scheduledMeets);
         model.addAttribute("user", user);
 
-
         return "dashboard";
-
     }
 
 
@@ -92,14 +89,14 @@ public class EventController {
     public String getNewEventPage() {
         return "new-event";
     }
+
     @GetMapping("/save-event-details")
     public String saveEventDetails(
             Model model,
             @RequestParam("title") String title,
             @RequestParam("description") String description,
             @RequestParam("duration") int duration,
-            @RequestParam("location") String location
-    ) {
+            @RequestParam("location") String location) {
         Event event = eventService.createEvent(title, description, duration, location);
 
         return "redirect:/create-event?eventId=" + event.getId();
