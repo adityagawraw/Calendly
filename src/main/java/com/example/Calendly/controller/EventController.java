@@ -11,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
@@ -118,8 +119,8 @@ public class EventController {
         return "event";
     }
 
-    @GetMapping("/events/delete")
-    public String deleteEvent(Model model, @RequestParam("eventId") long eventId) {
+    @GetMapping("/events/delete/{eventId}")
+    public String deleteEvent(Model model, @PathVariable("eventId") long eventId) {
         eventService.deleteEvent(eventId);
 
         return "redirect:/dashboard";

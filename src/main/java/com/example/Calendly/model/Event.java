@@ -27,7 +27,7 @@ public class Event {
     @Column(name = "title")
     private String title;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.DETACH, CascadeType.PERSIST, CascadeType.REFRESH})
     @JoinColumn(name = "user_id")
     private User host;
 

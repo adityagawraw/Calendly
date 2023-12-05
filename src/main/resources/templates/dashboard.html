@@ -444,9 +444,12 @@ font-size: large;
     <div class="main">
         <div th:each="event: ${events}">
             <div class="card">
-                <div><input type="checkbox"><img id="delete-btn" src="https://img.icons8.com/metro/344/trash.png"></div>
+                <div>
+                    <img class="delete-btn" src="https://img.icons8.com/metro/344/trash.png" th:attr="data-event-id=${event.id}" onclick="deleteEvent(this)">
+                </div>
+
                 <h1 th:text="${event.title}"/>
-                <p th:text="${event.host}"/>
+                <p th:text="${event.host.name}"/>
                 <p th:text="${event.duration}"/>
                 <p th:text="${event.location}"/>
                 <div>
@@ -455,6 +458,30 @@ font-size: large;
             </div>
         </div>
     </div>
+
+    <script>
+    function deleteEvent(deleteBtn) {
+        var eventId = deleteBtn.getAttribute('data-event-id');
+
+        // Make an asynchronous request to delete the event
+        fetch('/events/delete/' + eventId, {
+            method: 'GET'
+        })
+        .then(response => {
+            if (response.ok) {
+                // If the deletion is successful, remove the card from the UI
+                var card = deleteBtn.closest('.card');
+                card.parentNode.removeChild(card);
+            } else {
+                console.error('Failed to delete event');
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
+    }
+    </script>
+
 
     <div class="main-2 hide">
         <div>
