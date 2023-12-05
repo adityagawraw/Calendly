@@ -65,7 +65,7 @@ public class EventController {
             ) {
         eventService.createEvent(title, description, duration, location);
 
-        return "create-event";
+        return "redirect:/create-event";
     }
 
     @GetMapping("/scheduling-settings")
