@@ -21,7 +21,7 @@ public class EventQuestion {
     @Column(name = "question")
     private String question;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.MERGE,CascadeType.PERSIST})
     @JoinColumn(name = "event_id")
     private Event event;
 

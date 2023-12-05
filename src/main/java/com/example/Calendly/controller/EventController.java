@@ -48,6 +48,10 @@ public class EventController {
         return "dashboard";
 
     }
+    @GetMapping("/new-event")
+    public  String getNewEventPage() {
+        return "new-event";
+    }
 
     @GetMapping("/create-event")
     public  String getCreateEventPage() {
@@ -55,7 +59,8 @@ public class EventController {
     }
 
     @GetMapping("/event-details")
-    public  String getEventDetailsPage() {
+    public  String getEventDetailsPage(@RequestParam("eventId") long eventId,Model model) {
+
         return "event-details";
     }
 
@@ -69,7 +74,7 @@ public class EventController {
             ) {
         eventService.createEvent(title, description, duration, location);
 
-        return "create-event";
+        return "redirect:/create-event";
     }
 
     @GetMapping("/scheduling-settings")

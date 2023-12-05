@@ -249,6 +249,10 @@ margin-left: 10px;
 #B img:first-child{
 margin-top: -5px;
 }
+.eventButton{
+border:none;
+color:black;
+}
 .card{
     margin-top: 20px;
     width: 83%;
@@ -416,8 +420,8 @@ font-size: large;
     <img src="https://assets.calendly.com/packs/frontend/media/logo-square-cd364a3c33976d32792a.png" alt="">
     <div id="options">
         <a class="a" href="dashboard.html">Home</a>
-        <a class="a" href="#">Availibilty</a>
-        <a class="a" href="help.html">Help</a>
+<!--        <a class="a" href="#">Availibilty</a>-->
+<!--        <a class="a" href="help.html">Help</a>-->
         <form th:action="@{/logout}" method="post">
             <button type="submit" class="a" id="logout-dash">Logout</button>
         </form>
@@ -427,7 +431,7 @@ font-size: large;
 
 <div id="secondnavbar-dash">
     <p>My calendly <span></span></p>
-    <form th:action="@{/create-event}">
+    <form th:action="@{/new-event}">
         <button type="submit" id="create-btn">Create Event</button>
     </form>
 </div>
@@ -442,18 +446,21 @@ font-size: large;
     </div>
 
     <div class="main">
-        <div th:each="event: ${events}">
-            <div class="card">
-                <div><input type="checkbox"><img id="delete-btn" src="https://img.icons8.com/metro/344/trash.png"></div>
+        <form th:action="@{/create-event}" th:each="event: ${events}">
+            <input type="hidden" th:name="eventId" th:value="${event.id}">
+            <div type="submit" class="card">
+<!--                <div><input type="checkbox"><img id="delete-btn" src="https://img.icons8.com/metro/344/trash.png"></div>-->
+                <button class="eventButton" type="submit">
                 <h1 th:text="${event.title}"/>
+                </button>
                 <p th:text="${event.host}"/>
                 <p th:text="${event.duration}"/>
                 <p th:text="${event.location}"/>
-                <div>
-                    <p class="blue" th:attr="onclick='copyToClipboard(\'' + ${event.id} + '\')'">❐ Copy link</p>
-                </div>
+<!--                <div>-->
+<!--                    <p class="blue" th:attr="onclick='copyToClipboard(\'' + ${event.id} + '\')'">❐ Copy link</p>-->
+<!--                </div>-->
             </div>
-        </div>
+        </form>
     </div>
 
     <div class="main-2 hide">
