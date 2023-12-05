@@ -29,7 +29,7 @@ public class SecurityConfiguration {
                         form
                                 .loginPage("/signIn")
                                 .loginProcessingUrl("/authenticateTheUser")
-                                .defaultSuccessUrl("/")
+                                .defaultSuccessUrl("/dashboard")
                                 .permitAll()
                 )
                 .logout(logout -> logout.permitAll());
