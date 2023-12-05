@@ -412,6 +412,9 @@ font-size: large;
     display:none;
     }
 
+         #B{
+        display:block;
+        }
 
     </style>
 </head>
@@ -486,10 +489,12 @@ font-size: large;
     }
     </script>
 
-
+    </div>
     <div class="main-2 hide">
+        <h1>Hello</h1>
         <div>
             <div id="schedule" th:each="schedule: ${scheduledMeets}">
+
                 <h1 th:text="${schedule.inviteeName}"/>
                 <p th:text="${schedule.inviteeEmail}"/>
                 <p th:text="${schedule.date}"/>

@@ -44,6 +44,7 @@ public class EventController {
 
         List<ScheduledMeet> scheduledMeets = scheduledMeetService.findAllScheduledMeets();
         model.addAttribute("scheduledMeets", scheduledMeets);
+        System.out.println();
         model.addAttribute("user",user);
 
         return "dashboard";
