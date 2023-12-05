@@ -72,5 +72,4 @@ public class ScheduledMeetController {
         model.addAttribute("eventId", eventId);
         return "schedule-meeting";
     }
-
 }
