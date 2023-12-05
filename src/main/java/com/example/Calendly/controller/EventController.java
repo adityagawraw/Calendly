@@ -51,7 +51,8 @@ public class EventController {
     }
 
     @GetMapping("/event-details")
-    public  String getEventDetailsPage() {
+    public  String getEventDetailsPage(@RequestParam("eventId") long eventId,Model model) {
+
         return "event-details";
     }
 
@@ -109,6 +110,7 @@ public class EventController {
     public String findEvent(Model model, @RequestParam("eventId") long eventId) {
         Event event = eventService.findEvent(eventId);
         model.addAttribute("event", event);
+
         return "event";
     }
 }

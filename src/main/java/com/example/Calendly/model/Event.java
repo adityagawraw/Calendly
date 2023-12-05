@@ -56,7 +56,8 @@ public class Event {
     @OneToMany(mappedBy = "event")
     private List<EventQuestion> meetQuestions;
 
-    @OneToMany(mappedBy = "event")
+    @OneToMany(mappedBy = "event",
+            cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.MERGE,CascadeType.PERSIST})
     private List<ScheduledMeet> scheduledMeets;
     @Column(name = "event_link")
     private  String eventLink;
