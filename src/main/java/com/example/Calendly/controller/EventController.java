@@ -1,10 +1,8 @@
 package com.example.Calendly.controller;
 
-import com.example.Calendly.model.Event;
-import com.example.Calendly.model.User;
-import com.example.Calendly.model.DaysCheckBox;
-import com.example.Calendly.model.SchedulingSetting;
+import com.example.Calendly.model.*;
 import com.example.Calendly.service.EventService;
+import com.example.Calendly.service.ScheduledMeetService;
 import com.example.Calendly.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -21,10 +19,12 @@ import java.util.List;
 public class EventController {
     private final EventService eventService;
     private final UserService userService;
+    private final ScheduledMeetService scheduledMeetService;
     @Autowired
-    public EventController(EventService eventService, UserService userService) {
+    public EventController(EventService eventService, UserService userService, ScheduledMeetService scheduledMeetService) {
         this.eventService = eventService;
         this.userService = userService;
+        this.scheduledMeetService = scheduledMeetService;
     }
 
     @GetMapping("/")
@@ -40,7 +40,11 @@ public class EventController {
         model.addAttribute("events", events);
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         User user=userService.findUserByEmail(authentication.getName());
+
+        List<ScheduledMeet> scheduledMeets = scheduledMeetService.findAllScheduledMeets();
+        model.addAttribute("scheduledMeets", scheduledMeets);
         model.addAttribute("user",user);
+
         return "dashboard";
 
     }
@@ -103,6 +107,7 @@ public class EventController {
                                          @RequestParam("inviteeQuestions") String inviteeQuestions,
                                          Model model) {
     eventService.saveBookingPageOptions(eventId, eventLink, inviteeQuestions);
+
         return "redirect:/create-event";
     }
 
@@ -112,5 +117,12 @@ public class EventController {
         model.addAttribute("event", event);
 
         return "event";
+    }
+
+    @GetMapping("/events/delete")
+    public String deleteEvent(Model model, @RequestParam("eventId") long eventId) {
+        eventService.deleteEvent(eventId);
+
+        return "redirect:/dashboard";
     }
 }

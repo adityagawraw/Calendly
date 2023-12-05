@@ -28,7 +28,8 @@
 <section>
     <div id="meetDetails">
         <a href="">Back</a>
-        <h2 id="hostName">Host's Name</h2>
+        <h1 id="hostName" th:text="${host}"></h1>
+<!--            Host's Name</h2>-->
         <h1>Meet Title</h1>
         <div>
             <p class="meetinfo">45 min</p>
@@ -40,13 +41,13 @@
             <p class="meetinfo">India Standard Time</p>
         </div>
         <p>
-            I take inteerviews here Description
+            I take interviews here Description
         </p>
     </div>
     <div id="inviteesDetails">
         <h2>Enter Details</h2>
-        <form th:action="@{/schedule-meet}">
-            <input type="hidden" th:name="eventId" th:value="${eventId}">
+        <form th:action="@{/schedule-meet}" method="post" th:object="${event}">
+            <input type="hidden" th:name="eventId" th:value="${event.id}">
             <input id="startHour" type="hidden" name="startHour" placeholder="startHour" th:value="9">
             <input id="startMinute" type="hidden" name="startMinute" placeholder="startMinute" th:value="0">
             <input id="endHour" type="hidden" name="endHour" placeholder="endHour" th:value="10">
@@ -67,10 +68,7 @@
                 <p>Please share anything that will help prepare for our meeting.</p>
                 <textarea type="text"></textarea>
             </div>
-            <div class="inputFields">
-                <p>Please share anything that will help prepare for our meeting.</p>
-                <textarea type="text"></textarea>
-            </div>
+
             <button type="submit" id="save-button">Save and Close</button>
         </form>
     </div>
