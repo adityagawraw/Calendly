@@ -91,24 +91,29 @@ textarea{
     </div>
     <div id="setting-section">
         <form th:action="@{/event-details}">
+            <input type="hidden" th:name="eventId" th:value="1">
             <button  type="submit" class="event-setting">
                 <h2>Event details</h2>
                 <p>45 min</p>
                 <p>Google meet</p>
             </button>
         </form>
-        <form th:action="@{/event-details}">
+        <form th:action="@{/scheduling-settings}">
+            <input type="hidden" th:name="eventId" th:value="1">
             <button type="submit" class="event-setting">
                 <h2>Scheduling settings</h2>
                 <p>Indefinitly</p>
                 <p>Google, meet</p>
             </button>
         </form>
-        <div class="event-setting">
-            <h2>Booking page options</h2>
-            <p>Indefinitly</p>
-            <p>Google meet</p>
-        </div>
+        <form th:action="@{/booking-page-options}">
+            <input type="hidden" th:name="eventId" th:value="1">
+            <button type="submit" class="event-setting">
+                <h2>Booking page options</h2>
+                <p>Indefinitly</p>
+                <p>Google, meet</p>
+            </button>
+        </form>
     </div>
 </section>
 </body>

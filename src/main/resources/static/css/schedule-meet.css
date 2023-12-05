@@ -1,0 +1,70 @@
+body{
+    display: flex;
+    justify-content: center;
+
+}
+h1{
+    margin: 0px;
+}
+h2{
+    margin: 0px;
+}
+h3{
+    margin: 0px;
+}
+section{
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    border-radius: 4px;
+    box-shadow:  0 0 5px #a2a0a0;
+    width: 80%;
+    margin-top: 50px;
+}
+#meetDetails{
+    border-right: 1px gray solid;
+    padding: 28px;
+}
+#hostName{
+    color: #737373;
+    font-size: medium;
+
+}
+.meetinfo{
+    color: #737373;
+    font-size: medium;
+    font-weight: bold;
+}
+#inviteesDetails{
+    padding:28px;
+}
+.inputFields p{
+font-weight: bold;
+margin: 10px 0px 0px 0px;
+}
+.inputFields input{
+    width: 60%;
+    padding: 12px;
+    border: 1px solid #b2b2b2;
+    border-radius: 10px;
+    margin: 15px 0px 0px 0px ;
+}
+.inputFields input:focus {
+    border: 2px solid blue;
+    outline: none;
+}
+.inputFields textarea{
+    width: 60%;
+    padding: 12px;
+    border: 1px solid #b2b2b2;
+    border-radius: 10px;
+    margin: 15px 0px 0px 0px ;
+}
+#save-button{
+    margin-top: 20px;
+    background-color: #0069ff;
+    color: white;
+    font-weight: bold;
+    padding: 13px;
+    border:none;
+    border-radius: 20px;
+}
