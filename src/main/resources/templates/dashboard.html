@@ -410,7 +410,6 @@ font-size: large;
     <div id="options">
         <a class="a" href="dashboard.html">Home</a>
         <a class="a" href="#">Availibilty</a>
-        <a class="a" href="#">Integrations</a>
         <a class="a" href="help.html">Help</a>
         <form th:action="@{/logout}" method="post">
             <button type="submit" class="a" id="logout-dash">Logout</button>
@@ -428,17 +427,10 @@ font-size: large;
 <div id="headings">
     <p>Event Types</p>
     <p>Scheduled Events</p>
-    <p>Workflows</p>
-    <p>Routing Forms</p>
 </div>
 
 <section id="B">
     <div>
-        <img src="https://img.icons8.com/fluency/344/link.png" alt="">
-        <div id="url">
-            <P id="Name"></P>
-            <p>calendly.com/<span th:text="${user.name}"></span></p>
-        </div>
     </div>
 
     <div class="main">
