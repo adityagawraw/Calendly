@@ -451,9 +451,12 @@ font-size: large;
                 <div>
                     <img class="delete-btn" src="https://img.icons8.com/metro/344/trash.png" th:attr="data-event-id=${event.id}" onclick="deleteEvent(this)">
                 </div>
-
-                <h1 th:text="${event.title}"/>
-                <p th:text="${event.host.name}"/>
+                <form th:action="@{/create-event}">
+                    <input type="hidden" th:name="eventId" th:value="${event.id}">
+                    <button>
+                        <h1 th:text="${event.title}"/>
+                    </button>
+                </form>
                 <p th:text="${event.duration}"/>
                 <p th:text="${event.location}"/>
                 <div>
@@ -495,8 +498,6 @@ font-size: large;
                 <p th:text="${schedule.date}"/>
                 <p th:text="${schedule.startTime}"/>
                 <p th:text="${schedule.endTime}"/>
-                <!--            <p th:text="${schedule.host.name}"/>-->
-                <!--            <p th:text="${schedule.event.title}"/>-->
             </div>
         </div>
     </div>
