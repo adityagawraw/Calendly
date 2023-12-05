@@ -8,13 +8,16 @@
 <link rel="stylesheet" th:href="@{/css/create-event.css}">
 <section>
     <div id="setting-header">
-        <a th:href="@{/create-event}">< Event Type Summary</a>
+        <form th:action="@{/create-event}">
+            <input type="hidden" th:name="eventId" th:value="${eventId}">
+            <button class="backButton"  type="submit">< Event Type Summary</button>
+        </form>
         <h1>Booking page options</h1>
     </div>
     <form id="setting-section" th:action="@{/save-booking-page-options}">
         <div>
             <h4>Event link</h4>
-            <input type="text" th:name="eventLink" th:value="${eventLink}" >
+            <input type="text" th:name="eventLink" th:value="${eventLink}">
         </div>
         <div>
             <h4>Invitee questions</h4>

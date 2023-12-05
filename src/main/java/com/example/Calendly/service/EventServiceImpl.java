@@ -46,7 +46,7 @@ public class EventServiceImpl implements EventService{
         User user = userRepository.findByEmail(userEmail);
         event.setHost(user);
         Event savedEvent = eventRepository.save(event);
-        return savedEvent;
+                                    return savedEvent;
     }
 
     @Override
@@ -89,6 +89,21 @@ public class EventServiceImpl implements EventService{
     @Override
     public void deleteEvent(long eventId) {
         eventRepository.deleteById(eventId);
+    }
+
+    @Override
+    public void updateEventDetails(long eventId, String title, String description, int duration, String location) {
+        Optional<Event> optionalEvent = eventRepository.findById(eventId);
+
+        if(optionalEvent.isPresent()){
+            Event event = optionalEvent.get();
+            event.setTitle(title);
+            event.setDescription(description);
+            event.setDuration(duration);
+            event.setLocation(location);
+
+            eventRepository.save(event);
+        }
     }
 
     @Override
