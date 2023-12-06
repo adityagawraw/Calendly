@@ -11,7 +11,10 @@
     <div id="setting-header">
         <form th:action="@{/create-event}" >
             <input type="hidden" th:name="eventId" th:value="${eventId}">
-            <button class="backButton" type="submit">< Event Type Summary</button>
+            <div class="return">
+                <img src="/images/return-button-1.svg" alt="<">
+                <button class="backButton" type="submit"><u>Event Type Summary</u> </button>
+            </div>
         </form>
         <h1>Scheduling settings</h1>
     </div>
@@ -48,7 +51,7 @@
         </div>
         <input type="hidden" th:value="${eventId}" th:name="eventId">
         <div id="button-section">
-            <a type="submit" id="cancel-button" th:href="@{/create-event}">Cancel</a>
+            <a class="cancel-settings" th:href="@{/create-event(eventId=${eventId})}">Cancel</a>
             <button type="submit" id="save-button">Save and Close</button>
         </div>
     </form>

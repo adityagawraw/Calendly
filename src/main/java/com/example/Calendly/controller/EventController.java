@@ -55,6 +55,8 @@ public class EventController {
     @GetMapping("/create-event")
     public String getCreateEventPage(@RequestParam("eventId") long eventId, Model model) {
         model.addAttribute("eventId", eventId);
+        model.addAttribute("event", eventService.findEvent(eventId));
+
 
         return "create-event";
     }
@@ -104,8 +106,8 @@ public class EventController {
 
     @GetMapping("/scheduling-settings")
     public String getSchedulingSettingsPage(@RequestParam("eventId") long eventID,
-                                            @ModelAttribute("schedulingSettings") SchedulingSetting schedulingSetting,
                                             Model model) {
+
         model.addAttribute("schedulingSettings", new SchedulingSetting());
         model.addAttribute("eventId", eventID);
         model.addAttribute("daysCheckBox", new DaysCheckBox());

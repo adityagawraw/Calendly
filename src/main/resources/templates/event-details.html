@@ -8,45 +8,48 @@
 <body>
 <section>
     <div id="setting-header">
-        <form th:action="@{/create-event}" >
+        <form th:action="@{/create-event}">
             <input type="hidden" th:name="eventId" th:value="${eventId}">
-            <button class="backButton" type="submit">< Event Type Summary</button>
+            <div class="return">
+                <img src="/images/return-button-1.svg" alt="<">
+                <button class="backButton" type="submit"><u>Event Type Summary</u></button>
+            </div>
         </form>
         <h1>Event Details</h1>
     </div>
-    <form id="setting-section" th:action="@{/update-event-details}" >
+    <form id="setting-section" th:action="@{/update-event-details}">
         <div>
             <h4>Event Name</h4>
-            <input type="text" th:name="title" th:value="${title}" >
+            <input type="text" th:name="title" th:value="${title}">
         </div>
         <div>
             <h4>Duration</h4>
-            <select id="select-duration"  th:name="duration" >
-                <option value="30">30min</option>
-                <option value="40">60min</option>
+            <select id="select-duration" th:name="duration">
+                <option th:selected="${duration == 30}" value="30">30min</option>
+                <option th:selected="${duration == 60}" value="60">60min</option>
             </select>
         </div>
         <div>
             <h4>Event color</h4>
-            <select  th:name="eventColor" >
+            <select th:name="eventColor">
                 <option value="blue">Blue</option>
                 <option value="red">Red</option>
             </select>
         </div>
         <div>
             <h4>Location</h4>
-            <select  th:name="location" >
-                <option value="Google meet">Google meet</option>
-                <option value="Zoom">Zoom</option>
+            <select th:name="location">
+                <option th:selected="${location == 'Google meet'}" value="Google meet">Google meet</option>
+                <option th:selected="${location == 'Zoom'}" value="Zoom">Zoom</option>
             </select>
         </div>
         <div>
             <h4>Description/Instructions</h4>
-            <textarea name="" id="" cols="30" rows="6"  th:name="description" th:text="${description}"></textarea>
+            <textarea name="" id="" cols="30" rows="6" th:name="description" th:text="${description}"></textarea>
         </div>
         <input type="hidden" th:name="eventId" th:value="${eventId}">
         <div id="button-section">
-                <a type="submit" id="cancel-button" th:href="@{/create-event}">Cancel</a>
+            <a class="cancel-settings" th:href="@{/create-event(eventId=${eventId})}">Cancel</a>
             <button id="save-button">Save and Close</button>
         </div>
     </form>

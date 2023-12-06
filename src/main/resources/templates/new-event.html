@@ -21,7 +21,7 @@
             <h4>Duration</h4>
             <select id="select-duration"  th:name="duration" >
                 <option value="30">30min</option>
-                <option value="40">60min</option>
+                <option value="60">60min</option>
             </select>
         </div>
         <div>
@@ -44,7 +44,7 @@
         </div>
         <div class="line"></div> <!-- New line to complete the box shape -->
         <div id="button-section">
-            <a type="submit" id="cancel-button" th:href="@{/dashboard}">Cancel</a>
+            <a class="cancel-settings" th:href="@{/dashboard}">Cancel</a>
             <button id="save-button">Save and Close</button>
         </div>
     </form>
