@@ -12,7 +12,7 @@
             <input type="hidden" th:name="eventId" th:value="${eventId}">
             <div class="return">
                 <img src="/images/return-button-1.svg" alt="<">
-                <button class="backButton" type="submit"><u>Event Type Summary</u> </button>
+                <button class="backButton" type="submit"><u>Event Type Summary</u></button>
             </div>
         </form>
         <h1>Event Details</h1>
@@ -25,8 +25,8 @@
         <div>
             <h4>Duration</h4>
             <select id="select-duration" th:name="duration">
-                <option value="30">30min</option>
-                <option value="40">60min</option>
+                <option th:selected="${duration == 30}" value="30">30min</option>
+                <option th:selected="${duration == 60}" value="60">60min</option>
             </select>
         </div>
         <div>
@@ -39,8 +39,8 @@
         <div>
             <h4>Location</h4>
             <select th:name="location">
-                <option value="Google meet">Google meet</option>
-                <option value="Zoom">Zoom</option>
+                <option th:selected="${location == 'Google meet'}" value="Google meet">Google meet</option>
+                <option th:selected="${location == 'Zoom'}" value="Zoom">Zoom</option>
             </select>
         </div>
         <div>
@@ -49,10 +49,7 @@
         </div>
         <input type="hidden" th:name="eventId" th:value="${eventId}">
         <div id="button-section">
-            <form th:action="@{/create-event}">
-                <input type="hidden" th:name="eventId" th:value="${eventId}">
-                <button>Cancel</button>
-            </form>
+            <a class="cancel-settings" th:href="@{/create-event(eventId=${eventId})}">Cancel</a>
             <button id="save-button">Save and Close</button>
         </div>
     </form>
