@@ -39,8 +39,8 @@ public class ScheduledMeetController {
                                       @RequestParam("year") int year,
                                       @RequestParam("month") int month,
                                       @RequestParam("day") int day,
-                                      @RequestParam("eventId") long eventId
-                                      ) {
+                                      @RequestParam("eventId") long eventId,
+                                      Model model) {
 
         ScheduledMeet scheduledMeet = new ScheduledMeet();
         scheduledMeet.setInviteeName(inviteeName);
@@ -64,6 +64,7 @@ public class ScheduledMeetController {
         Event event = eventService.findEvent(eventId);
         scheduledMeet.setEvent(event);
         scheduledMeetService.saveScheduledMeet(scheduledMeet);
+        model.addAttribute("email",inviteeEmail);
 
         return "/scheduled-success";
     }

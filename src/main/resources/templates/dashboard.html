@@ -510,10 +510,8 @@ font-size: large;
     <div class="main-2 hide">
         <div>
             <div id="schedule" th:each="schedule: ${scheduledMeets}">
-
                 <h1 th:text="${schedule.inviteeName}"/>
                 <p th:text="${schedule.inviteeEmail}"/>
-                <p th:text="${schedule.date}"/>
                 <p th:text="${schedule.startTime}"/>
                 <p th:text="${schedule.endTime}"/>
             </div>
