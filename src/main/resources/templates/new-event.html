@@ -44,7 +44,9 @@
         </div>
         <div class="line"></div> <!-- New line to complete the box shape -->
         <div id="button-section">
-            <a type="submit" id="cancel-button" th:href="@{/dashboard}">Cancel</a>
+            <form th:action="@{/dashboard}">
+                <button>Cancel</button>
+            </form>
             <button id="save-button">Save and Close</button>
         </div>
     </form>
