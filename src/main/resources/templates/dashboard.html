@@ -529,10 +529,12 @@ font-size: large;
     <div class="main-2 hide">
         <div id="schedule-container">
             <div id="schedule" th:each="schedule: ${scheduledMeets}" class="schedule-block">
-                <h1 th:text="${schedule.inviteeName}"/>
+                <h1>Event Name: <span th:text="${schedule.event.title}"></span></h1>
+                <h2>Invitee: <span th:text="${schedule.inviteeName}"></span></h2>
                 <p th:text="${schedule.inviteeEmail}"/>
                 <p th:text="${schedule.startTime + ' - ' + schedule.endTime}"></p>
-                <p th:text="${schedule.inviteeEmail}"/>
+                <p th:text="${schedule.description}"/>
+                <a th:href="'mailto:' + ${schedule.inviteeEmail} + '?subject=Meeting%20Confirmation&body=Dear%20User,%0A%0AYour%20meeting%20has%20been%20confirmed.%0A%0ABest%20regards,%0AYour%20Application'" target="_blank">Send Confirmation Email</a>
             </div>
         </div>
     </div>
