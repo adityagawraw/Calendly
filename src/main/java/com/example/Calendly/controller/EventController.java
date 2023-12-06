@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 @Controller
 public class EventController {
@@ -107,10 +109,18 @@ public class EventController {
     @GetMapping("/scheduling-settings")
     public String getSchedulingSettingsPage(@RequestParam("eventId") long eventID,
                                             Model model) {
-
-        model.addAttribute("schedulingSettings", new SchedulingSetting());
+        SchedulingSetting schedulingSetting = eventService.getSchedulingSetting(eventID);
+        model.addAttribute("schedulingSettings", schedulingSetting);
         model.addAttribute("eventId", eventID);
-        model.addAttribute("daysCheckBox", new DaysCheckBox());
+
+        DaysCheckBox daysCheckBox = new DaysCheckBox();
+        Set<String> selectedDays = eventService.getCheckedDays(eventID);
+
+        for(String day: selectedDays){
+            daysCheckBox.addSelectedDays(day);
+        }
+
+        model.addAttribute("daysCheckBox", daysCheckBox);
 
         return "scheduling-settings";
     }

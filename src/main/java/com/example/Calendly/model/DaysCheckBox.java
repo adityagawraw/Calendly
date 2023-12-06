@@ -9,8 +9,11 @@ public class DaysCheckBox {
     public List<String> getSelectedDays() {
         return selectedDays;
     }
-
     public void setSelectedDays(List<String> selectedDays) {
         this.selectedDays = selectedDays;
     }
+    public void addSelectedDays(String day){
+        selectedDays.add(day);
+    }
+
 }
