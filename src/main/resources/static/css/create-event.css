@@ -13,20 +13,9 @@ section{
 #setting-section{
     padding: 4px 15px 4px 15px;
 }
-.event-setting{
-    border:none;
-    border-bottom: 1px solid black;
-    background-color:white;
-    width:100%;
-}
-.event-setting:hover{
-    background-color: #eef5ff;
-    cursor: pointer;
-}
 h4{
     margin: 0px;
     padding: 5px 0px 5px 0px;
-
 }
 input{
     border: 1px solid #b2b2b2;
@@ -128,4 +117,33 @@ max-height:17px;
     color: black;
     cursor: pointer;
 }
-
+.event-setting{
+    border:none;
+    border-bottom: 1px solid black;
+    background-color:white;
+    width:100%;
+    display:grid;
+    grid-template-columns: 1fr 10fr 1fr;
+}
+.event-setting:hover{
+    background-color: #eef5ff;
+    cursor: pointer;
+}
+.event-setting div{
+text-align:start;
+}
+.setting-img{
+max-width: 30px;
+max-height: 30px;
+margin-top: 15px;
+}
+.next{
+display:flex;
+align-items:center;
+height:100%;
+}
+.nextImg{
+ max-width: 40px;
+ max-height: 40px;
+ transform: rotate(180deg);
+ }
