@@ -34,6 +34,14 @@ public class EventService {
         return eventRepository.findAll();
     }
 
+    public List<Event> findEventsByHost() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String userEmail = authentication.getName();
+        User user = userRepository.findByEmail(userEmail);
+        List<Event> events = eventRepository.findByHost(user.getId());
+        return  events;
+    }
+
     public Event createEvent(String title, String description, int duration, String location) {
         Event event = new Event(title, description, duration, location);
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
@@ -77,6 +85,7 @@ public class EventService {
 
     public Event findEvent(long eventId) {
         Event event = eventRepository.findById(eventId).orElse(null);
+
         return event;
     }
 
