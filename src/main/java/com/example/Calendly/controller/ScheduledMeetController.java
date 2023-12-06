@@ -63,6 +63,7 @@ public class ScheduledMeetController {
         scheduledMeet.setDate(customDate);
         Event event = eventService.findEvent(eventId);
         scheduledMeet.setEvent(event);
+        scheduledMeet.setHost(event.getHost());
         scheduledMeetService.saveScheduledMeet(scheduledMeet);
         model.addAttribute("email",inviteeEmail);
 
@@ -81,7 +82,7 @@ public class ScheduledMeetController {
 
     @GetMapping("/scheduledMeets")
     public String findAllScheduledMeets(Model model) {
-        List<ScheduledMeet> scheduledMeets = scheduledMeetService.findAllScheduledMeets();
+        List<ScheduledMeet> scheduledMeets = scheduledMeetService.findAllScheduledMeetsByHost();
         model.addAttribute("scheduledMeets", scheduledMeets);
         return "scheduled-meets";
     }

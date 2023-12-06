@@ -44,7 +44,7 @@ public class EventController {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         User user = userService.findUserByEmail(authentication.getName());
 
-        List<ScheduledMeet> scheduledMeets = scheduledMeetService.findAllScheduledMeets();
+        List<ScheduledMeet> scheduledMeets = scheduledMeetService.findAllScheduledMeetsByHost();
         model.addAttribute("scheduledMeets", scheduledMeets);
         model.addAttribute("user", user);
 
