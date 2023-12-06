@@ -34,6 +34,7 @@ public class Availability {
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "user_id")
     private User host;
+
     @Column(name = "day")
     private String day;
 

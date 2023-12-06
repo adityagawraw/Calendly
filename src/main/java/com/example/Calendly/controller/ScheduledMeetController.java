@@ -39,11 +39,13 @@ public class ScheduledMeetController {
                                       @RequestParam("month") int month,
                                       @RequestParam("day") int day,
                                       @RequestParam("eventId") long eventId,
+                                      @RequestParam("description") String description,
                                       Model model) {
 
         ScheduledMeet scheduledMeet = new ScheduledMeet();
         scheduledMeet.setInviteeName(inviteeName);
         scheduledMeet.setInviteeEmail(inviteeEmail);
+        scheduledMeet.setDescription(description);
 
         LocalTime startTime = LocalTime.of(startHour, startMinute);
         LocalTime endTime = LocalTime.of(endHour, endMinute);
