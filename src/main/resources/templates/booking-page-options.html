@@ -11,8 +11,10 @@
     <div id="setting-header">
         <form th:action="@{/create-event}">
             <input type="hidden" th:name="eventId" th:value="${eventId}">
-            <button class="backButton"  type="submit">< Event Type Summary</button>
-        </form>
+            <div class="return">
+                <img src="/images/return-button-1.svg" alt="<">
+                <button class="backButton" type="submit"><u>Event Type Summary</u> </button>
+            </div>        </form>
         <h1>Booking page options</h1>
     </div>
     <form id="setting-section" th:action="@{/save-booking-page-options}">
