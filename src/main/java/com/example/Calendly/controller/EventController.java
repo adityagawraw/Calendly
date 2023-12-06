@@ -39,7 +39,7 @@ public class EventController {
 
     @GetMapping("/dashboard")
     public String showDashboard(Model model) {
-        List<Event> events = eventService.findAllEvents();
+        List<Event> events = eventService.findEventsByHost();
         model.addAttribute("events", events);
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         User user = userService.findUserByEmail(authentication.getName());
