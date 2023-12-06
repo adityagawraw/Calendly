@@ -38,6 +38,9 @@ public class ScheduledMeet {
     @Column(name = "date")
     private Date date;
 
+    @Column(name = "description")
+    private String description;
+
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "user_id")
     private User host;

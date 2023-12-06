@@ -428,6 +428,25 @@ font-size: large;
         outline: none; /* Remove outline on focus */
     }
 
+            #schedule-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            gap: 20px; /* Spacing between schedule blocks */
+        }
+
+        .schedule-block {
+            background-color: #fff; /* White background */
+            padding: 15px;
+            border-radius: 8px; /* Rounded corners */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle box shadow */
+            text-align: left;
+            max-width: 300px; /* Maximum width for better readability */
+            margin-bottom: 20px;
+        }
+
+
+
     </style>
 </head>
 <body>
@@ -508,12 +527,12 @@ font-size: large;
 
     </div>
     <div class="main-2 hide">
-        <div>
-            <div id="schedule" th:each="schedule: ${scheduledMeets}">
+        <div id="schedule-container">
+            <div id="schedule" th:each="schedule: ${scheduledMeets}" class="schedule-block">
                 <h1 th:text="${schedule.inviteeName}"/>
                 <p th:text="${schedule.inviteeEmail}"/>
-                <p th:text="${schedule.startTime}"/>
-                <p th:text="${schedule.endTime}"/>
+                <p th:text="${schedule.startTime + ' - ' + schedule.endTime}"></p>
+                <p th:text="${schedule.inviteeEmail}"/>
             </div>
         </div>
     </div>
@@ -553,13 +572,6 @@ font-size: large;
        document.querySelector('.main-2').classList.add('hide');
        document.querySelector('.main').classList.remove('hide');
     }
-
-
-
-
-
-
-
     </script>
 
 </section>

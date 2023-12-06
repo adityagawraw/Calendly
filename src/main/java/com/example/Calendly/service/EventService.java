@@ -28,7 +28,14 @@ public class EventService {
         this.eventQuestionRepository = eventQuestionRepository;
         this.userRepository = userRepository;
     }
+    public SchedulingSetting getSchedulingSetting(long eventId){
+        Event event  = findEvent(eventId);
+        SchedulingSetting schedulingSetting = new SchedulingSetting();
+        schedulingSetting.setDateRange(event.getDateRange());
+        schedulingSetting.setMaxPerDay(event.getLimitPerDay());
 
+        return schedulingSetting;
+    }
 
     public List<Event> findAllEvents() {
         return eventRepository.findAll();

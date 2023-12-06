@@ -44,7 +44,7 @@ public class EventController {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         User user = userService.findUserByEmail(authentication.getName());
 
-        List<ScheduledMeet> scheduledMeets = scheduledMeetService.findAllScheduledMeets();
+        List<ScheduledMeet> scheduledMeets = scheduledMeetService.findAllScheduledMeetsByHost();
         model.addAttribute("scheduledMeets", scheduledMeets);
         model.addAttribute("user", user);
 
@@ -96,7 +96,7 @@ public class EventController {
             @RequestParam("title") String title,
             @RequestParam("description") String description,
             @RequestParam("duration") int duration,
-            @RequestParam("location") String location) {
+            @RequestParam("location") String location){
         Event event = eventService.createEvent(title, description, duration, location);
 
         return "redirect:/create-event?eventId=" + event.getId();
@@ -104,8 +104,8 @@ public class EventController {
 
     @GetMapping("/scheduling-settings")
     public String getSchedulingSettingsPage(@RequestParam("eventId") long eventID,
-                                            @ModelAttribute("schedulingSettings") SchedulingSetting schedulingSetting,
                                             Model model) {
+
         model.addAttribute("schedulingSettings", new SchedulingSetting());
         model.addAttribute("eventId", eventID);
         model.addAttribute("daysCheckBox", new DaysCheckBox());
