@@ -96,7 +96,7 @@ public class EventController {
             @RequestParam("title") String title,
             @RequestParam("description") String description,
             @RequestParam("duration") int duration,
-            @RequestParam("location") String location) {
+            @RequestParam("location") String location){
         Event event = eventService.createEvent(title, description, duration, location);
 
         return "redirect:/create-event?eventId=" + event.getId();
