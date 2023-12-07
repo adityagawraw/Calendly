@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Calendar</title>
+    <style>
+        .current-month {
+            background-color: #e0e0e0;
+        }
+
+        .other-month {
+            color: #a0a0a0;
+        }
+    </style>
+</head>
+<body>
+
+<h2>Calendar</h2>
+
+<table>
+    <thead>
+    <tr>
+        <th>Sun</th>
+        <th>Mon</th>
+        <th>Tue</th>
+        <th>Wed</th>
+        <th>Thu</th>
+        <th>Fri</th>
+        <th>Sat</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="week : ${daysInMonth}">
+        <td th:each="day : ${week}" >
+            <form th:action="@{'/calendar/date'}" method="get">
+                <button type="submit" th:name="selectedDate"></button>
+                <span th:text="${day.dayOfWeek}"></span>
+            </form>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+</body>
+</html>
