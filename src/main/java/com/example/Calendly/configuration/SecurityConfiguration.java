@@ -22,7 +22,7 @@ public class SecurityConfiguration {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception{
         http.authorizeHttpRequests(configure -> configure
-                        .requestMatchers("/signIn","/signUp","/saveRegisteredUser", "/").permitAll()
+                        .requestMatchers("/signIn","/signUp","/saveRegisteredUser", "/", "sche").permitAll()
                         .anyRequest().authenticated()
                 )
                 .formLogin(form ->
