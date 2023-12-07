@@ -30,7 +30,8 @@
 
                 <div class="timeSlotSetting" th:each="availableDays : *{availabilityPerDay.entrySet()}">
                     <input type="checkbox" id="${availableDays.key}"
-                           th:field="${daysCheckBox.selectedDays}" th:value="${availableDays.key}">
+                           th:field="${daysCheckBox.selectedDays}" th:value="${availableDays.key}"
+                           th:checked="${daysCheckBox.selectedDays.contains(day)}">
                     <span th:text="${availableDays.key}"></span>
                     <div th:each="hourSlot, iterStat : ${availableDays.value}">
                         <input class="timeSlot" type="text"

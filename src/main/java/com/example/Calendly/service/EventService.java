@@ -9,8 +9,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @Service
 public class EventService {
@@ -31,10 +30,22 @@ public class EventService {
     public SchedulingSetting getSchedulingSetting(long eventId){
         Event event  = findEvent(eventId);
         SchedulingSetting schedulingSetting = new SchedulingSetting();
+
         schedulingSetting.setDateRange(event.getDateRange());
         schedulingSetting.setMaxPerDay(event.getLimitPerDay());
 
         return schedulingSetting;
+    }
+
+    public Set<String> getCheckedDays(long eventId){
+        Set<String> selectedDays = new HashSet<>();
+        Event event = findEvent(eventId);
+
+        for(Availability availability : event.getAvailableHoursByDays()){
+            selectedDays.add(availability.getDay());
+        }
+
+        return  selectedDays;
     }
 
     public List<Event> findAllEvents() {
