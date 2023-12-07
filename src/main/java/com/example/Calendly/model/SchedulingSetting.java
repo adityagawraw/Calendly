@@ -51,6 +51,9 @@ public class SchedulingSetting {
         this.availabilityPerDay = availabilityPerDay;
     }
 
+    public void setAvailabilityListForADay(String day,List<Availability> availabilityOnADay){
+        availabilityPerDay.put(day, availabilityOnADay);
+    }
     @Override
     public String toString() {
         return "SchedulingSetting{" +

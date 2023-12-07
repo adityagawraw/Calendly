@@ -16,6 +16,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.*;
+import java.time.Duration;
+
+
 
 @Controller
 public class EventController {
@@ -103,7 +106,7 @@ public class EventController {
             @RequestParam("title") String title,
             @RequestParam("description") String description,
             @RequestParam("duration") int duration,
-            @RequestParam("location") String location){
+            @RequestParam("location") String location) {
         Event event = eventService.createEvent(title, description, duration, location);
 
         return "redirect:/create-event?eventId=" + event.getId();
@@ -119,7 +122,7 @@ public class EventController {
         DaysCheckBox daysCheckBox = new DaysCheckBox();
         Set<String> selectedDays = eventService.getCheckedDays(eventID);
 
-        for(String day: selectedDays){
+        for (String day : selectedDays) {
             daysCheckBox.addSelectedDays(day);
         }
 
@@ -133,6 +136,24 @@ public class EventController {
                                          @ModelAttribute("daysCheckBox") DaysCheckBox daysCheckBox,
                                          @RequestParam("eventId") long eventId,
                                          Model model) {
+        Event event = eventService.findEvent(eventId);
+
+        for (Map.Entry<String, List<Availability>> entry : schedulingSetting.getAvailabilityPerDay().entrySet()) {
+            Availability availability = entry.getValue().get(0);
+            Duration duration = Duration.between(availability.getStartTime(), availability.getEndTime());
+
+            if (availability.getStartTime().isAfter(availability.getEndTime()) ||
+                    availability.getStartTime().equals(availability.getEndTime())) {
+                return "redirect:/scheduling-settings?eventId=" + eventId;
+            }
+
+            if (duration.toMinutes() < event.getDuration()){
+                return "redirect:/scheduling-settings?eventId=" + eventId;
+            }
+
+
+        }
+
         eventService.saveScheduleSettings(eventId, daysCheckBox.getSelectedDays(), schedulingSetting);
 
         return "redirect:/create-event?eventId=" + eventId;

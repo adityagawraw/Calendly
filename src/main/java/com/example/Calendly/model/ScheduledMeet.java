@@ -8,7 +8,6 @@ import lombok.Setter;
 
 import java.time.LocalTime;
 import java.util.Date;
-import java.util.LinkedHashSet;
 import java.util.List;
 
 @Entity
@@ -16,7 +15,7 @@ import java.util.List;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name = "scheduled_meet")
+@Table(name = "scheduled_meets")
 public class ScheduledMeet {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
