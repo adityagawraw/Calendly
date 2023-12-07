@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Show Schedules</title>
+
+</head>
+<body>
+
+
+<section id="B">
+<h1>Hello world</h1>
+  <div class="main">
+    <div id="schedule" th:each="schedule: ${scheduledMeets}" >
+      <h1 th:text="${schedule.inviteeName}"/>
+      <p th:text="${schedule.inviteeEmail}"/>
+      <p th:text="${schedule.date}"/>
+      <p th:text="${schedule.startTime}"/>
+      <p th:text="${schedule.endTime}"/>
+    </div>
+  </div>
+  <h1 th:text="${availability.startTime}"></h1>
+  <h1 th:text="${availability.endTime}"></h1>
+
+</section>
+
+
+</body>
+
+</html>

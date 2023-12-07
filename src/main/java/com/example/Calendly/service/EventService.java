@@ -42,7 +42,7 @@ public class EventService {
         Event event = findEvent(eventId);
 
         for(Availability availability : event.getAvailableHoursByDays()){
-            selectedDays.add(availability.getDay());
+            selectedDays.add(availability.getDayOfWeek());
         }
 
         return  selectedDays;
@@ -91,7 +91,7 @@ public class EventService {
 
                 for (Availability availableHoursByDay : availableHoursByDays) {
                     availableHoursByDay.setEvent(event);
-                    availableHoursByDay.setDay(day);
+                    availableHoursByDay.setDayOfWeek(day);
                     availabilityRepository.save(availableHoursByDay);
 
                     event.addAvailableHoursByDay(availableHoursByDay);

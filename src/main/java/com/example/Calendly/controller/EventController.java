@@ -1,6 +1,7 @@
 package com.example.Calendly.controller;
 
 import com.example.Calendly.model.*;
+import com.example.Calendly.service.AvailabilityService;
 import com.example.Calendly.service.EventService;
 import com.example.Calendly.service.ScheduledMeetService;
 import com.example.Calendly.service.UserService;
@@ -14,21 +15,26 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 @Controller
 public class EventController {
     private final EventService eventService;
     private final UserService userService;
     private final ScheduledMeetService scheduledMeetService;
+    private final AvailabilityService availabilityService;
 
     @Autowired
-    public EventController(EventService eventService, UserService userService, ScheduledMeetService scheduledMeetService) {
+    public EventController(
+            EventService eventService,
+            UserService userService,
+            ScheduledMeetService scheduledMeetService,
+            AvailabilityService availabilityService
+    ) {
         this.eventService = eventService;
         this.userService = userService;
         this.scheduledMeetService = scheduledMeetService;
+        this.availabilityService = availabilityService;
     }
 
     @GetMapping("/")
@@ -164,5 +170,25 @@ public class EventController {
         eventService.deleteEvent(eventId);
 
         return "redirect:/dashboard";
+    }
+
+    @GetMapping("/timeslot")
+    public String findAvailableSlot(Model model) {
+
+//        @RequestParam("year") int year,
+//        @RequestParam("month") int month,
+//        @RequestParam("day") int day
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(Calendar.YEAR, 2023);
+        calendar.set(Calendar.MONTH, 8); // Month is 0-indexed in Calendar
+        calendar.set(Calendar.DAY_OF_MONTH, 9);
+
+        // Convert Calendar to Date
+        Date customDate = calendar.getTime();
+        List<ScheduledMeet> scheduledMeets = scheduledMeetService.findAvailableTimeSlots(customDate);
+        Availability availability = availabilityService.findAvailabilityByDayOfWeekAndEvent("MONDAY", 9);
+        model.addAttribute("scheduledMeets", scheduledMeets);
+        model.addAttribute("availability", availability);
+        return "trying";
     }
 }

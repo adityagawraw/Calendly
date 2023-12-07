@@ -13,7 +13,7 @@ public class SchedulingSetting {
             List<Availability> availableHoursOnADay = new ArrayList<>();
             Availability availableHoursByDay = new Availability();
 
-            availableHoursByDay.setDay(String.valueOf(day));
+            availableHoursByDay.setDayOfWeek(String.valueOf(day));
             LocalTime startTime = LocalTime.of(9,0);
             LocalTime endTime = LocalTime.of(12,0);
 
