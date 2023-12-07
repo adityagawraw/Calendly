@@ -73,6 +73,9 @@
 
         <button type="submit">Register</button>
     </form>
+    <th:block th:if="${emailExists}">
+        <p style="color: red; text-align: center;">Email id already exists. Kindly sign in.</p>
+    </th:block>
 </div>
 
 </body>
