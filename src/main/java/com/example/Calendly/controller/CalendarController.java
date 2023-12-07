@@ -20,17 +20,12 @@ public class CalendarController {
     public String showCalendar(Model model) {
         List<List<LocalDate>> daysInMonth = getDaysInMonth(LocalDate.now());
         model.addAttribute("daysInMonth", daysInMonth);
-        for(List<LocalDate> week : daysInMonth){
-            for(LocalDate day : week){
-                System.out.print(day+" ");
-            }
-            System.out.println();
-        }
+
         return "calendar";
     }
 
     @GetMapping("/date")
-    public String handleDate(@RequestParam("selectedDate") String selectedDate) {
+    public String handleDate(@RequestParam("selectedDate") LocalDate selectedDate) {
         // Handle the date logic here
         System.out.println("Selected date: " + selectedDate);
         return "redirect:/calendar";

@@ -32,8 +32,9 @@
     <tr th:each="week : ${daysInMonth}">
         <td th:each="day : ${week}" >
             <form th:action="@{'/calendar/date'}" method="get">
-                <button type="submit" th:name="selectedDate"></button>
-                <span th:text="${day.dayOfWeek}"></span>
+                <button type="submit" th:name="selectedDate" th:value="${day}">
+                <span th:text="${#temporals.format(day, 'dd')}"></span>
+                </button>
             </form>
         </td>
     </tr>
