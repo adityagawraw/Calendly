@@ -506,30 +506,6 @@ font-size: large;
             </form>
         </div>
 
-        <script>
-    function deleteEvent(deleteBtn) {
-        var eventId = deleteBtn.getAttribute('data-event-id');
-
-        // Make an asynchronous request to delete the event
-        fetch('/events/delete/' + eventId, {
-            method: 'GET'
-        })
-        .then(response => {
-            if (response.ok) {
-                // If the deletion is successful, remove the card from the UI
-                var card = deleteBtn.closest('.card');
-                card.parentNode.removeChild(card);
-            } else {
-                console.error('Failed to delete event');
-            }
-        })
-        .catch(error => {
-            console.error('Error:', error);
-        });
-    }
-
-        </script>
-
     </div>
     <div class="main-2 hide">
         <div id="schedule-container">
