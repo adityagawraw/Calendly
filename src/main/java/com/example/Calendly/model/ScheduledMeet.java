@@ -16,7 +16,7 @@ import java.util.List;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name = "scheduled_meet")
+@Table(name = "scheduled_meets")
 public class ScheduledMeet {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
