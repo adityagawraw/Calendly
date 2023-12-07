@@ -21,7 +21,7 @@ public class CalendarController {
         List<List<LocalDate>> daysInMonth = getDaysInMonth(LocalDate.now());
         model.addAttribute("daysInMonth", daysInMonth);
 
-        return "calendar";
+        return "select-timeslot";
     }
 
     @GetMapping("/date")
