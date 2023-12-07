@@ -61,6 +61,7 @@
 
 <div class="login-container">
   <h2>Login</h2>
+
   <form th:action="@{/authenticateTheUser}" method="post">
     <label for="email">Email:</label>
     <input type="email" id="email" name="username" required>
@@ -70,6 +71,9 @@
 
     <button type="submit">Login</button>
   </form>
+  <th:block th:if="${param.error}">
+    <h3 style="color: red; text-align: center;">Wrong Username or Password</h3>
+  </th:block>
   <br>
   <br>
   <form th:action="@{/}" method="get">

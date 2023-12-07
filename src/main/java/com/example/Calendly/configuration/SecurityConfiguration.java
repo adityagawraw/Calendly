@@ -7,6 +7,8 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.provisioning.JdbcUserDetailsManager;
 import org.springframework.security.provisioning.UserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.AuthenticationFailureHandler;
+import org.springframework.security.web.authentication.SimpleUrlAuthenticationFailureHandler;
 
 import javax.sql.DataSource;
 
@@ -41,4 +43,10 @@ public class SecurityConfiguration {
         return http.build();
     }
 
+    @Bean
+    public AuthenticationFailureHandler authenticationFailureHandler() {
+        SimpleUrlAuthenticationFailureHandler failureHandler = new SimpleUrlAuthenticationFailureHandler("/signIn?error=true");
+        failureHandler.setUseForward(true);
+        return failureHandler;
+    }
 }

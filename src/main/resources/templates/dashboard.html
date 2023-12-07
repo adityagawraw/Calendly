@@ -538,7 +538,10 @@ font-size: large;
                 <p th:text="${schedule.inviteeEmail}"/>
                 <p th:text="${schedule.startTime + ' - ' + schedule.endTime}"></p>
                 <p th:text="${schedule.description}"/>
-                <a th:href="'mailto:' + ${schedule.inviteeEmail} + '?subject=Meeting%20Confirmation&body=Dear%20User,%0A%0AYour%20meeting%20has%20been%20confirmed.%0A%0ABest%20regards,%0AYour%20Application'" target="_blank">Send Confirmation Email</a>
+                <p th:text="${schedule.event.location}"/>
+<!--                <a th:href="'mailto:' + ${schedule.inviteeEmail} + '?subject=Meeting%20Confirmation&body=Dear%20User,%0A%0AYour%20meeting%20has%20been%20confirmed.%0A%0ABest%20regards,%0AYour%20Application%0A%0AZoom%20Meeting%20Link:%20' + ${zoomInviteGenerator.generateZoomLink()}" target="_blank">Send Confirmation Email</a>-->
+                <a th:href="'mailto:' + ${schedule.inviteeEmail} + '?subject=Meeting%20Confirmation&body=Dear%20User,%0A%0AYour%20meeting%20has%20been%20confirmed.%0A%0ABest%20regards,%0AYour%20Application'"
+                   target="_blank">Send Confirmation Email</a>
             </div>
         </div>
     </div>
