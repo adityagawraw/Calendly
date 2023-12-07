@@ -1,11 +1,13 @@
 package com.example.Calendly.configuration;
 
+import com.example.Calendly.model.User;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.provisioning.JdbcUserDetailsManager;
 import org.springframework.security.provisioning.UserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
+
 import javax.sql.DataSource;
 
 @Configuration
@@ -20,11 +22,7 @@ public class SecurityConfiguration {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception{
         http.authorizeHttpRequests(configure -> configure
-                        .requestMatchers("/signIn","/signUp","/saveRegisteredUser", "/",
-                                "/css/**","/create-event","/event-details","/save-event-details",
-                                "/scheduling-settings","/save-scheduling-settings","/booking-page-options",
-                                "/save-booking-page-options").permitAll()
-                        .requestMatchers("/scheduled-meet/**", "/schedule-meet").permitAll()
+                        .requestMatchers("/signIn","/signUp","/saveRegisteredUser", "/").permitAll()
                         .anyRequest().authenticated()
                 )
                 .formLogin(form ->
@@ -42,4 +40,5 @@ public class SecurityConfiguration {
 
         return http.build();
     }
+
 }
