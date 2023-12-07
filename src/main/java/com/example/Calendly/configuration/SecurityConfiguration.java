@@ -7,6 +7,8 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.provisioning.JdbcUserDetailsManager;
 import org.springframework.security.provisioning.UserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.AuthenticationFailureHandler;
+import org.springframework.security.web.authentication.SimpleUrlAuthenticationFailureHandler;
 
 import javax.sql.DataSource;
 
@@ -23,6 +25,7 @@ public class SecurityConfiguration {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception{
         http.authorizeHttpRequests(configure -> configure
                         .requestMatchers("/signIn","/signUp","/saveRegisteredUser", "/").permitAll()
+                        .requestMatchers("/timeslot").permitAll()
                         .anyRequest().authenticated()
                 )
                 .formLogin(form ->
@@ -40,5 +43,4 @@ public class SecurityConfiguration {
 
         return http.build();
     }
-
 }
