@@ -31,7 +31,7 @@ public class Event {
     @JoinColumn(name = "user_id")
     private User host;
 
-    @Column(name = "description")
+    @Column(name = "description",columnDefinition = "TEXT")
     private String description;
 
     @Column(name = "duration")

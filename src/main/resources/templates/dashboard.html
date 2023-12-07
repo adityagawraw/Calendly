@@ -517,7 +517,9 @@ font-size: large;
                 <p th:text="${schedule.description}"/>
                 <p th:text="${schedule.event.location}"/>
 <!--                <a th:href="'mailto:' + ${schedule.inviteeEmail} + '?subject=Meeting%20Confirmation&body=Dear%20User,%0A%0AYour%20meeting%20has%20been%20confirmed.%0A%0ABest%20regards,%0AYour%20Application%0A%0AZoom%20Meeting%20Link:%20' + ${zoomInviteGenerator.generateZoomLink()}" target="_blank">Send Confirmation Email</a>-->
-                <a th:href="'mailto:' + ${schedule.inviteeEmail} + '?subject=Meeting%20Confirmation&body=Dear%20User,%0A%0AYour%20meeting%20has%20been%20confirmed.%0A%0ABest%20regards,%0AYour%20Application'"
+<!--                <a th:href="'mailto:' + ${schedule.inviteeEmail} + '?subject=Meeting%20Confirmation&body=Dear%20User,%0A%0AYour%20meeting%20has%20been%20confirmed.%0A%0ABest%20regards,%0AYour%20Application'"-->
+<!--                   target="_blank">Send Confirmation Email</a>-->
+                <a th:href="'mailto:' + ${schedule.inviteeEmail} + '?subject=Meeting%20Confirmation&body=Dear%20User,%0A%0AYour%20meeting%20has%20been%20confirmed.%0A%0APlease%20find%20the%20below%20Zoom%20invite:%0A%0AZoom%20Invite%20Link:%20https://us05web.zoom.us/j/4497348515%0APasscode:%20edZEj4%0A%0ABest%20regards,%0AYour%20Application'"
                    target="_blank">Send Confirmation Email</a>
             </div>
         </div>

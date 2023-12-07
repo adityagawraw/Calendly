@@ -24,7 +24,8 @@ public class SecurityConfiguration {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception{
         http.authorizeHttpRequests(configure -> configure
-                        .requestMatchers("/signIn","/signUp","/saveRegisteredUser", "/", "sche").permitAll()
+                        .requestMatchers("/signIn","/signUp","/saveRegisteredUser", "/").permitAll()
+                        .requestMatchers("/timeslot").permitAll()
                         .anyRequest().authenticated()
                 )
                 .formLogin(form ->
@@ -41,12 +42,5 @@ public class SecurityConfiguration {
                 );
 
         return http.build();
-    }
-
-    @Bean
-    public AuthenticationFailureHandler authenticationFailureHandler() {
-        SimpleUrlAuthenticationFailureHandler failureHandler = new SimpleUrlAuthenticationFailureHandler("/signIn?error=true");
-        failureHandler.setUseForward(true);
-        return failureHandler;
     }
 }

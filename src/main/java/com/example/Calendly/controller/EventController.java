@@ -1,6 +1,7 @@
 package com.example.Calendly.controller;
 
 import com.example.Calendly.model.*;
+import com.example.Calendly.service.AvailabilityService;
 import com.example.Calendly.service.EventService;
 import com.example.Calendly.service.ScheduledMeetService;
 import com.example.Calendly.service.UserService;
@@ -14,22 +15,30 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.time.LocalTime;
+import java.util.*;
 import java.time.Duration;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+
+
 
 @Controller
 public class EventController {
     private final EventService eventService;
     private final UserService userService;
     private final ScheduledMeetService scheduledMeetService;
+    private final AvailabilityService availabilityService;
 
     @Autowired
-    public EventController(EventService eventService, UserService userService, ScheduledMeetService scheduledMeetService) {
+    public EventController(
+            EventService eventService,
+            UserService userService,
+            ScheduledMeetService scheduledMeetService,
+            AvailabilityService availabilityService
+    ) {
         this.eventService = eventService;
         this.userService = userService;
         this.scheduledMeetService = scheduledMeetService;
+        this.availabilityService = availabilityService;
     }
 
     @GetMapping("/")
@@ -183,5 +192,58 @@ public class EventController {
         eventService.deleteEvent(eventId);
 
         return "redirect:/dashboard";
+    }
+
+    // TimeSlot work in project
+    @GetMapping("/timeslot")
+    public String findAvailableSlot(
+            Model model,
+            @RequestParam("year") int year,
+            @RequestParam("month") int month,
+            @RequestParam("day") int day,
+            @RequestParam("eventId") long eventId
+
+    ) {
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(Calendar.YEAR, year);
+        calendar.set(Calendar.MONTH, month); // Month is 0-indexed in Calendar
+        calendar.set(Calendar.DAY_OF_MONTH, day);
+
+        int dayOfWeek = calendar.get(Calendar.DAY_OF_WEEK);
+
+        Map<Integer, String> days = new HashMap<>();
+        days.put(1, "SUNDAY");
+        days.put(2, "MONDAY");
+        days.put(3, "TUESDAY");
+        days.put(4, "WEDNESDAY");
+        days.put(5, "THURSDAY");
+        days.put(6, "FRIDAY");
+        days.put(7, "SATURDAY");
+
+        // Convert Calendar to Date
+        Date customDate = calendar.getTime();
+        List<ScheduledMeet> scheduledMeets = scheduledMeetService.findAvailableTimeSlots(customDate);
+        Availability availability = availabilityService.findAvailabilityByDayOfWeekAndEvent(days.get(dayOfWeek), eventId);
+
+        List<TimeSlot> timeslots = new ArrayList<>();
+        int duration = eventService.findEvent(eventId).getDuration();
+
+        LocalTime startTime = availability.getStartTime();
+        LocalTime endTime = availability.getEndTime();
+        LocalTime meetStartTime = startTime;
+        LocalTime meetEndTime = meetStartTime.plusMinutes(duration);
+
+        while (meetEndTime.isBefore(endTime)) {
+            timeslots.add(new TimeSlot(meetStartTime, meetEndTime));
+            meetStartTime = meetEndTime;
+            meetEndTime = meetEndTime.plusMinutes(duration);
+        }
+
+        System.out.println(timeslots);
+        model.addAttribute("scheduledMeets", scheduledMeets);
+        model.addAttribute("availability", availability);
+        model.addAttribute("timeSlots", timeslots);
+
+        return "trying";
     }
 }
