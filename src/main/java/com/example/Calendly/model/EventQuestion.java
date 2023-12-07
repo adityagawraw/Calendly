@@ -18,7 +18,7 @@ public class EventQuestion {
     @Column(name = "id")
     private long id;
 
-    @Column(name = "question")
+    @Column(name = "question",columnDefinition = "TEXT")
     private String question;
 
     @ManyToOne(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.MERGE,CascadeType.PERSIST})
