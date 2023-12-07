@@ -35,8 +35,8 @@ public class Availability {
     @JoinColumn(name = "user_id")
     private User host;
 
-    @Column(name = "day")
-    private String day;
+    @Column(name = "day_of_week")
+    private String dayOfWeek;
 
     @ManyToOne(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.MERGE,CascadeType.PERSIST})
     @JoinColumn(name = "event_id")
@@ -50,12 +50,12 @@ public class Availability {
         this.id = id;
     }
 
-    public String getDay() {
-        return day;
+    public String getDayOfWeek() {
+        return dayOfWeek;
     }
 
-    public void setDay(String day) {
-        this.day = day;
+    public void setDayOfWeek(String dayOfWeek) {
+        this.dayOfWeek = dayOfWeek;
     }
 
     public LocalTime getStartTime() {

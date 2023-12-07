@@ -13,7 +13,7 @@ public class SchedulingSetting {
             List<Availability> availableHoursOnADay = new ArrayList<>();
             Availability availableHoursByDay = new Availability();
 
-            availableHoursByDay.setDay(String.valueOf(day));
+            availableHoursByDay.setDayOfWeek(String.valueOf(day));
             LocalTime startTime = LocalTime.of(9,0);
             LocalTime endTime = LocalTime.of(12,0);
 
@@ -51,6 +51,9 @@ public class SchedulingSetting {
         this.availabilityPerDay = availabilityPerDay;
     }
 
+    public void setAvailabilityListForADay(String day,List<Availability> availabilityOnADay){
+        availabilityPerDay.put(day, availabilityOnADay);
+    }
     @Override
     public String toString() {
         return "SchedulingSetting{" +
