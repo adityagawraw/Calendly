@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml" xmlns:sec="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -452,6 +452,10 @@ font-size: large;
 <body>
 <div id="navbar">
     <img src="https://assets.calendly.com/packs/frontend/media/logo-square-cd364a3c33976d32792a.png" alt="">
+    <div sec:authorize="isAuthenticated()">
+        <h2 th:text="'Welcome : '+${user.name}" style="color: black;"></h2>
+    </div>
+
     <div id="options">
         <a class="a" href="/dashboard">Home</a>
         <!--        <a class="a" href="#">Availibilty</a>-->

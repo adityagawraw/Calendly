@@ -31,9 +31,6 @@ public class EventController {
 
     @GetMapping("/")
     public String home(Model model) {
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        User user = userService.findUserByEmail(authentication.getName());
-        model.addAttribute("user", user);
         return "homepage";
     }
 
@@ -72,7 +69,7 @@ public class EventController {
 
         return "event-details";
     }
-
+    
     @GetMapping("/update-event-details")
     public String updateEventDetails(
             Model model,
