@@ -25,6 +25,12 @@
         <div>
             <h4>Invitee questions</h4>
             <textarea id="" cols="30" rows="6" th:name="inviteeQuestions" th:value="${inviteeQuestions}"></textarea>
+            <div id="questions">
+
+            </div>
+            <button type="button" onclick="addNewQuestionField()">
+            + Add New Question
+            </button>
         </div>
         <input type="hidden" th:value="${eventId}" th:name="eventId">
         <div id="button-section">
@@ -32,7 +38,11 @@
             <button type="submit" id="save-button">Save and Close</button>
         </div>
     </form>
+<script>
+    function addNewQuestionField(){
 
+    }
+</script>
 </section>
 </body>
 </html>

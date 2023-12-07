@@ -27,12 +27,23 @@ public class EventService {
         this.eventQuestionRepository = eventQuestionRepository;
         this.userRepository = userRepository;
     }
+
     public SchedulingSetting getSchedulingSetting(long eventId){
         Event event  = findEvent(eventId);
         SchedulingSetting schedulingSetting = new SchedulingSetting();
 
         schedulingSetting.setDateRange(event.getDateRange());
         schedulingSetting.setMaxPerDay(event.getLimitPerDay());
+
+        for(Availability availability: event.getAvailableHoursByDays()){
+            List<Availability> availabilities = schedulingSetting.getAvailabilityPerDay().get(availability.getDayOfWeek());
+            Availability availability1 =  availabilities.get(0);
+
+            availability1.setStartTime(availability.getStartTime());
+            availability1.setEndTime(availability.getEndTime());
+
+            schedulingSetting.setAvailabilityListForADay(availability.getDayOfWeek(), availabilities);
+        }
 
         return schedulingSetting;
     }
@@ -42,7 +53,7 @@ public class EventService {
         Event event = findEvent(eventId);
 
         for(Availability availability : event.getAvailableHoursByDays()){
-            selectedDays.add(availability.getDay());
+            selectedDays.add(availability.getDayOfWeek());
         }
 
         return  selectedDays;
@@ -91,7 +102,7 @@ public class EventService {
 
                 for (Availability availableHoursByDay : availableHoursByDays) {
                     availableHoursByDay.setEvent(event);
-                    availableHoursByDay.setDay(day);
+                    availableHoursByDay.setDayOfWeek(day);
                     availabilityRepository.save(availableHoursByDay);
 
                     event.addAvailableHoursByDay(availableHoursByDay);

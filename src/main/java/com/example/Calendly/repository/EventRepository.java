@@ -7,6 +7,6 @@ import org.springframework.data.jpa.repository.Query;
 import java.util.List;
 
 public interface EventRepository extends JpaRepository<Event, Long> {
-    @Query(value = "select * from event where user_id = :userId", nativeQuery = true)
+    @Query(value = "select * from events where user_id = :userId", nativeQuery = true)
     List<Event> findByHost(long userId);
 }

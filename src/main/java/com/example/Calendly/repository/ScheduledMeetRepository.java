@@ -8,6 +8,6 @@ import org.springframework.data.jpa.repository.Query;
 import java.util.List;
 
 public interface ScheduledMeetRepository extends JpaRepository<ScheduledMeet, Long> {
-    @Query(value = "select * from scheduled_meet where user_id = :userId", nativeQuery = true)
+    @Query(value = "select * from scheduled_meets where user_id = :userId", nativeQuery = true)
     List<ScheduledMeet> findMeetByLoggedInUser(long userId);
 }
