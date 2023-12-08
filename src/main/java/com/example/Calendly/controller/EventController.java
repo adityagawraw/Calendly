@@ -150,8 +150,6 @@ public class EventController {
             if (duration.toMinutes() < event.getDuration()){
                 return "redirect:/scheduling-settings?eventId=" + eventId;
             }
-
-
         }
 
         eventService.saveScheduleSettings(eventId, daysCheckBox.getSelectedDays(), schedulingSetting);

@@ -21,7 +21,7 @@
     <form th:action="@{/save-scheduling-settings}" id="setting-section" th:object="${schedulingSettings}">
         <div id="dateRange">
             <h4>Date range</h4>
-            <input type="number" th:field="*{dateRange}"><span>into the future</span>
+            <input type="number" th:field="*{dateRange}" ><span>into the future</span>
         </div>
         <div>
             <h4>Available hours</h4>

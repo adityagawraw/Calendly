@@ -118,11 +118,8 @@ public class EventService {
         }
     }
 
-
     public Event findEvent(long eventId) {
-        Event event = eventRepository.findById(eventId).orElse(null);
-
-        return event;
+        return eventRepository.findById(eventId).orElse(null);
     }
 
     public void deleteEvent(long eventId) {
@@ -223,6 +220,7 @@ public class EventService {
 
         return timeslots;
     }
+
     public List<List<LocalDate>> getDaysInMonth(LocalDate date) {
         List<List<LocalDate>> daysInMonth = new ArrayList<>();
         YearMonth yearMonth = YearMonth.from(date);
