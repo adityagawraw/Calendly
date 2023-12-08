@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Calendar</title>
+    <style>
+        .current-month {
+            background-color: #e0e0e0;
+        }
+
+        .other-month {
+            color: #a0a0a0;
+        }
+    </style>
+</head>
+<body>
+<link rel="stylesheet" th:href="@{/css/select-timeslot.css}">
+<section>
+
+    <div id="event-details">
+        <h2 id="hostName">Host's Name</h2>
+        <h1>Meet Title</h1>
+        <div>
+            <p class="meetinfo">45 min</p>
+        </div>
+        <div>
+            <p class="meetinfo">11:30am - 12:15pm, Friday, December 8, 2023</p>
+        </div>
+        <div>
+            <p class="meetinfo">India Standard Time</p>
+        </div>
+        <p>
+            I take interviews here Description
+        </p>
+    </div>
+    <div>
+        <h1>Select a Date & Time</h1>
+        <div>
+            <button>
+                < </button>
+            <span>December 2023</span>
+            <button> > </button>
+        </div>
+        <table>
+            <thead>
+            <tr>
+                <th>Mon</th>
+                <th>Tue</th>
+                <th>Wed</th>
+                <th>Thu</th>
+                <th>Fri</th>
+                <th>Sat</th>
+                <th>Sun</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="week : ${daysInMonth}">
+                <td th:each="day : ${week}" >
+                    <form th:action="@{'/calendar/date'}" method="get">
+                        <button class="days" type="submit" th:name="selectedDate" th:value="${day}"
+                        th:disabled="${day == null}" style="display: ${day == null ? 'none' : 'inline-block'};">
+                            <span th:text="${#temporals.format(day, 'dd')}"></span>
+                        </button>
+                    </form>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div>
+        <div><span>Sunday</span><span>, </span> <span>December 10</span></div>
+        <div id="timeSlots">
+            <button>9:00 am</button>
+            <button>9:00 am</button>
+            <button>9:00 am</button>
+            <button>9:00 am</button>
+        </div>
+    </div>
+</section>
+
+</body>
+</html>

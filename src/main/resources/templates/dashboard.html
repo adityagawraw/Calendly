@@ -523,9 +523,17 @@ font-size: large;
                 <p th:text="${schedule.inviteeEmail}"/>
                 <p th:text="${schedule.startTime + ' - ' + schedule.endTime}"></p>
                 <p th:text="${schedule.event.location}"/>
+<<<<<<< HEAD
                 <p th:text="${schedule.description}"/>
                 <a th:href="'mailto:' + ${schedule.inviteeEmail} + '?subject=Meeting%20Confirmation&body=Dear%20User,%0A%0AYour%20meeting%20has%20been%20confirmed.%0A%0A' + (${schedule.event.location == 'Zoom' ? 'Please find the below Zoom invite:   Zoom Invite Link: https://us05web.zoom.us/j/4497348515   Passcode: edZEj4' : schedule.event.location == 'Google meet' ? 'Please find the below Google meet invite:   Meet Invite Link: https://meet.google.com/wat-ptvv-tqg' : ''}) + '%0A%0ABest%20regards,%0AYour%20Application'"
                    target="_blank" class="confirmation-button">Send Confirmation Email</a>
+=======
+<!--                <a th:href="'mailto:' + ${schedule.inviteeEmail} + '?subject=Meeting%20Confirmation&body=Dear%20User,%0A%0AYour%20meeting%20has%20been%20confirmed.%0A%0ABest%20regards,%0AYour%20Application%0A%0AZoom%20Meeting%20Link:%20' + ${zoomInviteGenerator.generateZoomLink()}" target="_blank">Send Confirmation Email</a>-->
+<!--                <a th:href="'mailto:' + ${schedule.inviteeEmail} + '?subject=Meeting%20Confirmation&body=Dear%20User,%0A%0AYour%20meeting%20has%20been%20confirmed.%0A%0ABest%20regards,%0AYour%20Application'"-->
+<!--                   target="_blank">Send Confirmation Email</a>-->
+                <a th:href="'mailto:' + ${schedule.inviteeEmail} + '?subject=Meeting%20Confirmation&body=Dear%20User,%0A%0AYour%20meeting%20has%20been%20confirmed.%0A%0APlease%20find%20the%20below%20Zoom%20invite:%0A%0AZoom%20Invite%20Link:%20https://us05web.zoom.us/j/4497348515%0APasscode:%20edZEj4%0A%0ABest%20regards,%0AYour%20Application'"
+                   target="_blank">Send Confirmation Email</a>
+>>>>>>> origin/dev
             </div>
         </div>
     </div>

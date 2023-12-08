@@ -1,6 +1,7 @@
 package com.example.Calendly.controller;
 
 import com.example.Calendly.model.*;
+import com.example.Calendly.service.AvailabilityService;
 import com.example.Calendly.service.EventService;
 import com.example.Calendly.service.ScheduledMeetService;
 import com.example.Calendly.service.UserService;
@@ -14,22 +15,31 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.util.*;
 import java.time.Duration;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+
+
 
 @Controller
 public class EventController {
     private final EventService eventService;
     private final UserService userService;
     private final ScheduledMeetService scheduledMeetService;
+    private final AvailabilityService availabilityService;
 
     @Autowired
-    public EventController(EventService eventService, UserService userService, ScheduledMeetService scheduledMeetService) {
+    public EventController(
+            EventService eventService,
+            UserService userService,
+            ScheduledMeetService scheduledMeetService,
+            AvailabilityService availabilityService
+    ) {
         this.eventService = eventService;
         this.userService = userService;
         this.scheduledMeetService = scheduledMeetService;
+        this.availabilityService = availabilityService;
     }
 
     @GetMapping("/")

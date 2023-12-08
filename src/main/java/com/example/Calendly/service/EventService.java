@@ -9,6 +9,8 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.*;
 
 @Service
@@ -17,27 +19,34 @@ public class EventService {
     private final AvailabilityRepository availabilityRepository;
     private final EventQuestionRepository eventQuestionRepository;
     private final UserRepository userRepository;
+    private AvailabilityService availabilityService;
+    private ScheduledMeetService scheduledMeetService;
 
     public EventService(EventRepository eventRepository,
                         AvailabilityRepository availabilityRepository,
                         EventQuestionRepository eventQuestionRepository,
-                        UserRepository userRepository) {
+                        UserRepository userRepository,
+                        AvailabilityService availabilityService,
+                        ScheduledMeetService scheduledMeetService) {
         this.eventRepository = eventRepository;
         this.availabilityRepository = availabilityRepository;
         this.eventQuestionRepository = eventQuestionRepository;
         this.userRepository = userRepository;
+        this.availabilityService = availabilityService;
+        this.scheduledMeetService = scheduledMeetService;
+
     }
 
-    public SchedulingSetting getSchedulingSetting(long eventId){
-        Event event  = findEvent(eventId);
+    public SchedulingSetting getSchedulingSetting(long eventId) {
+        Event event = findEvent(eventId);
         SchedulingSetting schedulingSetting = new SchedulingSetting();
 
         schedulingSetting.setDateRange(event.getDateRange());
         schedulingSetting.setMaxPerDay(event.getLimitPerDay());
 
-        for(Availability availability: event.getAvailableHoursByDays()){
+        for (Availability availability : event.getAvailableHoursByDays()) {
             List<Availability> availabilities = schedulingSetting.getAvailabilityPerDay().get(availability.getDayOfWeek());
-            Availability availability1 =  availabilities.get(0);
+            Availability availability1 = availabilities.get(0);
 
             availability1.setStartTime(availability.getStartTime());
             availability1.setEndTime(availability.getEndTime());
@@ -48,15 +57,15 @@ public class EventService {
         return schedulingSetting;
     }
 
-    public Set<String> getCheckedDays(long eventId){
+    public Set<String> getCheckedDays(long eventId) {
         Set<String> selectedDays = new HashSet<>();
         Event event = findEvent(eventId);
 
-        for(Availability availability : event.getAvailableHoursByDays()){
+        for (Availability availability : event.getAvailableHoursByDays()) {
             selectedDays.add(availability.getDayOfWeek());
         }
 
-        return  selectedDays;
+        return selectedDays;
     }
 
     public List<Event> findAllEvents() {
@@ -68,7 +77,7 @@ public class EventService {
         String userEmail = authentication.getName();
         User user = userRepository.findByEmail(userEmail);
         List<Event> events = eventRepository.findByHost(user.getId());
-        return  events;
+        return events;
     }
 
     public Event createEvent(String title, String description, int duration, String location) {
@@ -160,5 +169,49 @@ public class EventService {
                 event.addMeetQuestions(eventQuestion);
             }
         }
+    }
+
+    public List<TimeSlot> findAvailableSlot(LocalDate date, long eventId) {
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(Calendar.YEAR, date.getYear());
+        calendar.set(Calendar.MONTH, date.getMonthValue()); // Month is 0-indexed in Calendar
+        calendar.set(Calendar.DAY_OF_MONTH, date.getDayOfMonth());
+
+        int dayOfWeek = calendar.get(Calendar.DAY_OF_WEEK);
+
+        Map<Integer, String> days = new HashMap<>();
+        days.put(1, "SUNDAY");
+        days.put(2, "MONDAY");
+        days.put(3, "TUESDAY");
+        days.put(4, "WEDNESDAY");
+        days.put(5, "THURSDAY");
+        days.put(6, "FRIDAY");
+        days.put(7, "SATURDAY");
+
+        // Convert Calendar to Date
+        Date customDate = calendar.getTime();
+        List<ScheduledMeet> scheduledMeets = scheduledMeetService.findAvailableTimeSlots(customDate);
+        Availability availability = availabilityService.findAvailabilityByDayOfWeekAndEvent(days.get(dayOfWeek), eventId);
+
+        List<TimeSlot> timeslots = new ArrayList<>();
+        int duration = findEvent(eventId).getDuration();
+
+        LocalTime startTime = availability.getStartTime();
+        LocalTime endTime = availability.getEndTime();
+        LocalTime meetStartTime = startTime;
+        LocalTime meetEndTime = meetStartTime.plusMinutes(duration);
+
+        while (meetEndTime.isBefore(endTime)) {
+            timeslots.add(new TimeSlot(meetStartTime, meetEndTime));
+            meetStartTime = meetEndTime;
+            meetEndTime = meetEndTime.plusMinutes(duration);
+        }
+
+        System.out.println(timeslots);
+//        model.addAttribute("scheduledMeets", scheduledMeets);
+//        model.addAttribute("availability", availability);
+//        model.addAttribute("timeSlots", timeslots);
+
+        return timeslots;
     }
 }

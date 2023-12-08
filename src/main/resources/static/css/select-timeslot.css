@@ -1,0 +1,63 @@
+section{
+    display: grid;
+    grid-template-columns: 1fr 2fr 1fr;
+    border-radius: 4px;
+    box-shadow:  0 0 5px #a2a0a0;
+    width: 80%;
+    margin-top: 50px;
+}
+section div{
+    padding: 10px;
+
+}
+#event-details{
+    border-right: 1px gray solid;
+}
+#meetDetails{
+    border-right: 1px gray solid;
+    padding: 28px;
+}
+#hostName{
+    color: #737373;
+    font-size: medium;
+}
+th{
+    font-weight: 100;
+    color: rgb(60, 60, 60);
+    width: 45px;
+    text-align: center;
+}
+td{
+    width: 45px;
+    height: 45px;
+}
+#timeSlots{
+    max-height:400px;
+    overflow: auto;
+}
+#timeSlots button{
+    background-color: white;
+    color: #0069ff;
+    border: #0069ff solid 1px;
+    border-radius: 4px;
+    width: 180px;
+    text-align: center;
+    padding: 10px 0px 10px 0px;
+    margin: 10px 4px 10px 4px;
+    font-size: large;
+    font-weight: bold;
+
+}
+#timeSlots button:hover{
+    border-width: 2px;
+}
+
+.days{
+width: 40px;
+height: 40px;
+text: center;
+border-radius: 20px;
+border:none;
+background:white;
+font-size:large;
+}

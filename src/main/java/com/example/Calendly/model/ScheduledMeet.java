@@ -8,7 +8,6 @@ import lombok.Setter;
 
 import java.time.LocalTime;
 import java.util.Date;
-import java.util.LinkedHashSet;
 import java.util.List;
 
 @Entity
@@ -114,6 +113,14 @@ public class ScheduledMeet {
 
     public void setEvent(Event event) {
         this.event = event;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public List<MeetQuestionAnswer> getMeetQuestionAnswers() {
