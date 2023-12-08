@@ -12,12 +12,16 @@ public class TimeSlot {
     private int startMinute;
     private int endHour;
     private int endMinute;
+    private LocalTime startTime;
+    private LocalTime endTime;
 
     public TimeSlot(LocalTime startTime, LocalTime endTime) {
         this.startHour = startTime.getHour();
         this.startMinute = startTime.getMinute();
         this.endHour = endTime.getHour();
         this.endMinute = endTime.getMinute();
+        this.startTime = startTime;
+        this.endTime = endTime;
     }
 
     public int getStartHour() {
@@ -50,5 +54,22 @@ public class TimeSlot {
 
     public void setEndMinute(int endMinute) {
         this.endMinute = endMinute;
+    }
+
+
+    public LocalTime getStartTime() {
+        return startTime;
+    }
+
+    public void setStartTime(LocalTime startTime) {
+        this.startTime = startTime;
+    }
+
+    public LocalTime getEndTime() {
+        return endTime;
+    }
+
+    public void setEndTime(LocalTime endTime) {
+        this.endTime = endTime;
     }
 }
