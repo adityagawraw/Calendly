@@ -82,8 +82,18 @@ public class ScheduledMeetController {
         scheduledMeet.setHost(event.getHost());
 
         scheduledMeetService.saveScheduledMeet(scheduledMeet);
-        System.out.println("mmet id "+scheduledMeet.getId());
+
         return "";
+    }
+
+    @GetMapping("/scheduled-meet")
+    public String scheduledMeet(Model model, @PathVariable("eventId") long eventId) {
+        Event event = eventService.findEvent(eventId);
+        String host = event.getHost().getName();
+
+        model.addAttribute("event", event);
+        model.addAttribute("host", host);
+        return "schedule-meeting";
     }
     @PostMapping("/schedule-meet")
     public String createScheduledMeet(
@@ -130,15 +140,7 @@ public class ScheduledMeetController {
         return "/scheduled-success";
     }
 
-    @GetMapping("/scheduled-meet/{eventId}")
-    public String scheduledMeet(Model model, @PathVariable("eventId") long eventId) {
-        Event event = eventService.findEvent(eventId);
-        String host = event.getHost().getName();
 
-        model.addAttribute("event", event);
-        model.addAttribute("host", host);
-        return "schedule-meeting";
-    }
 
     @GetMapping("/scheduledMeets")
     public String findAllScheduledMeets(Model model) {

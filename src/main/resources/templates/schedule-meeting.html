@@ -30,15 +30,6 @@
     <div id="inviteesDetails">
         <h2>Enter Details</h2>
         <form th:action="@{/schedule-meet}" method="post" th:object="${event}">
-            <input type="hidden" th:name="eventId" th:value="${event.id}">
-            <input id="startHour" type="hidden" name="startHour" placeholder="startHour" th:value="9">
-            <input id="startMinute" type="hidden" name="startMinute" placeholder="startMinute" th:value="0">
-            <input id="endHour" type="hidden" name="endHour" placeholder="endHour" th:value="10">
-            <input id="endMinute" type="hidden" name="endMinute" placeholder="endMinute" th:value="0">
-            <input id="year" type="hidden" name="year" placeholder="year" th:value="2023">
-            <input id="month" type="hidden" name="month" placeholder="month" th:value="9">
-            <input id="day" type="hidden" name="day" placeholder="day" th:value="9">
-
             <div class="inputFields">
                 <p>Name *</p>
                 <input type="text" th:name="inviteeName">
