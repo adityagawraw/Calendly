@@ -1,6 +1,7 @@
 package com.example.Calendly.controller;
 
 import com.example.Calendly.model.Event;
+import com.example.Calendly.model.MeetDate;
 import com.example.Calendly.model.ScheduledMeet;
 import com.example.Calendly.model.TimeSlot;
 import com.example.Calendly.service.EventService;
@@ -36,7 +37,7 @@ public class ScheduledMeetController {
                                @RequestParam(value = "selectedDate",defaultValue = "") LocalDate selectedDate,
                                @RequestParam(value = "date") LocalDate currentDate
                                ) {
-        List<List<LocalDate>> daysInMonth = eventService.getDaysInMonth(currentDate);
+        List<List<MeetDate>> daysInMonth = eventService.getDaysInMonth(currentDate, eventId);
         List<TimeSlot> timeSlots = eventService.findAvailableSlot(selectedDate, eventId);
 
         model.addAttribute("event", eventService.findEvent(eventId));

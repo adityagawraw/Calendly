@@ -71,6 +71,16 @@ font-size:large;
 background-color:#0069ff;
 color:white;
 }
+.available-day{
+width: 40px;
+height: 40px;
+text: center;
+border-radius: 20px;
+border:none;
+font-size:large;
+background-color:#eef5ff;
+color:#0069ff;
+}
 .changeMonth{
 display:flex;
 

@@ -10,6 +10,7 @@ import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.YearMonth;
+import java.time.temporal.ChronoUnit;
 import java.util.*;
 
 @Service
@@ -20,6 +21,7 @@ public class EventService {
     private final UserRepository userRepository;
     private final AvailabilityService availabilityService;
     private final ScheduledMeetRepository scheduledMeetRepository;
+
 
     public EventService(EventRepository eventRepository,
                         AvailabilityRepository availabilityRepository,
@@ -33,8 +35,6 @@ public class EventService {
         this.userRepository = userRepository;
         this.availabilityService = availabilityService;
         this.scheduledMeetRepository = scheduledMeetRepository;
-
-
     }
 
     public SchedulingSetting getSchedulingSetting(long eventId) {
@@ -224,16 +224,34 @@ public class EventService {
         return timeslots;
     }
 
-    public List<List<LocalDate>> getDaysInMonth(LocalDate date) {
-        List<List<LocalDate>> daysInMonth = new ArrayList<>();
+    public List<List<MeetDate>> getDaysInMonth(LocalDate date, long eventId) {
+        List<List<MeetDate>> daysInMonth = new ArrayList<>();
         YearMonth yearMonth = YearMonth.from(date);
         int days = yearMonth.lengthOfMonth();
 
         // Start with the first day of the month
         LocalDate firstDayOfMonth = LocalDate.of(yearMonth.getYear(), yearMonth.getMonth(), 1);
 
+        Set<String> availableDays = getCheckedDays(eventId);
+        Map<String, Integer> daysByValue = new HashMap<>();
+        daysByValue.put("SUNDAY", 7);
+        daysByValue.put("MONDAY", 1);
+        daysByValue.put("TUESDAY", 2);
+        daysByValue.put("WEDNESDAY", 3);
+        daysByValue.put("THURSDAY", 4);
+        daysByValue.put("FRIDAY", 5);
+        daysByValue.put("SATURDAY", 6);
+
+        Set<Integer> availableDaysByValue = new HashSet<>();
+
+        for(String day: availableDays){
+            availableDaysByValue.add(daysByValue.get(day));
+        }
+
+        Event event = findEvent(eventId);
+
         // Initialize the list for the current week
-        List<LocalDate> currentWeek = new ArrayList<>();
+        List<MeetDate> currentWeek = new ArrayList<>();
 
         // Add empty cells for the days before the first day of the month
         for (int i = 1; i < firstDayOfMonth.getDayOfWeek().getValue(); i++) {
@@ -242,7 +260,20 @@ public class EventService {
 
         // Iterate through the days of the month
         for (int day = 1; day <= days; day++) {
-            currentWeek.add(LocalDate.of(yearMonth.getYear(), yearMonth.getMonth(), day));
+            LocalDate todaysDate = LocalDate.now();
+            LocalDate currentDate = LocalDate.of(yearMonth.getYear(), yearMonth.getMonth(), day);
+            MeetDate meetDate = new MeetDate();
+            meetDate.setLocalDate(currentDate);
+            meetDate.setAvailable(false);
+
+            if(availableDaysByValue.contains(currentDate.getDayOfWeek().getValue())){
+                if(ChronoUnit.DAYS.between(todaysDate, currentDate)>0 &&
+                        ChronoUnit.DAYS.between(todaysDate, currentDate) < event.getDuration()) {
+                    meetDate.setAvailable(true);
+                }
+            }
+
+            currentWeek.add(meetDate);
 
             // If we reach the end of the week, start a new week
             if (currentWeek.size() == DayOfWeek.values().length) {
