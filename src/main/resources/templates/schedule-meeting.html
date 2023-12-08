@@ -23,13 +23,13 @@
         <div>
             <p class="meetinfo">India Standard Time</p>
         </div>
-        <p>
+        <p th:text="${event.description}">
             I take interviews here Description
         </p>
     </div>
     <div id="inviteesDetails">
         <h2>Enter Details</h2>
-        <form th:action="@{/schedule-meet}" method="post" th:object="${event}">
+        <form th:action="@{/save-schedule-meet}" method="post" th:object="${event}">
             <div class="inputFields">
                 <p>Name *</p>
                 <input type="text" th:name="inviteeName">
@@ -42,7 +42,7 @@
                 <p>Please share anything that will help prepare for our meeting.</p>
                 <textarea type="text" th:name="description"></textarea>
             </div>
-
+            <input type="hidden" th:name="meetId" th:value="${meetId}">
             <button type="submit" id="save-button">Save and Close</button>
         </form>
     </div>

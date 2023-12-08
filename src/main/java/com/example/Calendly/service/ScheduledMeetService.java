@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ScheduledMeetService{
@@ -49,4 +50,11 @@ public class ScheduledMeetService{
     public void deleteSchedule(long eventId) {
         scheduledMeetRepository.deleteById(eventId);
     }
+
+    public ScheduledMeet findScheduledMeetById(long meetId){
+       Optional<ScheduledMeet> optionalScheduledMeet = scheduledMeetRepository.findById(meetId);
+
+        return optionalScheduledMeet.get();
+    }
+
 }

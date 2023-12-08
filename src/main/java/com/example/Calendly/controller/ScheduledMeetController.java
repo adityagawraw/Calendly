@@ -83,56 +83,36 @@ public class ScheduledMeetController {
 
         scheduledMeetService.saveScheduledMeet(scheduledMeet);
 
-        return "";
+        return "redirect:/schedule-meet?meetId="+scheduledMeet.getId()+"&eventId="+eventId;
     }
 
-    @GetMapping("/scheduled-meet")
-    public String scheduledMeet(Model model, @PathVariable("eventId") long eventId) {
+    @GetMapping("/schedule-meet")
+    public String scheduledMeet(Model model,
+                                @RequestParam("meetId") long meetId,
+                                @RequestParam("eventId") long eventId) {
         Event event = eventService.findEvent(eventId);
         String host = event.getHost().getName();
 
         model.addAttribute("event", event);
         model.addAttribute("host", host);
+        model.addAttribute("meetId", meetId);
+        model.addAttribute("scheduledMeet", scheduledMeetService.findScheduledMeetById(meetId));
+
         return "schedule-meeting";
     }
-    @PostMapping("/schedule-meet")
-    public String createScheduledMeet(
+    @PostMapping("/save-schedule-meet")
+    public String saveScheduledMeet(
                                       @RequestParam("inviteeName") String inviteeName,
                                       @RequestParam("inviteeEmail") String inviteeEmail,
-                                      @RequestParam("startHour") int startHour,
-                                      @RequestParam("startMinute") int startMinute,
-                                      @RequestParam("endHour") int endHour,
-                                      @RequestParam("endMinute") int endMinute,
-                                      @RequestParam("year") int year,
-                                      @RequestParam("month") int month,
-                                      @RequestParam("day") int day,
-                                      @RequestParam("eventId") long eventId,
+                                      @RequestParam("meetId") long meetId,
                                       @RequestParam("description") String description,
                                       Model model) {
 
-        ScheduledMeet scheduledMeet = new ScheduledMeet();
+        ScheduledMeet scheduledMeet = scheduledMeetService.findScheduledMeetById(meetId);
         scheduledMeet.setInviteeName(inviteeName);
         scheduledMeet.setInviteeEmail(inviteeEmail);
         scheduledMeet.setDescription(description);
 
-        LocalTime startTime = LocalTime.of(startHour, startMinute);
-        LocalTime endTime = LocalTime.of(endHour, endMinute);
-
-        // Create a Calendar instance and set year, month, and day
-        Calendar calendar = Calendar.getInstance();
-        calendar.set(Calendar.YEAR, year);
-        calendar.set(Calendar.MONTH, month - 1); // Month is 0-indexed in Calendar
-        calendar.set(Calendar.DAY_OF_MONTH, day);
-
-        // Convert Calendar to Date
-        Date customDate = calendar.getTime();
-
-        scheduledMeet.setStartTime(startTime);
-        scheduledMeet.setEndTime(endTime);
-        scheduledMeet.setDate(customDate);
-        Event event = eventService.findEvent(eventId);
-        scheduledMeet.setEvent(event);
-        scheduledMeet.setHost(event.getHost());
         scheduledMeetService.saveScheduledMeet(scheduledMeet);
 
         model.addAttribute("email",inviteeEmail);
