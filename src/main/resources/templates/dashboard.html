@@ -501,22 +501,28 @@ font-size: large;
 
     <script>
     function copyToClipboard(eventId) {
-        var link = 'http://localhost:8080/scheduled-meet/' + eventId;
+    // Get the current date in the format 'yyyy-MM-dd'
+    var currentDate = new Date().toISOString().split('T')[0];
 
-        // Create a temporary input element
-        var tempInput = document.createElement('input');
-        tempInput.value = link;
-        document.body.appendChild(tempInput);
+    // Build the link with the specified format
+    var link = 'http://localhost:8080/select-timeslot?selectedDate=' + currentDate + '&eventId=' + eventId;
 
-        // Select the input text
-        tempInput.select();
-        document.execCommand('copy');
+    // Create a temporary input element
+    var tempInput = document.createElement('input');
+    tempInput.value = link;
+    document.body.appendChild(tempInput);
 
-        // Remove the temporary input
-        document.body.removeChild(tempInput);
+    // Select the input text
+    tempInput.select();
+    document.execCommand('copy');
 
-        alert('Link copied to clipboard: ' + link);
-    }
+    // Remove the temporary input
+    document.body.removeChild(tempInput);
+
+    // Show an alert indicating that the link has been copied to the clipboard
+    alert('Link copied to clipboard: ' + link);
+}
+
 
     function changeDiv(){
       console.log('hello');
