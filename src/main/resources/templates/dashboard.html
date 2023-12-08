@@ -505,7 +505,7 @@ font-size: large;
     var currentDate = new Date().toISOString().split('T')[0];
 
     // Build the link with the specified format
-    var link = 'http://localhost:8080/select-timeslot?selectedDate=' + currentDate + '&eventId=' + eventId;
+    var link = 'http://localhost:8080/select-timeslot?selectedDate=' + currentDate + '&eventId=' + eventId + '&date=' + currentDate;
 
     // Create a temporary input element
     var tempInput = document.createElement('input');

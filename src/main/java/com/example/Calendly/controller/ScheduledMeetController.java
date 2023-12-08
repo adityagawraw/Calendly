@@ -33,20 +33,36 @@ public class ScheduledMeetController {
 
     @GetMapping("/select-timeslot")
     public String showCalendar(Model model,@RequestParam("eventId") long eventId,
-                               @RequestParam(value = "selectedDate",defaultValue = "") LocalDate selectedDate
+                               @RequestParam(value = "selectedDate",defaultValue = "") LocalDate selectedDate,
+                               @RequestParam(value = "date") LocalDate currentDate
                                ) {
-        List<List<LocalDate>> daysInMonth = eventService.getDaysInMonth(LocalDate.now());
+        List<List<LocalDate>> daysInMonth = eventService.getDaysInMonth(currentDate);
+        List<TimeSlot> timeSlots = eventService.findAvailableSlot(selectedDate, eventId);
+
         model.addAttribute("event", eventService.findEvent(eventId));
         model.addAttribute("daysInMonth", daysInMonth);
         model.addAttribute("eventId", eventId);
         model.addAttribute("selectedDate", selectedDate);
-
-
-
-        List<TimeSlot> timeSlots = eventService.findAvailableSlot(selectedDate, eventId);
+        model.addAttribute("date", currentDate);
         model.addAttribute("timeslots", timeSlots);
 
         return "select-timeslot";
+    }
+
+    @GetMapping("/nextMonth")
+    public String nextMonth(@RequestParam("eventId") long eventId,
+                            @RequestParam("selectedDate") LocalDate selectedDate,
+                            @RequestParam(value = "date") LocalDate currentDate){
+        return "redirect:/select-timeslot?selectedDate="+selectedDate+"&eventId="+eventId+"&date="
+                +currentDate.plusMonths(1);
+    }
+
+    @GetMapping("/previousMonth")
+    public String previousMonth(@RequestParam("eventId") long eventId,
+                                @RequestParam("selectedDate") LocalDate selectedDate,
+                                @RequestParam(value = "date") LocalDate currentDate){
+        return "redirect:/select-timeslot?selectedDate="+selectedDate+"&eventId="+eventId+"&date="
+                +currentDate.minusMonths(1);
     }
 
     @GetMapping("/date")
@@ -94,6 +110,7 @@ public class ScheduledMeetController {
                                 @RequestParam("eventId") long eventId) {
         Event event = eventService.findEvent(eventId);
         String host = event.getHost().getName();
+        ScheduledMeet meet = scheduledMeetService.findScheduledMeetById(meetId);
 
         model.addAttribute("event", event);
         model.addAttribute("host", host);
