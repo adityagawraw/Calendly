@@ -43,7 +43,7 @@ public class ScheduledMeetController {
     @GetMapping("/date")
     public String handleDate(@RequestParam("selectedDate") LocalDate selectedDate) {
         // Handle the date logic here
-        System.out.println("Selected date: " + selectedDate);
+//        System.out.println("Selected date: " + selectedDate);
         return "redirect:/select-timeslot";
     }
     @PostMapping("/schedule-meet")
