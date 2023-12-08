@@ -13,11 +13,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.time.YearMonth;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -56,6 +53,37 @@ public class ScheduledMeetController {
                              @RequestParam("selectedDate") LocalDate selectedDate) {
 
         return "redirect:/select-timeslot?selectedDate="+selectedDate+"&eventId="+eventId;
+    }
+
+    @PostMapping("/create-meet")
+    public String createMeet(@RequestParam("startHour") int startHour,
+                             @RequestParam("startMinute") int startMinute,
+                             @RequestParam("endHour") int endHour,
+                             @RequestParam("endMinute") int endMinute,
+                             @RequestParam("selectedDate") LocalDate selectedDate,
+                             @RequestParam("eventId") long eventId){
+        ScheduledMeet scheduledMeet = new ScheduledMeet();
+
+        LocalTime startTime = LocalTime.of(startHour, startMinute);
+        LocalTime endTime = LocalTime.of(endHour, endMinute);
+
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(Calendar.YEAR, selectedDate.getYear());
+        calendar.set(Calendar.MONTH, selectedDate.getMonth().getValue() - 1); // Month is 0-indexed in Calendar
+        calendar.set(Calendar.DAY_OF_MONTH, selectedDate.getDayOfMonth());
+
+        Event event = eventService.findEvent(eventId);
+        scheduledMeet.setEvent(event);
+
+        Date customDate = calendar.getTime();
+
+        scheduledMeet.setStartTime(startTime);
+        scheduledMeet.setEndTime(endTime);
+        scheduledMeet.setHost(event.getHost());
+
+        scheduledMeetService.saveScheduledMeet(scheduledMeet);
+        System.out.println("mmet id "+scheduledMeet.getId());
+        return "";
     }
     @PostMapping("/schedule-meet")
     public String createScheduledMeet(
@@ -119,4 +147,10 @@ public class ScheduledMeetController {
         return "scheduled-meets";
     }
 
+
+    @GetMapping("/deleteSchedule")
+    public String deleteSchedule(@RequestParam("id") long eventId) {
+        scheduledMeetService.deleteSchedule(eventId);
+        return "redirect:/dashboard";
+    }
 }

@@ -70,7 +70,15 @@
     <div>
         <div><span>Sunday</span><span>, </span> <span th:text="${selectedDate}"></span></div>
         <div id="timeSlots">
-            <button th:each="timeslot : ${timeslots}" th:text="${timeslot.startHour+' : '+timeslot.startMinute}"></button>
+            <form th:action="@{/create-meet}" th:each="timeslot : ${timeslots}" method="post" >
+                <input type="hidden" th:name="startHour" th:value="${timeslot.startHour}">
+                <input type="hidden" th:name="startMinute" th:value="${timeslot.startMinute}">
+                <input type="hidden" th:name="endHour" th:value="${timeslot.endHour}">
+                <input type="hidden" th:name="endMinute" th:value="${timeslot.endMinute}">
+                <input type="hidden" th:name="selectedDate" th:value="${selectedDate}">
+                <input type="hidden" th:name="eventId" th:value="${eventId}">
+                <button th:type="submit" th:text="${timeslot.startHour+' : '+timeslot.startMinute}"></button>
+            </form>
 
         </div>
     </div>

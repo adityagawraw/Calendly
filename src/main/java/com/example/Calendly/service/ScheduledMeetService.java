@@ -22,8 +22,10 @@ public class ScheduledMeetService{
         this.scheduledMeetRepository = scheduledMeetRepository;
         this.userRepository = userRepository;
     }
-    public void saveScheduledMeet(ScheduledMeet scheduledMeet) {
+    public long saveScheduledMeet(ScheduledMeet scheduledMeet) {
         scheduledMeetRepository.save(scheduledMeet);
+
+        return  scheduledMeet.getId();
     }
 
     public List<ScheduledMeet> findAllScheduledMeets() {
@@ -42,5 +44,9 @@ public class ScheduledMeetService{
     public List<ScheduledMeet> findAvailableTimeSlots(Date date) {
         List<ScheduledMeet> scheduledMeets = scheduledMeetRepository.findScheduledMeetByDate(date);
         return scheduledMeets;
+    }
+
+    public void deleteSchedule(long eventId) {
+        scheduledMeetRepository.deleteById(eventId);
     }
 }
