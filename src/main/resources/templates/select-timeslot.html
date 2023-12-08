@@ -18,9 +18,9 @@
 
     <div id="event-details">
         <h2 id="hostName">Host's Name</h2>
-        <h1>Meet Title</h1>
+        <h1 th:text="${event.title}">Meet Title</h1>
         <div>
-            <p class="meetinfo">45 min</p>
+            <span class="meetinfo" th:text="${event.duration}"></span> <span> min</span>
         </div>
         <div>
             <p class="meetinfo">11:30am - 12:15pm, Friday, December 8, 2023</p>
@@ -28,7 +28,7 @@
         <div>
             <p class="meetinfo">India Standard Time</p>
         </div>
-        <p>
+        <p th:text="${event.description}">
             I take interviews here Description
         </p>
     </div>
@@ -55,9 +55,10 @@
             <tbody>
             <tr th:each="week : ${daysInMonth}">
                 <td th:each="day : ${week}" >
-                    <form th:action="@{'/calendar/date'}" method="get">
-                        <button class="days" type="submit" th:name="selectedDate" th:value="${day}"
-                        th:disabled="${day == null}" style="display: ${day == null ? 'none' : 'inline-block'};">
+                    <form th:action="@{'/date'}" method="get">
+                        <input type="hidden" th:name="eventId" th:value="${eventId}">
+                        <input type="hidden" th:name="selectedDate" th:value="${day}">
+                        <button class="days" type="submit" th:disabled="${day == null}" style="display: ${day == null ? 'none' : 'inline-block'};">
                             <span th:text="${#temporals.format(day, 'dd')}"></span>
                         </button>
                     </form>
@@ -67,12 +68,10 @@
         </table>
     </div>
     <div>
-        <div><span>Sunday</span><span>, </span> <span>December 10</span></div>
+        <div><span>Sunday</span><span>, </span> <span th:text="${selectedDate}"></span></div>
         <div id="timeSlots">
-            <button>9:00 am</button>
-            <button>9:00 am</button>
-            <button>9:00 am</button>
-            <button>9:00 am</button>
+            <button th:each="timeslot : ${timeslots}" th:text="${timeslot.startHour+' : '+timeslot.startMinute}"></button>
+
         </div>
     </div>
 </section>

@@ -6,8 +6,10 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
+import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.time.YearMonth;
 import java.util.*;
 
 @Service
@@ -176,15 +178,15 @@ public class EventService {
         calendar.set(Calendar.DAY_OF_MONTH, date.getDayOfMonth());
 
         int dayOfWeek = calendar.get(Calendar.DAY_OF_WEEK);
-
+        System.out.println(dayOfWeek);
         Map<Integer, String> days = new HashMap<>();
-        days.put(1, "SUNDAY");
-        days.put(2, "MONDAY");
-        days.put(3, "TUESDAY");
-        days.put(4, "WEDNESDAY");
-        days.put(5, "THURSDAY");
-        days.put(6, "FRIDAY");
-        days.put(7, "SATURDAY");
+        days.put(3, "SUNDAY");
+        days.put(4, "MONDAY");
+        days.put(5, "TUESDAY");
+        days.put(6, "WEDNESDAY");
+        days.put(7, "THURSDAY");
+        days.put(1, "FRIDAY");
+        days.put(2, "SATURDAY");
 
         // Convert Calendar to Date
         Date customDate = calendar.getTime();
@@ -206,5 +208,42 @@ public class EventService {
         }
 
         return timeslots;
+    }
+    public List<List<LocalDate>> getDaysInMonth(LocalDate date) {
+        List<List<LocalDate>> daysInMonth = new ArrayList<>();
+        YearMonth yearMonth = YearMonth.from(date);
+        int days = yearMonth.lengthOfMonth();
+
+        // Start with the first day of the month
+        LocalDate firstDayOfMonth = LocalDate.of(yearMonth.getYear(), yearMonth.getMonth(), 1);
+
+        // Initialize the list for the current week
+        List<LocalDate> currentWeek = new ArrayList<>();
+
+        // Add empty cells for the days before the first day of the month
+        for (int i = 1; i < firstDayOfMonth.getDayOfWeek().getValue(); i++) {
+            currentWeek.add(null);
+        }
+
+        // Iterate through the days of the month
+        for (int day = 1; day <= days; day++) {
+            currentWeek.add(LocalDate.of(yearMonth.getYear(), yearMonth.getMonth(), day));
+
+            // If we reach the end of the week, start a new week
+            if (currentWeek.size() == DayOfWeek.values().length) {
+                daysInMonth.add(currentWeek);
+                currentWeek = new ArrayList<>();
+            }
+        }
+
+        // Add empty cells for the days after the last day of the month
+        while (currentWeek.size() < DayOfWeek.values().length) {
+            currentWeek.add(null);
+        }
+
+        // Add the last week to the list
+        daysInMonth.add(currentWeek);
+
+        return daysInMonth;
     }
 }

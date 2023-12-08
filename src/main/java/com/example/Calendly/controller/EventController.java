@@ -20,8 +20,6 @@ import java.time.LocalTime;
 import java.util.*;
 import java.time.Duration;
 
-
-
 @Controller
 public class EventController {
     private final EventService eventService;
