@@ -73,6 +73,11 @@
 
         <button type="submit">Register</button>
     </form>
+    <br>
+    <br>
+    <form th:action="@{/}" method="get">
+        <button type="submit">Home</button>
+    </form>
     <th:block th:if="${emailExists}">
         <p style="color: red; text-align: center;">Email id already exists. Kindly sign in.</p>
     </th:block>

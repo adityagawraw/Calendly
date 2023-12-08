@@ -445,9 +445,14 @@ font-size: large;
             margin-bottom: 20px;
         }
 
-
-
-
+  .confirmation-button {
+    display: inline-block;
+    padding: 10px 20px;
+    border-radius: 20px;
+    background-color: blue;
+    color: white;
+    text-decoration: none;
+  }
 
 
     </style>
@@ -517,10 +522,10 @@ font-size: large;
                 <h2>Invitee: <span th:text="${schedule.inviteeName}"></span></h2>
                 <p th:text="${schedule.inviteeEmail}"/>
                 <p th:text="${schedule.startTime + ' - ' + schedule.endTime}"></p>
-                <p th:text="${schedule.description}"/>
                 <p th:text="${schedule.event.location}"/>
+                <p th:text="${schedule.description}"/>
                 <a th:href="'mailto:' + ${schedule.inviteeEmail} + '?subject=Meeting%20Confirmation&body=Dear%20User,%0A%0AYour%20meeting%20has%20been%20confirmed.%0A%0A' + (${schedule.event.location == 'Zoom' ? 'Please find the below Zoom invite:   Zoom Invite Link: https://us05web.zoom.us/j/4497348515   Passcode: edZEj4' : schedule.event.location == 'Google meet' ? 'Please find the below Google meet invite:   Meet Invite Link: https://meet.google.com/wat-ptvv-tqg' : ''}) + '%0A%0ABest%20regards,%0AYour%20Application'"
-                   target="_blank">Send Confirmation Email</a>
+                   target="_blank" class="confirmation-button">Send Confirmation Email</a>
             </div>
         </div>
     </div>
@@ -560,7 +565,6 @@ font-size: large;
        document.querySelector('.main-2').classList.add('hide');
        document.querySelector('.main').classList.remove('hide');
     }
-
 
 
     </script>
