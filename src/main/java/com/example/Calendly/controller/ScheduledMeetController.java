@@ -34,18 +34,28 @@ public class ScheduledMeetController {
     }
 
     @GetMapping("select-timeslot")
-    public String showCalendar(Model model) {
-        List<List<LocalDate>> daysInMonth = getDaysInMonth(LocalDate.now());
+    public String showCalendar(Model model,@RequestParam("eventId") long eventId,
+                               @RequestParam(value = "selectedDate",defaultValue = "") LocalDate selectedDate
+                               ) {
+        List<List<LocalDate>> daysInMonth = eventService.getDaysInMonth(LocalDate.now());
+        model.addAttribute("event", eventService.findEvent(eventId));
         model.addAttribute("daysInMonth", daysInMonth);
-        List<TimeSlot> list = eventService.findAvailableSlot()
+        model.addAttribute("eventId", eventId);
+        model.addAttribute("selectedDate", selectedDate);
+
+
+
+        List<TimeSlot> timeSlots = eventService.findAvailableSlot(selectedDate, eventId);
+        model.addAttribute("timeslots", timeSlots);
+
         return "select-timeslot";
     }
 
     @GetMapping("/date")
-    public String handleDate(@RequestParam("selectedDate") LocalDate selectedDate) {
+    public String handleDate(@RequestParam("eventId") long eventId,
+                             @RequestParam("selectedDate") LocalDate selectedDate) {
         // Handle the date logic here
-        System.out.println("Selected date: " + selectedDate);
-        return "redirect:/select-timeslot?selectedDate="+selectedDate;
+        return "redirect:/select-timeslot?selectedDate="+selectedDate+"&eventId="+eventId;
     }
     @PostMapping("/schedule-meet")
     public String createScheduledMeet(
@@ -108,41 +118,5 @@ public class ScheduledMeetController {
         model.addAttribute("scheduledMeets", scheduledMeets);
         return "scheduled-meets";
     }
-    private List<List<LocalDate>> getDaysInMonth(LocalDate date) {
-        List<List<LocalDate>> daysInMonth = new ArrayList<>();
-        YearMonth yearMonth = YearMonth.from(date);
-        int days = yearMonth.lengthOfMonth();
 
-        // Start with the first day of the month
-        LocalDate firstDayOfMonth = LocalDate.of(yearMonth.getYear(), yearMonth.getMonth(), 1);
-
-        // Initialize the list for the current week
-        List<LocalDate> currentWeek = new ArrayList<>();
-
-        // Add empty cells for the days before the first day of the month
-        for (int i = 1; i < firstDayOfMonth.getDayOfWeek().getValue(); i++) {
-            currentWeek.add(null);
-        }
-
-        // Iterate through the days of the month
-        for (int day = 1; day <= days; day++) {
-            currentWeek.add(LocalDate.of(yearMonth.getYear(), yearMonth.getMonth(), day));
-
-            // If we reach the end of the week, start a new week
-            if (currentWeek.size() == DayOfWeek.values().length) {
-                daysInMonth.add(currentWeek);
-                currentWeek = new ArrayList<>();
-            }
-        }
-
-        // Add empty cells for the days after the last day of the month
-        while (currentWeek.size() < DayOfWeek.values().length) {
-            currentWeek.add(null);
-        }
-
-        // Add the last week to the list
-        daysInMonth.add(currentWeek);
-
-        return daysInMonth;
-    }
 }
