@@ -189,7 +189,6 @@ public class EventController {
 
         return "redirect:/dashboard";
     }
-
     // TimeSlot work in project
 
 }

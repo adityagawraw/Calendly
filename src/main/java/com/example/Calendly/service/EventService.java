@@ -102,10 +102,6 @@ public class EventService {
 
             List<Availability> availabilities = event.getAvailableHoursByDays();
 
-//            for (Availability availability : availabilities) {
-//                availabilityRepository.delete(availability);
-//            }
-
             availabilityRepository.deleteByEventId(eventId);
 
             for (String day : selectedDays) {
