@@ -13,11 +13,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.time.YearMonth;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -119,4 +116,10 @@ public class ScheduledMeetController {
         return "scheduled-meets";
     }
 
+
+    @GetMapping("/deleteSchedule")
+    public String deleteSchedule(@RequestParam("id") long eventId) {
+        scheduledMeetService.deleteSchedule(eventId);
+        return "redirect:/dashboard";
+    }
 }

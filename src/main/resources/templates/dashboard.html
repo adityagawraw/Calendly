@@ -479,6 +479,12 @@ font-size: large;
     <div class="main-2 hide">
         <div id="schedule-container">
             <div id="schedule" th:each="schedule: ${scheduledMeets}" class="schedule-block">
+                <div>
+                    <form th:action="@{/deleteSchedule}" method="get">
+                        <input type="hidden" name="id" th:value="${schedule.id}" />
+                        <button type="submit" class="delete-btn">Delete</button>
+                    </form>
+                </div>
                 <h1>Event Name: <span th:text="${schedule.event.title}"></span></h1>
                 <h2>Invitee: <span th:text="${schedule.inviteeName}"></span></h2>
                 <p th:text="${schedule.inviteeEmail}"/>
@@ -490,7 +496,7 @@ font-size: large;
             </div>
         </div>
     </div>
-    <!-- Add the script for copy-to-clipboard functionality -->
+
     <script>
     function copyToClipboard(eventId) {
         var link = 'http://localhost:8080/scheduled-meet/' + eventId;

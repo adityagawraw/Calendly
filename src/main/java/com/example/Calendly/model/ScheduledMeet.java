@@ -44,7 +44,7 @@ public class ScheduledMeet {
     @JoinColumn(name = "user_id")
     private User host;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = {CascadeType.MERGE,CascadeType.DETACH,CascadeType.PERSIST,CascadeType.REFRESH})
     @JoinColumn(name = "event_id")
     private Event event;
 

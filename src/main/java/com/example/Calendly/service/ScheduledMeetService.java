@@ -43,4 +43,8 @@ public class ScheduledMeetService{
         List<ScheduledMeet> scheduledMeets = scheduledMeetRepository.findScheduledMeetByDate(date);
         return scheduledMeets;
     }
+
+    public void deleteSchedule(long eventId) {
+        scheduledMeetRepository.deleteById(eventId);
+    }
 }
