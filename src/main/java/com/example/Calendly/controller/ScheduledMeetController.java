@@ -30,7 +30,7 @@ public class ScheduledMeetController {
         this.eventService = eventService;
     }
 
-    @GetMapping("select-timeslot")
+    @GetMapping("/select-timeslot")
     public String showCalendar(Model model,@RequestParam("eventId") long eventId,
                                @RequestParam(value = "selectedDate",defaultValue = "") LocalDate selectedDate
                                ) {
@@ -51,47 +51,68 @@ public class ScheduledMeetController {
     @GetMapping("/date")
     public String handleDate(@RequestParam("eventId") long eventId,
                              @RequestParam("selectedDate") LocalDate selectedDate) {
-        // Handle the date logic here
+
         return "redirect:/select-timeslot?selectedDate="+selectedDate+"&eventId="+eventId;
     }
-    @PostMapping("/schedule-meet")
-    public String createScheduledMeet(
-                                      @RequestParam("inviteeName") String inviteeName,
-                                      @RequestParam("inviteeEmail") String inviteeEmail,
-                                      @RequestParam("startHour") int startHour,
-                                      @RequestParam("startMinute") int startMinute,
-                                      @RequestParam("endHour") int endHour,
-                                      @RequestParam("endMinute") int endMinute,
-                                      @RequestParam("year") int year,
-                                      @RequestParam("month") int month,
-                                      @RequestParam("day") int day,
-                                      @RequestParam("eventId") long eventId,
-                                      @RequestParam("description") String description,
-                                      Model model) {
 
+    @PostMapping("/create-meet")
+    public String createMeet(@RequestParam("startHour") int startHour,
+                             @RequestParam("startMinute") int startMinute,
+                             @RequestParam("endHour") int endHour,
+                             @RequestParam("endMinute") int endMinute,
+                             @RequestParam("selectedDate") LocalDate selectedDate,
+                             @RequestParam("eventId") long eventId){
         ScheduledMeet scheduledMeet = new ScheduledMeet();
-        scheduledMeet.setInviteeName(inviteeName);
-        scheduledMeet.setInviteeEmail(inviteeEmail);
-        scheduledMeet.setDescription(description);
 
         LocalTime startTime = LocalTime.of(startHour, startMinute);
         LocalTime endTime = LocalTime.of(endHour, endMinute);
 
-        // Create a Calendar instance and set year, month, and day
         Calendar calendar = Calendar.getInstance();
-        calendar.set(Calendar.YEAR, year);
-        calendar.set(Calendar.MONTH, month - 1); // Month is 0-indexed in Calendar
-        calendar.set(Calendar.DAY_OF_MONTH, day);
+        calendar.set(Calendar.YEAR, selectedDate.getYear());
+        calendar.set(Calendar.MONTH, selectedDate.getMonth().getValue() - 1); // Month is 0-indexed in Calendar
+        calendar.set(Calendar.DAY_OF_MONTH, selectedDate.getDayOfMonth());
 
-        // Convert Calendar to Date
+        Event event = eventService.findEvent(eventId);
+        scheduledMeet.setEvent(event);
+
         Date customDate = calendar.getTime();
 
         scheduledMeet.setStartTime(startTime);
         scheduledMeet.setEndTime(endTime);
-        scheduledMeet.setDate(customDate);
-        Event event = eventService.findEvent(eventId);
-        scheduledMeet.setEvent(event);
         scheduledMeet.setHost(event.getHost());
+
+        scheduledMeetService.saveScheduledMeet(scheduledMeet);
+
+        return "redirect:/schedule-meet?meetId="+scheduledMeet.getId()+"&eventId="+eventId;
+    }
+
+    @GetMapping("/schedule-meet")
+    public String scheduledMeet(Model model,
+                                @RequestParam("meetId") long meetId,
+                                @RequestParam("eventId") long eventId) {
+        Event event = eventService.findEvent(eventId);
+        String host = event.getHost().getName();
+
+        model.addAttribute("event", event);
+        model.addAttribute("host", host);
+        model.addAttribute("meetId", meetId);
+        model.addAttribute("scheduledMeet", scheduledMeetService.findScheduledMeetById(meetId));
+
+        return "schedule-meeting";
+    }
+    @PostMapping("/save-schedule-meet")
+    public String saveScheduledMeet(
+                                      @RequestParam("inviteeName") String inviteeName,
+                                      @RequestParam("inviteeEmail") String inviteeEmail,
+                                      @RequestParam("meetId") long meetId,
+                                      @RequestParam("description") String description,
+                                      Model model) {
+
+        ScheduledMeet scheduledMeet = scheduledMeetService.findScheduledMeetById(meetId);
+        scheduledMeet.setInviteeName(inviteeName);
+        scheduledMeet.setInviteeEmail(inviteeEmail);
+        scheduledMeet.setDescription(description);
+
         scheduledMeetService.saveScheduledMeet(scheduledMeet);
 
         model.addAttribute("email",inviteeEmail);
@@ -99,15 +120,7 @@ public class ScheduledMeetController {
         return "/scheduled-success";
     }
 
-    @GetMapping("/scheduled-meet/{eventId}")
-    public String scheduledMeet(Model model, @PathVariable("eventId") long eventId) {
-        Event event = eventService.findEvent(eventId);
-        String host = event.getHost().getName();
 
-        model.addAttribute("event", event);
-        model.addAttribute("host", host);
-        return "schedule-meeting";
-    }
 
     @GetMapping("/scheduledMeets")
     public String findAllScheduledMeets(Model model) {
