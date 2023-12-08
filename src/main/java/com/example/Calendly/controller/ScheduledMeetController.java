@@ -33,7 +33,7 @@ public class ScheduledMeetController {
         this.eventService = eventService;
     }
 
-    @GetMapping("select-timeslot")
+    @GetMapping("/select-timeslot")
     public String showCalendar(Model model,@RequestParam("eventId") long eventId,
                                @RequestParam(value = "selectedDate",defaultValue = "") LocalDate selectedDate
                                ) {
@@ -56,6 +56,37 @@ public class ScheduledMeetController {
                              @RequestParam("selectedDate") LocalDate selectedDate) {
         // Handle the date logic here
         return "redirect:/select-timeslot?selectedDate="+selectedDate+"&eventId="+eventId;
+    }
+
+    @PostMapping("/create-meet")
+    public String createMeet(@RequestParam("startHour") int startHour,
+                             @RequestParam("startMinute") int startMinute,
+                             @RequestParam("endHour") int endHour,
+                             @RequestParam("endMinute") int endMinute,
+                             @RequestParam("selectedDate") LocalDate selectedDate,
+                             @RequestParam("eventId") long eventId){
+        ScheduledMeet scheduledMeet = new ScheduledMeet();
+
+        LocalTime startTime = LocalTime.of(startHour, startMinute);
+        LocalTime endTime = LocalTime.of(endHour, endMinute);
+
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(Calendar.YEAR, selectedDate.getYear());
+        calendar.set(Calendar.MONTH, selectedDate.getMonth().getValue() - 1); // Month is 0-indexed in Calendar
+        calendar.set(Calendar.DAY_OF_MONTH, selectedDate.getDayOfMonth());
+
+        Event event = eventService.findEvent(eventId);
+        scheduledMeet.setEvent(event);
+
+        Date customDate = calendar.getTime();
+
+        scheduledMeet.setStartTime(startTime);
+        scheduledMeet.setEndTime(endTime);
+        scheduledMeet.setHost(event.getHost());
+
+        scheduledMeetService.saveScheduledMeet(scheduledMeet);
+        System.out.println("mmet id "+scheduledMeet.getId());
+        return "";
     }
     @PostMapping("/schedule-meet")
     public String createScheduledMeet(

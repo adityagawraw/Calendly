@@ -22,8 +22,10 @@ public class ScheduledMeetService{
         this.scheduledMeetRepository = scheduledMeetRepository;
         this.userRepository = userRepository;
     }
-    public void saveScheduledMeet(ScheduledMeet scheduledMeet) {
+    public long saveScheduledMeet(ScheduledMeet scheduledMeet) {
         scheduledMeetRepository.save(scheduledMeet);
+
+        return  scheduledMeet.getId();
     }
 
     public List<ScheduledMeet> findAllScheduledMeets() {
