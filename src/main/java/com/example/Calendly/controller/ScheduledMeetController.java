@@ -2,6 +2,7 @@ package com.example.Calendly.controller;
 
 import com.example.Calendly.model.Event;
 import com.example.Calendly.model.ScheduledMeet;
+import com.example.Calendly.model.TimeSlot;
 import com.example.Calendly.service.EventService;
 import com.example.Calendly.service.ScheduledMeetService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,7 +37,7 @@ public class ScheduledMeetController {
     public String showCalendar(Model model) {
         List<List<LocalDate>> daysInMonth = getDaysInMonth(LocalDate.now());
         model.addAttribute("daysInMonth", daysInMonth);
-
+        List<TimeSlot> list = eventService.findAvailableSlot()
         return "select-timeslot";
     }
 
@@ -44,7 +45,7 @@ public class ScheduledMeetController {
     public String handleDate(@RequestParam("selectedDate") LocalDate selectedDate) {
         // Handle the date logic here
         System.out.println("Selected date: " + selectedDate);
-        return "redirect:/select-timeslot";
+        return "redirect:/select-timeslot?selectedDate="+selectedDate;
     }
     @PostMapping("/schedule-meet")
     public String createScheduledMeet(
