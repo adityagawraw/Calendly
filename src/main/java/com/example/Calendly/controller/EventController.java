@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.*;
 import java.time.Duration;
@@ -195,55 +196,5 @@ public class EventController {
     }
 
     // TimeSlot work in project
-    @GetMapping("/timeslot")
-    public String findAvailableSlot(
-            Model model,
-            @RequestParam("year") int year,
-            @RequestParam("month") int month,
-            @RequestParam("day") int day,
-            @RequestParam("eventId") long eventId
 
-    ) {
-        Calendar calendar = Calendar.getInstance();
-        calendar.set(Calendar.YEAR, year);
-        calendar.set(Calendar.MONTH, month); // Month is 0-indexed in Calendar
-        calendar.set(Calendar.DAY_OF_MONTH, day);
-
-        int dayOfWeek = calendar.get(Calendar.DAY_OF_WEEK);
-
-        Map<Integer, String> days = new HashMap<>();
-        days.put(1, "SUNDAY");
-        days.put(2, "MONDAY");
-        days.put(3, "TUESDAY");
-        days.put(4, "WEDNESDAY");
-        days.put(5, "THURSDAY");
-        days.put(6, "FRIDAY");
-        days.put(7, "SATURDAY");
-
-        // Convert Calendar to Date
-        Date customDate = calendar.getTime();
-        List<ScheduledMeet> scheduledMeets = scheduledMeetService.findAvailableTimeSlots(customDate);
-        Availability availability = availabilityService.findAvailabilityByDayOfWeekAndEvent(days.get(dayOfWeek), eventId);
-
-        List<TimeSlot> timeslots = new ArrayList<>();
-        int duration = eventService.findEvent(eventId).getDuration();
-
-        LocalTime startTime = availability.getStartTime();
-        LocalTime endTime = availability.getEndTime();
-        LocalTime meetStartTime = startTime;
-        LocalTime meetEndTime = meetStartTime.plusMinutes(duration);
-
-        while (meetEndTime.isBefore(endTime)) {
-            timeslots.add(new TimeSlot(meetStartTime, meetEndTime));
-            meetStartTime = meetEndTime;
-            meetEndTime = meetEndTime.plusMinutes(duration);
-        }
-
-        System.out.println(timeslots);
-        model.addAttribute("scheduledMeets", scheduledMeets);
-        model.addAttribute("availability", availability);
-        model.addAttribute("timeSlots", timeslots);
-
-        return "trying";
-    }
 }

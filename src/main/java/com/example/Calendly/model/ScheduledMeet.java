@@ -115,6 +115,14 @@ public class ScheduledMeet {
         this.event = event;
     }
 
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
     public List<MeetQuestionAnswer> getMeetQuestionAnswers() {
         return meetQuestionAnswers;
     }
