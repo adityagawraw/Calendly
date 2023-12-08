@@ -18,15 +18,9 @@
 
     <div id="event-details">
         <h2 id="hostName">Host's Name</h2>
-        <h1 th:text="${event.title}">Meet Title</h1>
+        <h1 th:text="${event.title}"></h1>
         <div>
-            <span class="meetinfo" th:text="${event.duration}"></span> <span> min</span>
-        </div>
-        <div>
-            <p class="meetinfo">11:30am - 12:15pm, Friday, December 8, 2023</p>
-        </div>
-        <div>
-            <p class="meetinfo">India Standard Time</p>
+            <span th:text="${event.duration}"></span> <span> min</span>
         </div>
         <p th:text="${event.description}">
             I take interviews here Description

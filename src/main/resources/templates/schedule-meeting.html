@@ -10,21 +10,25 @@
 <section>
     <div id="meetDetails">
 
-        <h1 id="hostName">Host name: <span th:text="${host}"></span></h1>
+        <h1 id="hostName"><span th:text="${host}"></span></h1>
 
-        <h1>Event Title: <span th:text="${event.title}"></span></h1>
+        <h1><span th:text="${event.title}"></span></h1>
 
         <div>
-            <p class="meetinfo">45 min</p>
+            <span class="meetinfo" th:text="${event.duration}"></span>
+            <span class="meetinfo">  min</span>
         </div>
         <div>
-            <p class="meetinfo">11:30am - 12:15pm, Friday, December 8, 2023</p>
+            <span class="meetinfo" th:text="${scheduledMeet.startTime}"></span>
+            <span class="meetinfo"> - </span>
+            <span class="meetinfo" th:text="${scheduledMeet.endTime}"></span>
+            <span class="meetinfo">, </span>
+            <span class="meetinfo" th:text="${scheduledMeet.date}"></span>
         </div>
         <div>
             <p class="meetinfo">India Standard Time</p>
         </div>
         <p th:text="${event.description}">
-            I take interviews here Description
         </p>
     </div>
     <div id="inviteesDetails">
@@ -32,11 +36,11 @@
         <form th:action="@{/save-schedule-meet}" method="post" th:object="${event}">
             <div class="inputFields">
                 <p>Name *</p>
-                <input type="text" th:name="inviteeName">
+                <input type="text" th:name="inviteeName" required>
             </div>
             <div class="inputFields">
                 <p>Email *</p>
-                <input type="text" th:name="inviteeEmail">
+                <input type="text" th:name="inviteeEmail" required>
             </div>
             <div class="inputFields">
                 <p>Please share anything that will help prepare for our meeting.</p>
