@@ -174,7 +174,7 @@ public class EventService {
         calendar.set(Calendar.DAY_OF_MONTH, date.getDayOfMonth());
 
         int dayOfWeek = calendar.get(Calendar.DAY_OF_WEEK);
-        System.out.println(dayOfWeek);
+
         Map<Integer, String> days = new HashMap<>();
         days.put(3, "SUNDAY");
         days.put(4, "MONDAY");
@@ -186,13 +186,16 @@ public class EventService {
 
         // Convert Calendar to Date
         Date customDate = calendar.getTime();
-        long userId = eventRepository.findById(eventId).get().getHost().getId();
+        Event event = eventRepository.findById(eventId).get();
+        long userId = event.getHost().getId();
         List<ScheduledMeet> scheduledMeets = scheduledMeetRepository.findMeetByHostAndDate(userId, customDate);
+        List<ScheduledMeet> scheduledMeetsOfEvent = scheduledMeetRepository.findMeetByEventAndDate(eventId, customDate);
+
         Availability availability = availabilityService.findAvailabilityByDayOfWeekAndEvent(days.get(dayOfWeek), eventId);
 
         List<TimeSlot> timeslots = new ArrayList<>();
 
-        if(availability==null){
+        if(availability==null || scheduledMeetsOfEvent.size()>=event.getLimitPerDay()){
             return timeslots;
         }
 

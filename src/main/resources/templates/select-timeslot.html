@@ -81,9 +81,8 @@
                 <input type="hidden" th:name="endMinute" th:value="${timeslot.endMinute}">
                 <input type="hidden" th:name="selectedDate" th:value="${selectedDate}">
                 <input type="hidden" th:name="eventId" th:value="${eventId}">
-                <button th:type="submit" th:text="${timeslot.startTime + '-' + timeslot.endTime}"></button>
+                <button th:type="submit" th:text="${timeslot.startTime + ' - ' + timeslot.endTime}"></button>
             </form>
-
         </div>
     </div>
 </section>
