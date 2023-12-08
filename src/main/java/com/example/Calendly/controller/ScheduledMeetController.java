@@ -51,7 +51,7 @@ public class ScheduledMeetController {
     @GetMapping("/date")
     public String handleDate(@RequestParam("eventId") long eventId,
                              @RequestParam("selectedDate") LocalDate selectedDate) {
-        // Handle the date logic here
+
         return "redirect:/select-timeslot?selectedDate="+selectedDate+"&eventId="+eventId;
     }
 

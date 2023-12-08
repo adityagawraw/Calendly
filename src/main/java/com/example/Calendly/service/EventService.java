@@ -1,10 +1,7 @@
 package com.example.Calendly.service;
 
 import com.example.Calendly.model.*;
-import com.example.Calendly.repository.AvailabilityRepository;
-import com.example.Calendly.repository.EventQuestionRepository;
-import com.example.Calendly.repository.EventRepository;
-import com.example.Calendly.repository.UserRepository;
+import com.example.Calendly.repository.*;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
@@ -21,21 +18,22 @@ public class EventService {
     private final AvailabilityRepository availabilityRepository;
     private final EventQuestionRepository eventQuestionRepository;
     private final UserRepository userRepository;
-    private AvailabilityService availabilityService;
-    private ScheduledMeetService scheduledMeetService;
+    private final AvailabilityService availabilityService;
+    private final ScheduledMeetRepository scheduledMeetRepository;
 
     public EventService(EventRepository eventRepository,
                         AvailabilityRepository availabilityRepository,
                         EventQuestionRepository eventQuestionRepository,
                         UserRepository userRepository,
                         AvailabilityService availabilityService,
-                        ScheduledMeetService scheduledMeetService) {
+                        ScheduledMeetRepository scheduledMeetRepository) {
         this.eventRepository = eventRepository;
         this.availabilityRepository = availabilityRepository;
         this.eventQuestionRepository = eventQuestionRepository;
         this.userRepository = userRepository;
         this.availabilityService = availabilityService;
-        this.scheduledMeetService = scheduledMeetService;
+        this.scheduledMeetRepository = scheduledMeetRepository;
+
 
     }
 
@@ -188,8 +186,7 @@ public class EventService {
 
         // Convert Calendar to Date
         Date customDate = calendar.getTime();
-        List<ScheduledMeet> scheduledMeets = scheduledMeetService.findAvailableTimeSlots(customDate);
-        System.out.println(days.get(dayOfWeek));
+        List<ScheduledMeet> scheduledMeets = scheduledMeetRepository.findMeetByHostAndDate(eventId, customDate);
         Availability availability = availabilityService.findAvailabilityByDayOfWeekAndEvent(days.get(dayOfWeek), eventId);
 
         List<TimeSlot> timeslots = new ArrayList<>();
@@ -205,11 +202,6 @@ public class EventService {
             meetStartTime = meetEndTime;
             meetEndTime = meetEndTime.plusMinutes(duration);
         }
-
-        System.out.println(timeslots);
-//        model.addAttribute("scheduledMeets", scheduledMeets);
-//        model.addAttribute("availability", availability);
-//        model.addAttribute("timeSlots", timeslots);
 
         return timeslots;
     }
