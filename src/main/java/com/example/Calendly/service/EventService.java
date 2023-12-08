@@ -190,6 +190,11 @@ public class EventService {
         Availability availability = availabilityService.findAvailabilityByDayOfWeekAndEvent(days.get(dayOfWeek), eventId);
 
         List<TimeSlot> timeslots = new ArrayList<>();
+
+        if(availability == null){
+            return  timeslots;
+        }
+
         int duration = findEvent(eventId).getDuration();
 
         LocalTime startTime = availability.getStartTime();

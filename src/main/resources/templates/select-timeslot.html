@@ -34,11 +34,20 @@
     </div>
     <div>
         <h1>Select a Date & Time</h1>
-        <div>
-            <button>
-                < </button>
-            <span>December 2023</span>
-            <button> > </button>
+        <div id="changeMonth">
+            <form th:action="@{/previousMonth}">
+                <input type="hidden" th:name="eventId" th:value="${eventId}">
+                <input type="hidden" th:name="selectedDate" th:value="${selectedDate}">
+                <input type="hidden" th:name="date" th:value="${date}">
+                <button type="submit"> < </button>
+            </form>
+            <span th:text="${date}"></span>
+            <form th:action="@{/nextMonth}">
+                <input type="hidden" th:name="eventId" th:value="${eventId}">
+                <input type="hidden" th:name="selectedDate" th:value="${selectedDate}">
+                <input type="hidden" th:name="date" th:value="${date}">
+                <button type="submit"> > </button>
+            </form>
         </div>
         <table>
             <thead>
@@ -55,10 +64,11 @@
             <tbody>
             <tr th:each="week : ${daysInMonth}">
                 <td th:each="day : ${week}" >
-                    <form th:action="@{'/date'}" method="get">
+                    <form th:action="@{/select-timeslot}" method="get">
                         <input type="hidden" th:name="eventId" th:value="${eventId}">
                         <input type="hidden" th:name="selectedDate" th:value="${day}">
-                        <button class="days" type="submit" th:disabled="${day == null}" style="display: ${day == null ? 'none' : 'inline-block'};">
+                        <input type="hidden" th:name="date" th:value="${date}">
+                        <button th:class="${day == selectedDate ? 'selected-day' : 'days'}"   type="submit" th:disabled="${day == null}" style="display: ${day == null ? 'none' : 'inline-block'};">
                             <span th:text="${#temporals.format(day, 'dd')}"></span>
                         </button>
                     </form>
@@ -78,7 +88,7 @@
                 <input type="hidden" th:name="selectedDate" th:value="${selectedDate}">
                 <input type="hidden" th:name="eventId" th:value="${eventId}">
                 <button th:type="submit"
-                        th:text="${timeslot.startHour+' : '+timeslot.startMinute+' to '
+                        th:text="${timeslot.startHour+':'+timeslot.startMinute+' to '
                         +timeslot.endHour+' : '+timeslot.endMinute}"></button>
             </form>
 
