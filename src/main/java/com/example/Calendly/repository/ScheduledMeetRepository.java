@@ -11,7 +11,6 @@ import java.util.List;
 public interface ScheduledMeetRepository extends JpaRepository<ScheduledMeet, Long> {
     @Query(value = "select * from scheduled_meets where user_id = :userId", nativeQuery = true)
     List<ScheduledMeet> findMeetByLoggedInUser(long userId);
-
     @Query(value = "select * from scheduled_meets where DATE(date) = DATE(:date)", nativeQuery = true)
     List<ScheduledMeet> findScheduledMeetByDate(Date date);
 }

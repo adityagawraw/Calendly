@@ -109,17 +109,6 @@ button{
    color: rgb(20, 20, 237);
 }
 
-#type{
-    background-color: rgb(174, 170, 170);
-    color: white;
-    border: none;
-    border-radius: 10px;
-    margin-left: 10px;
-}
-#type>span{
-    font-size: large;
-}
-
 
 
 @media only screen and (max-width: 700px){
@@ -174,18 +163,6 @@ margin-top: 30px;
 
 }
 
-
-#headings>p:first-child~p{
-    border: none;
-    color: rgb(122, 114, 114);
-
-}
-
-#headings>p:first-child~p:hover{
-    border-bottom: solid 3px grey;
-    color: black;
-}
-
 #secondnavbar-dash p{
     font-size:180%;
     margin-top: -4px;
@@ -197,16 +174,7 @@ margin-top: 30px;
    background-color:  rgb(47, 94, 235);
 }
 
-#A>input{
 
-
-outline: none;
-padding: 0% 10%;
-font-size: 16px;
-border: none;
-margin-top: 20px;
-width: 200px;
-}
 #B{
     display: flex;
 
@@ -241,12 +209,6 @@ margin-left: 10px;
 
 }
 
-#url>p:last-child{
-    color: rgb(67, 67, 241);
-}
-#B img:first-child{
-margin-top: -5px;
-}
 .eventButton{
 border:none;
 color:black;
@@ -454,7 +416,6 @@ font-size: large;
     text-decoration: none;
   }
 
-
     </style>
 </head>
 <body>
@@ -505,13 +466,13 @@ font-size: large;
                         <h1 th:text="${event.title}"/>
                     </button>
                 </form>
-                <p th:text="${event.duration}"/>
-                <p th:text="${event.location}"/>
+                <p>Duration: <span th:text="${event.duration}"/></p>
+                <p>Location: <span th:text="${event.location}"/></p>
+
                 <div>
                     <p class="blue" th:attr="onclick='copyToClipboard(\'' + ${event.id} + '\')'">❐ Copy link</p>
                 </div>
             </div>
-            </form>
         </div>
 
     </div>
@@ -523,17 +484,9 @@ font-size: large;
                 <p th:text="${schedule.inviteeEmail}"/>
                 <p th:text="${schedule.startTime + ' - ' + schedule.endTime}"></p>
                 <p th:text="${schedule.event.location}"/>
-<<<<<<< HEAD
                 <p th:text="${schedule.description}"/>
                 <a th:href="'mailto:' + ${schedule.inviteeEmail} + '?subject=Meeting%20Confirmation&body=Dear%20User,%0A%0AYour%20meeting%20has%20been%20confirmed.%0A%0A' + (${schedule.event.location == 'Zoom' ? 'Please find the below Zoom invite:   Zoom Invite Link: https://us05web.zoom.us/j/4497348515   Passcode: edZEj4' : schedule.event.location == 'Google meet' ? 'Please find the below Google meet invite:   Meet Invite Link: https://meet.google.com/wat-ptvv-tqg' : ''}) + '%0A%0ABest%20regards,%0AYour%20Application'"
                    target="_blank" class="confirmation-button">Send Confirmation Email</a>
-=======
-<!--                <a th:href="'mailto:' + ${schedule.inviteeEmail} + '?subject=Meeting%20Confirmation&body=Dear%20User,%0A%0AYour%20meeting%20has%20been%20confirmed.%0A%0ABest%20regards,%0AYour%20Application%0A%0AZoom%20Meeting%20Link:%20' + ${zoomInviteGenerator.generateZoomLink()}" target="_blank">Send Confirmation Email</a>-->
-<!--                <a th:href="'mailto:' + ${schedule.inviteeEmail} + '?subject=Meeting%20Confirmation&body=Dear%20User,%0A%0AYour%20meeting%20has%20been%20confirmed.%0A%0ABest%20regards,%0AYour%20Application'"-->
-<!--                   target="_blank">Send Confirmation Email</a>-->
-                <a th:href="'mailto:' + ${schedule.inviteeEmail} + '?subject=Meeting%20Confirmation&body=Dear%20User,%0A%0AYour%20meeting%20has%20been%20confirmed.%0A%0APlease%20find%20the%20below%20Zoom%20invite:%0A%0AZoom%20Invite%20Link:%20https://us05web.zoom.us/j/4497348515%0APasscode:%20edZEj4%0A%0ABest%20regards,%0AYour%20Application'"
-                   target="_blank">Send Confirmation Email</a>
->>>>>>> origin/dev
             </div>
         </div>
     </div>
@@ -573,7 +526,6 @@ font-size: large;
        document.querySelector('.main-2').classList.add('hide');
        document.querySelector('.main').classList.remove('hide');
     }
-
 
     </script>
 
