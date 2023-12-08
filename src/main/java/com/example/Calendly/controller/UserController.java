@@ -1,10 +1,7 @@
 package com.example.Calendly.controller;
 
-import com.example.Calendly.model.User;
 import com.example.Calendly.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
