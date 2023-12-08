@@ -17,4 +17,7 @@ public interface ScheduledMeetRepository extends JpaRepository<ScheduledMeet, Lo
 
     @Query(value = "select * from scheduled_meets where user_id = :userId and DATE(date) = DATE(:date)", nativeQuery = true)
     List<ScheduledMeet> findMeetByHostAndDate(long userId, Date date);
+
+    @Query(value = "select * from scheduled_meets where event_id = :eventId and DATE(date) = DATE(:date)", nativeQuery = true)
+    List<ScheduledMeet> findMeetByEventAndDate(long eventId, Date date);
 }
