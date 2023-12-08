@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.time.ZoneId;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -80,6 +81,7 @@ public class ScheduledMeetController {
         scheduledMeet.setStartTime(startTime);
         scheduledMeet.setEndTime(endTime);
         scheduledMeet.setHost(event.getHost());
+        scheduledMeet.setDate(customDate);
 
         scheduledMeetService.saveScheduledMeet(scheduledMeet);
 

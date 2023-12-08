@@ -170,7 +170,7 @@ public class EventService {
     public List<TimeSlot> findAvailableSlot(LocalDate date, long eventId) {
         Calendar calendar = Calendar.getInstance();
         calendar.set(Calendar.YEAR, date.getYear());
-        calendar.set(Calendar.MONTH, date.getMonthValue()); // Month is 0-indexed in Calendar
+        calendar.set(Calendar.MONTH, date.getMonthValue()-1); // Month is 0-indexed in Calendar
         calendar.set(Calendar.DAY_OF_MONTH, date.getDayOfMonth());
 
         int dayOfWeek = calendar.get(Calendar.DAY_OF_WEEK);
@@ -186,7 +186,8 @@ public class EventService {
 
         // Convert Calendar to Date
         Date customDate = calendar.getTime();
-        List<ScheduledMeet> scheduledMeets = scheduledMeetRepository.findMeetByHostAndDate(eventId, customDate);
+        long userId = eventRepository.findById(eventId).get().getHost().getId();
+        List<ScheduledMeet> scheduledMeets = scheduledMeetRepository.findMeetByHostAndDate(userId, customDate);
         Availability availability = availabilityService.findAvailabilityByDayOfWeekAndEvent(days.get(dayOfWeek), eventId);
 
         List<TimeSlot> timeslots = new ArrayList<>();
@@ -197,8 +198,21 @@ public class EventService {
         LocalTime meetStartTime = startTime;
         LocalTime meetEndTime = meetStartTime.plusMinutes(duration);
 
-        while (meetEndTime.isBefore(endTime)) {
-            timeslots.add(new TimeSlot(meetStartTime, meetEndTime));
+        while (meetEndTime.isBefore(endTime) ||
+                (meetEndTime.getHour()==endTime.getHour() && meetEndTime.getMinute()==endTime.getMinute())) {
+
+            boolean flag = true;
+
+            for (ScheduledMeet scheduledMeet: scheduledMeets) {
+                if ((!meetStartTime.isBefore(scheduledMeet.getStartTime()) && meetStartTime.isBefore(scheduledMeet.getEndTime()) || meetStartTime.equals(scheduledMeet.getStartTime())) &&
+                        (!meetEndTime.isBefore(scheduledMeet.getEndTime()) && meetEndTime.isBefore(scheduledMeet.getStartTime()) || meetEndTime.equals(scheduledMeet.getEndTime()))) {
+                    flag = false;
+                }
+            }
+
+            if (flag) {
+                timeslots.add(new TimeSlot(meetStartTime, meetEndTime));
+            }
             meetStartTime = meetEndTime;
             meetEndTime = meetEndTime.plusMinutes(duration);
         }
