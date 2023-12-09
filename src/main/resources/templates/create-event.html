@@ -61,5 +61,70 @@
         </form>
     </div>
 </section>
+<!--<section id="preview">-->
+<!--    <div>-->
+<!--        <h1>Select a Date & Time</h1>-->
+<!--        <div id="changeMonth">-->
+<!--            <form th:action="@{/previousMonthCreateEvent}">-->
+<!--                <input type="hidden" th:name="eventId" th:value="${eventId}">-->
+<!--                <input type="hidden" th:name="selectedDate" th:value="${selectedDate}">-->
+<!--                <input type="hidden" th:name="date" th:value="${date}">-->
+<!--                <button type="submit"> < </button>-->
+<!--            </form>-->
+<!--            <span th:text="${date}"></span>-->
+<!--            <form th:action="@{/nextMonthCreateEvent}">-->
+<!--                <input type="hidden" th:name="eventId" th:value="${eventId}">-->
+<!--                <input type="hidden" th:name="selectedDate" th:value="${selectedDate}">-->
+<!--                <input type="hidden" th:name="date" th:value="${date}">-->
+<!--                <button type="submit"> > </button>-->
+<!--            </form>-->
+<!--        </div>-->
+<!--        <table>-->
+<!--            <thead>-->
+<!--            <tr>-->
+<!--                <th>Mon</th>-->
+<!--                <th>Tue</th>-->
+<!--                <th>Wed</th>-->
+<!--                <th>Thu</th>-->
+<!--                <th>Fri</th>-->
+<!--                <th>Sat</th>-->
+<!--                <th>Sun</th>-->
+<!--            </tr>-->
+<!--            </thead>-->
+<!--            <tbody>-->
+<!--            <tr th:each="week : ${daysInMonth}">-->
+<!--                <td th:each="day : ${week}" >-->
+<!--                    <form th:action="@{/create-event}" method="get">-->
+<!--                        <input type="hidden" th:name="eventId" th:value="${eventId}">-->
+<!--                        <input type="hidden" th:name="selectedDate" th:value="${day==null ? null :day.localDate}">-->
+<!--                        <input type="hidden" th:name="date" th:value="${date}">-->
+<!--                        <button th:class="${day == null ? null : (day.localDate == selectedDate ? 'selected-day' :-->
+<!--                                            (day.isAvailable == false ? 'days' : 'available-day'))}"-->
+<!--                                type="submit"-->
+<!--                                th:disabled="${day == null || day == null ? null :day.isAvailable == false}"-->
+<!--                                style="display: ${day == null ? 'none' : 'inline-block'};">-->
+<!--                            <span th:text="${#temporals.format(day==null ? null :day.localDate , 'dd')}"></span>-->
+<!--                        </button>-->
+<!--                    </form>-->
+<!--                </td>-->
+<!--            </tr>-->
+<!--            </tbody>-->
+<!--        </table>-->
+<!--    </div>-->
+<!--    <div>-->
+<!--        <div><span>Sunday</span><span>, </span> <span th:text="${selectedDate}"></span></div>-->
+<!--        <div id="timeSlots">-->
+<!--            <form th:action="@{/create-meet}" th:each="timeslot : ${timeslots}" method="post" >-->
+<!--                <input type="hidden" th:name="startHour" th:value="${timeslot.startHour}">-->
+<!--                <input type="hidden" th:name="startMinute" th:value="${timeslot.startMinute}">-->
+<!--                <input type="hidden" th:name="endHour" th:value="${timeslot.endHour}">-->
+<!--                <input type="hidden" th:name="endMinute" th:value="${timeslot.endMinute}">-->
+<!--                <input type="hidden" th:name="selectedDate" th:value="${selectedDate}">-->
+<!--                <input type="hidden" th:name="eventId" th:value="${eventId}">-->
+<!--                <button th:type="submit" th:text="${timeslot.startTime + ' - ' + timeslot.endTime}"></button>-->
+<!--            </form>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--</section>-->
 </body>
 </html>

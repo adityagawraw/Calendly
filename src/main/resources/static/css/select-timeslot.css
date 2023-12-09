@@ -8,7 +8,6 @@ section{
 }
 section div{
     padding: 10px;
-
 }
 #event-details{
     border-right: 1px gray solid;
@@ -61,6 +60,7 @@ border:none;
 background:white;
 font-size:large;
 }
+
 .selected-day{
 width: 40px;
 height: 40px;
@@ -71,6 +71,7 @@ font-size:large;
 background-color:#0069ff;
 color:white;
 }
+
 .available-day{
 width: 40px;
 height: 40px;
@@ -81,13 +82,24 @@ font-size:large;
 background-color:#eef5ff;
 color:#0069ff;
 }
-.changeMonth{
-display:flex;
-
+.available-day:hover{
+border:#0069ff 2px solid;
 }
 
-.changeMonth button{
-    border-radius:10px;
-    padding:10px;
-    margin: 10px;
+#changeMonth{
+    display: flex;
+    align-items: center;
+}
+#changeMonth button{
+    margin: 0px 15px 0px 15px;
+    padding: 10px 15px;
+    color:#0069ff;
+    font-size: large;
+    font-weight: bold;
+    background-color: #eef5ff;
+    border-radius: 20px;
+    border: none;
+}
+#changeMonth button:hover{
+    background-color: #c9e0ff;
 }

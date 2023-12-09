@@ -61,7 +61,17 @@ public class EventController {
 
 
     @GetMapping("/create-event")
-    public String getCreateEventPage(@RequestParam("eventId") long eventId, Model model) {
+    public String getCreateEventPage(@RequestParam("eventId") long eventId,
+//                                     @RequestParam(value = "selectedDate",defaultValue = "") LocalDate selectedDate,
+//                                     @RequestParam(value = "date") LocalDate currentDate,
+                                     Model model) {
+//        List<List<MeetDate>> daysInMonth = eventService.getDaysInMonth(currentDate, eventId);
+//        List<TimeSlot> timeSlots = eventService.findAvailableSlot(selectedDate, eventId);
+//        model.addAttribute("selectedDate", selectedDate);
+//        model.addAttribute("date", currentDate);
+//        model.addAttribute("timeslots", timeSlots);
+//        model.addAttribute("daysInMonth", daysInMonth);
+
         model.addAttribute("eventId", eventId);
         model.addAttribute("event", eventService.findEvent(eventId));
 
@@ -69,8 +79,26 @@ public class EventController {
         return "create-event";
     }
 
+    @GetMapping("/nextMonthCreateEvent")
+    public String nextMonth(@RequestParam("eventId") long eventId,
+                            @RequestParam("selectedDate") LocalDate selectedDate,
+                            @RequestParam(value = "date") LocalDate currentDate){
+        return "redirect:/create-event?selectedDate="+selectedDate+"&eventId="+eventId+"&date="
+                +currentDate.plusMonths(1);
+    }
+
+    @GetMapping("/previousMonthCreateEvent")
+    public String previousMonth(@RequestParam("eventId") long eventId,
+                                @RequestParam("selectedDate") LocalDate selectedDate,
+                                @RequestParam(value = "date") LocalDate currentDate){
+        return "redirect:/create-event?selectedDate="+selectedDate+"&eventId="+eventId+"&date="
+                +currentDate.minusMonths(1);
+    }
+
     @GetMapping("/event-details")
-    public String getEventDetailsPage(@RequestParam("eventId") long eventId, Model model) {
+    public String getEventDetailsPage(@RequestParam("eventId") long eventId,
+
+                                      Model model) {
         model.addAttribute("eventId", eventId);
         Event event = eventService.findEvent(eventId);
         model.addAttribute("title", event.getTitle());
@@ -79,6 +107,21 @@ public class EventController {
         model.addAttribute("location", event.getLocation());
 
         return "event-details";
+    }
+    @GetMapping("/nextMonthEventDetails")
+    public String nextMonthEventDetails(@RequestParam("eventId") long eventId,
+                            @RequestParam("selectedDate") LocalDate selectedDate,
+                            @RequestParam(value = "date") LocalDate currentDate){
+        return "redirect:/event-details?selectedDate="+selectedDate+"&eventId="+eventId+"&date="
+                +currentDate.plusMonths(1);
+    }
+
+    @GetMapping("/previousMonthEventDetails")
+    public String previousMonthEventDetails(@RequestParam("eventId") long eventId,
+                                @RequestParam("selectedDate") LocalDate selectedDate,
+                                @RequestParam(value = "date") LocalDate currentDate){
+        return "redirect:/event-details?selectedDate="+selectedDate+"&eventId="+eventId+"&date="
+                +currentDate.minusMonths(1);
     }
     
     @GetMapping("/update-event-details")
@@ -160,7 +203,6 @@ public class EventController {
     @GetMapping("/booking-page-options")
     public String getBookingPageOptions(@RequestParam("eventId") long eventID, Model model) {
         model.addAttribute("eventId", eventID);
-        model.addAttribute("eventLink", "");
         model.addAttribute("inviteeQuestions", "");
 
         return "booking-page-options";
@@ -168,10 +210,9 @@ public class EventController {
 
     @GetMapping("/save-booking-page-options")
     public String saveBookingPageOptions(@ModelAttribute("eventId") long eventId,
-                                         @RequestParam("eventLink") String eventLink,
                                          @RequestParam("inviteeQuestions") String inviteeQuestions,
                                          Model model) {
-        eventService.saveBookingPageOptions(eventId, eventLink, inviteeQuestions);
+        eventService.saveBookingPageOptions(eventId,  inviteeQuestions);
 
         return "redirect:/create-event?eventId=" + eventId;
     }

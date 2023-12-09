@@ -33,7 +33,8 @@ public class ScheduledMeetController {
     }
 
     @GetMapping("/select-timeslot")
-    public String showCalendar(Model model,@RequestParam("eventId") long eventId,
+    public String showCalendar(Model model,
+                               @RequestParam("eventId") long eventId,
                                @RequestParam(value = "selectedDate",defaultValue = "") LocalDate selectedDate,
                                @RequestParam(value = "date") LocalDate currentDate
                                ) {
@@ -46,6 +47,10 @@ public class ScheduledMeetController {
         model.addAttribute("selectedDate", selectedDate);
         model.addAttribute("date", currentDate);
         model.addAttribute("timeslots", timeSlots);
+        model.addAttribute("month", currentDate.getMonth());
+        model.addAttribute("selectedMonth", selectedDate.getMonth());
+        model.addAttribute("selectedDayOfWeek", selectedDate.getDayOfWeek());
+        model.addAttribute("selectedDayOfMonth", selectedDate.getDayOfMonth());
 
         return "select-timeslot";
     }

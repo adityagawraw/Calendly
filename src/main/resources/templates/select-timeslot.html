@@ -15,7 +15,6 @@
 <body>
 <link rel="stylesheet" th:href="@{/css/select-timeslot.css}">
 <section>
-
     <div id="event-details">
         <h2 id="hostName">Host's Name</h2>
         <h1 th:text="${event.title}"></h1>
@@ -35,7 +34,7 @@
                 <input type="hidden" th:name="date" th:value="${date}">
                 <button type="submit"> < </button>
             </form>
-            <span th:text="${date}"></span>
+            <span th:text="${month}"></span>
             <form th:action="@{/nextMonth}">
                 <input type="hidden" th:name="eventId" th:value="${eventId}">
                 <input type="hidden" th:name="selectedDate" th:value="${selectedDate}">
@@ -76,7 +75,13 @@
         </table>
     </div>
     <div>
-        <div><span>Sunday</span><span>, </span> <span th:text="${selectedDate}"></span></div>
+        <div><span th:text="${selectedDayOfWeek}"></span>
+            <span>, </span>
+            <span th:text="${selectedMonth}"></span>
+            <span> </span>
+            <span th:text="${selectedDayOfMonth}"></span>
+        </div>
+
         <div id="timeSlots">
             <form th:action="@{/create-meet}" th:each="timeslot : ${timeslots}" method="post" >
                 <input type="hidden" th:name="startHour" th:value="${timeslot.startHour}">

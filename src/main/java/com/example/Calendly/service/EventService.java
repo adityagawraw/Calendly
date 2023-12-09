@@ -141,17 +141,24 @@ public class EventService {
         }
     }
 
-    public void saveBookingPageOptions(Long eventId, String eventLink, String inviteeQuestions) {
+    public void saveBookingPageOptions(Long eventId, String inviteeQuestions) {
         Optional<Event> optionalEvent = eventRepository.findById(eventId);
         if (optionalEvent.isPresent()) {
             Event event = optionalEvent.get();
-            event.setEventLink(eventLink);
+
             String[] meetQuestions = inviteeQuestions.split(",");
 
             List<EventQuestion> eventQuestions = event.getMeetQuestions();
             for (EventQuestion eventQuestion : eventQuestions) {
                 eventQuestionRepository.delete(eventQuestion);
             }
+
+            EventQuestion defaultQuestion = new EventQuestion();
+            defaultQuestion.setQuestion("Please share anything that will help prepare for our meeting.\n" +
+                    "\n");
+            defaultQuestion.setEvent(event);
+            eventQuestionRepository.save(defaultQuestion);
+            event.addMeetQuestions(defaultQuestion);
 
             for (String question : meetQuestions) {
                 EventQuestion eventQuestion = new EventQuestion();
